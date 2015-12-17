@@ -8,5 +8,6 @@
     <string name="title_activity_user_info">UserInfoActivity</string>
     <string name="title_activity_change_user_info">ChangeUserInfoActivity</string>
     <string name="title_activity_class_info">ClassInfoActivity</string>
+    <string name="title_activity_task_info">TaskInfoActivity</string>
 
 </resources>

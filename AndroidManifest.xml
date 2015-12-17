@@ -14,8 +14,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ChangeUserInfoActivity"
-            android:label="@string/title_activity_change_user_info" >
+            android:name=".TaskInfoActivity"
+            android:label="@string/title_activity_task_info" >
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +36,10 @@
         <activity
             android:name=".UserInfoActivity"
             android:label="@string/title_activity_user_info" >
+        </activity>
+        <activity
+            android:name=".ChangeUserInfoActivity"
+            android:label="@string/title_activity_change_user_info" >
         </activity>
         <activity
             android:name=".ClassInfoActivity"
