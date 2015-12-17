@@ -36,6 +36,10 @@
             android:name=".UserInfoActivity"
             android:label="@string/title_activity_user_info" >
         </activity>
+        <activity
+            android:name=".ClassInfoActivity"
+            android:label="@string/title_activity_class_info" >
+        </activity>
     </application>
 
 </manifest>
