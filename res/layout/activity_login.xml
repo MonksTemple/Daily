@@ -1,8 +1,137 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.daily.LoginActivity" >
+    android:background="@color/white" >
+
+  <RelativeLayout
+        android:id="@+id/userpasswordcount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50pt"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        
+      <ImageView 
+          android:id="@+id/user"
+          android:layout_width="17pt"
+          android:layout_height="17pt"
+          android:src="@drawable/user"
+          />
+      
+      <RelativeLayout 
+          android:id="@+id/uname"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_toRightOf="@id/user"
+          >
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="#ffffff"
+            android:hint="  用户名"
+            android:textColor="#ff7b7a7e"
+            android:textSize="15dp" />
+        
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/username"
+            android:background="#b2b2b2" /> 
+            
+        </RelativeLayout>
+            
+       <ImageView 
+          android:id="@+id/pwd"
+          android:layout_alignParentLeft="true"
+          android:layout_marginTop="10dp"
+          android:layout_below="@id/uname"
+          android:layout_width="17pt"
+          android:layout_height="17pt"
+          android:src="@drawable/pwd"
+          />
+        
+        
+       <RelativeLayout 
+           android:id="@+id/p"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:layout_below="@id/uname"
+           android:layout_toRightOf="@id/pwd"
+           >
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_height="45dp"
+            android:layout_width="match_parent"
+            android:background="#ffffff"
+            android:hint=" 密码"
+            android:inputType="textPassword"
+            android:textColor="#ff7b7a7e"
+            android:textSize="15dp"/>
+  
+        
+        <View
+            android:id="@+id/line2"
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/password"
+            android:background="#b2b2b2" />
+        
+        </RelativeLayout>
+        
+        <TextView
+            android:id="@+id/forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/p"
+            android:layout_below="@id/p"
+            android:layout_marginTop="5dp"
+            android:paddingTop="3dp"
+            android:text="忘记密码？"
+            android:textColor="@color/darkGrey"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
     
-	
+  
+  <RelativeLayout 
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/userpasswordcount"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="15dp"
+      >
+
+    <Button
+        android:id="@+id/btnlogin"
+        android:layout_width="60pt"
+        android:layout_height="43dp"
+        android:layout_alignParentLeft="true"
+        android:background="@color/theme"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:text="登    录" />
+    
+    <Button
+        android:id="@+id/register"
+        android:layout_width="60pt"
+        android:layout_height="43dp"
+        android:background="@color/theme"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:layout_alignParentRight="true"
+        android:text="注    册" />
+    
+    
+    </RelativeLayout>
+
+    
+
 </RelativeLayout>
