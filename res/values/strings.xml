@@ -9,5 +9,12 @@
     <string name="title_activity_change_user_info">ChangeUserInfoActivity</string>
     <string name="title_activity_class_info">ClassInfoActivity</string>
     <string name="title_activity_task_info">TaskInfoActivity</string>
+    <string name="title_activity_person_class_info">PersonClassInfoActivity</string>
+    <string name="title_activity_pserson_task_info">PsersonTaskInfoActivity</string>
+    <string name="title_activity_add_task_info">AddTaskInfoActivity</string>
+    <string name="title_activity_class_list">ClassListActivity</string>
+    <string name="title_activity_tast_list">TastListActivity</string>
+    <string name="title_activity_agenda_info">AgendaInfoActivity</string>
+    <string name="title_activity_agenda_list">AgendaListActivity</string>
 
 </resources>

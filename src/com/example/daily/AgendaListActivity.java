@@ -10,14 +10,14 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class TaskInfoActivity extends Activity {
+public class AgendaListActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_task_info);
+		setContentView(R.layout.activity_agenda_list);
 		
-		
+
 		ListView list = (ListView) findViewById(R.id.classListView); 
 
 		//生成动态数组，并且转载数据  
@@ -34,7 +34,7 @@ public class TaskInfoActivity extends Activity {
 		//生成适配器，数组===》ListItem  
 		SimpleAdapter mSchedule = new SimpleAdapter(this,  
 				mylist,//数据来源   
-				R.layout.two_decimal_item,//ListItem的XML实现  
+				R.layout.agenda_list,//ListItem的XML实现  
 
 				//动态数组与ListItem对应的子项          
 				new String[] {"ItemTitle", "ItemText"},   

@@ -7,15 +7,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class TaskInfoActivity extends Activity {
+public class ClassListActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_task_info);
+		setContentView(R.layout.activity_class_list);
 		
 		
 		ListView list = (ListView) findViewById(R.id.classListView); 

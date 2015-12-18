@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="30pt"
+        android:background="@color/theme" >
+
+        <ImageView
+            android:id="@+id/re"
+            android:layout_width="18pt"
+            android:layout_height="18pt"
+            android:layout_centerVertical="true"
+            android:src="@drawable/returna" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3pt"
+            android:layout_toRightOf="@id/re"
+            android:text="日程列表"
+            android:textColor="@color/white"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:id="@+id/cross"
+            android:layout_width="10pt"
+            android:layout_height="10pt"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5pt"
+            android:layout_toLeftOf="@+id/lines"
+            android:src="@drawable/flesh" />
+
+        <ImageView
+            android:id="@id/lines"
+            android:layout_width="10pt"
+            android:layout_height="10pt"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10pt"
+            android:src="@drawable/lines" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/finds"
+        android:layout_width="match_parent"
+        android:layout_height="20pt"
+        android:layout_below="@id/title"
+        android:layout_marginBottom="5pt"
+        android:layout_marginLeft="1pt"
+        android:layout_marginRight="1pt"
+        android:layout_marginTop="5pt"
+        android:background="@drawable/fet"
+        android:textColor="@color/black"
+        android:textSize="7pt"/>
+
+    <ListView
+        android:id="@+id/classListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/finds"
+        >
+    </ListView>
+
+</RelativeLayout>
