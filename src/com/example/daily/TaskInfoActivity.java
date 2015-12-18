@@ -1,47 +1,62 @@
 package com.example.daily;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.example.component.DateTimePickDialogUtil;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
 
 public class TaskInfoActivity extends Activity {
+	private EditText startDateTime;
+	private EditText endDateTime;
+	private EditText remindDateTime;
+
+	private String initStartDateTime = "2015年12月30日 10:44"; // 初始化开始时间
+	private String initEndDateTime = "2015年1月30日 11:44"; // 初始化结束时间
+	private String initRemindDateTime = "2015年1月30日 11:40"; // 初始化结束时间
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_info);
 		
+		// 输入框
+		startDateTime = (EditText) findViewById(R.id.startime);
+		endDateTime = (EditText) findViewById(R.id.endtime);
+		remindDateTime = (EditText) findViewById(R.id.remindtime);
+
+		startDateTime.setText(initStartDateTime);
+		endDateTime.setText(initEndDateTime);
+		remindDateTime.setText(initRemindDateTime);
+
+		startDateTime.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						TaskInfoActivity.this, initEndDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(startDateTime);
+
+			}
+		});
+
+		endDateTime.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						TaskInfoActivity.this, initEndDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(endDateTime);
+			}
+		});
 		
-		ListView list = (ListView) findViewById(R.id.classListView); 
+		remindDateTime.setOnClickListener(new OnClickListener() {
 
-		//生成动态数组，并且转载数据  
-		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
-
-		HashMap<String, String> map1 = new HashMap<String, String>(); 
-		HashMap<String, String> map2 = new HashMap<String, String>();  
-		map1.put("ItemTitle", "AAAAA");  
-		map1.put("ItemText", "bbbbbb");  
-		map2.put("ItemTitle", "CCCCC");  
-		map2.put("ItemText", "ddddd");  
-		mylist.add(map1);  
-		mylist.add(map2);
-		//生成适配器，数组===》ListItem  
-		SimpleAdapter mSchedule = new SimpleAdapter(this,  
-				mylist,//数据来源   
-				R.layout.two_decimal_item,//ListItem的XML实现  
-
-				//动态数组与ListItem对应的子项          
-				new String[] {"ItemTitle", "ItemText"},   
-
-				//ListItem的XML文件里面的两个TextView ID  
-				new int[] {R.id.ItemTitle,R.id.ItemText});  
-		//添加并且显示  
-		list.setAdapter(mSchedule); 
+			public void onClick(View v) {
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						TaskInfoActivity.this, initRemindDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(remindDateTime);
+			}
+		});
 	}
 }

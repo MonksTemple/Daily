@@ -142,7 +142,8 @@
              android:layout_height="40dp"
              android:layout_toRightOf="@id/stime"
              android:layout_centerVertical="true"
-             android:hint=" 2015-12-30"
+             android:editable="false"
+             android:clickable="true"
              android:textSize="7pt"
              android:textColor="@color/black"/>
              
@@ -171,6 +172,8 @@
              android:layout_toRightOf="@id/etime"
              android:layout_centerVertical="true"
              android:hint=" 2015-01-30"
+             android:clickable="true"
+             android:editable="false"
              android:textSize="7pt"
              android:textColor="@color/black"/>
              
@@ -226,8 +229,9 @@
              android:layout_height="40dp"
              android:layout_toRightOf="@id/rtime"
              android:layout_centerVertical="true"
-             android:hint=" 2015-01-30"
+             android:editable="false"
              android:textSize="7pt"
+             android:clickable="true"
              android:textColor="@color/black"/>
              
          </RelativeLayout>

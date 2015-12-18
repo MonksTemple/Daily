@@ -14,8 +14,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-             android:name=".AgendaListActivity"
-            android:label="@string/title_activity_agenda_list" >
+             android:name=".AgendaInfoActivity"
+            android:label="@string/title_activity_agenda_info" >
+             
             
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,8 +67,8 @@
             android:label="@string/title_activity_tast_list" >
         </activity>
         <activity
-            android:name=".AgendaInfoActivity"
-            android:label="@string/title_activity_agenda_info" >
+           android:name=".AgendaListActivity"
+            android:label="@string/title_activity_agenda_list" >
         </activity>
         <activity
             android:name=".ClassListActivity"
