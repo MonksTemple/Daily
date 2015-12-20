@@ -41,7 +41,7 @@ public class TeamMemListActivity extends Activity {
 		
 		
 		 
-//		list.setAdapter(mSchedule); 
+		list.setAdapter(mSchedule); 
 	}
 
 }
