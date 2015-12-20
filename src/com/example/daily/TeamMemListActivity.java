@@ -35,7 +35,7 @@ public class TeamMemListActivity extends Activity {
 				new String[] {"ItemTitle", "ItemText"},   		
 				new int[] {R.id.ItemTitle,R.id.ItemText});  
 		 
-		list.setAdapter(mSchedule); 
+//		list.setAdapter(mSchedule); 
 	}
 
 }
