@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="3pt"
             android:layout_toRightOf="@id/re"
-            android:text="团队列表"
+            android:text="团队成员列表"
             android:textColor="@color/white"
             android:textSize="10pt" />
 

@@ -18,8 +18,7 @@ public class TeamListActivity extends Activity {
 		setContentView(R.layout.activity_team_list);
 		
 		ListView list = (ListView) findViewById(R.id.teamListView); 
-
-		//锟斤拷锟缴讹拷态锟斤拷锟介，锟斤拷锟斤拷转锟斤拷锟斤拷锟斤拷  
+  
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
 		HashMap<String, String> map1 = new HashMap<String, String>(); 
@@ -30,17 +29,13 @@ public class TeamListActivity extends Activity {
 		map2.put("ItemText", "学生会是在党委领导下，团委指导下。。。");  
 		mylist.add(map1);  
 		mylist.add(map2);
-		//锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷===锟斤拷ListItem  
+
 		SimpleAdapter mSchedule = new SimpleAdapter(this,  
-				mylist,//锟斤拷锟斤拷锟斤拷源   
-				R.layout.two_decimal_item,//ListItem锟斤拷XML实锟斤拷  
-
-				//锟斤拷态锟斤拷锟斤拷锟斤拷ListItem锟斤拷应锟斤拷锟斤拷锟斤拷          
+				mylist,
+				R.layout.two_decimal_item,         
 				new String[] {"ItemTitle", "ItemText"},   
-
-				//ListItem锟斤拷XML锟侥硷拷锟斤拷锟斤拷锟斤拷锟斤拷锟絋extView ID  
 				new int[] {R.id.ItemTitle,R.id.ItemText});  
-		//锟斤拷硬锟斤拷锟斤拷锟绞�  
+
 		list.setAdapter(mSchedule); 
 	}
 	

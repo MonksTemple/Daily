@@ -73,7 +73,7 @@
             android:label="@string/title_activity_class_list" >
         </activity>
         
-        <!-- scx -->
+    <!-- scx -->
         <!-- 团队列表 -->
         <activity
             android:name=".TeamListActivity"
@@ -95,27 +95,35 @@
         <!-- 团队成员 -->
         <activity
             android:name=".TeamMemListActivity"
-            android:label="@string/title_activity_team_memlist" >    
-                        
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>   
+            android:label="@string/title_activity_team_memlist" >                                    
         </activity>
         
+        <!-- 活动列表 -->
         <activity
             android:name=".ActListActivity"
-            android:label="@string/title_activity_act_list" >
+            android:label="@string/title_activity_act_list" >    
         </activity>
+        
+        <!-- 活动信息 -->
         <activity
             android:name=".ActInfoActivity"
             android:label="@string/title_activity_act_info" >
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>    
         </activity>
         
         <activity
             android:name=".ActHoldActActivity"
             android:label="@string/title_activity_act_holdact" >
+        </activity>
+        
+        <!-- 活动成员 -->
+        <activity
+            android:name=".ActMemListActivity"
+            android:label="@string/title_activity_act_memlist" >                                         
         </activity>
         
     </application>
