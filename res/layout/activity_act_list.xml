@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="3pt"
             android:layout_toRightOf="@id/re"
-            android:text="活动信息"
+            android:text="活动列表"
             android:textColor="@color/white"
             android:textSize="10pt" />
 
@@ -60,7 +60,7 @@
         android:textSize="7pt"/>
 
     <ListView
-        android:id="@+id/classListView"
+        android:id="@+id/actListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/finds"

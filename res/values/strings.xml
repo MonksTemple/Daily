@@ -24,5 +24,6 @@
     <string name="title_activity_act_list">ActListActivity</string>
     <string name="title_activity_act_info">ActInfoActivity</string>
     <string name="title_activity_act_holdact">ActHoldActActivity</string>
-
+	<string name="title_activity_act_memlist">ActMemListActivity</string>
+    
 </resources>
