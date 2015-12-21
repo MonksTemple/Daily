@@ -45,6 +45,7 @@
             android:layout_width="10pt"
             android:layout_height="10pt"
             android:layout_marginRight="10pt"
+            android:onClick="popupmenu"
             android:src="@drawable/lines"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

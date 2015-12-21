@@ -38,6 +38,7 @@
 
         <ImageView
             android:id="@id/lines"
+             android:onClick="popupmenu"
             android:layout_width="10pt"
             android:layout_height="10pt"
             android:layout_alignParentRight="true"

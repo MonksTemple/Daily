@@ -5,26 +5,33 @@ import com.example.component.DateTimePickDialogUtil;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.Toast;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class AgendaInfoActivity extends Activity {
 	private EditText startDateTime;
 	private EditText endDateTime;
 	private EditText remindDateTime;
 
-	private String initStartDateTime = "2015Äê12ÔÂ30ÈÕ 10:44"; // ³õÊ¼»¯¿ªÊ¼Ê±¼ä
-	private String initEndDateTime = "2015Äê1ÔÂ30ÈÕ 11:44"; // ³õÊ¼»¯½áÊøÊ±¼ä
-	private String initRemindDateTime = "2015Äê1ÔÂ30ÈÕ 11:40"; // ³õÊ¼»¯½áÊøÊ±¼ä
+	private String initStartDateTime = "2015å¹´12æœˆ30æ—¥ 10:44"; // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
+	private String initEndDateTime = "2015å¹´01æœˆ30æ—¥ 11:44"; // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private String initRemindDateTime = "2015å¹´01æœˆ30æ—¥ 11:40"; // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
+	private PopupMenu popupMenu;  
+	private Menu menu; 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_agenda_info);
 		
-		// ÊäÈë¿ò
+	//åˆ›å»ºæ—¶é—´é€‰æ‹©å™¨
 	startDateTime = (EditText) findViewById(R.id.startime);
 	endDateTime = (EditText) findViewById(R.id.endtime);
 	remindDateTime = (EditText) findViewById(R.id.remindtime);
@@ -60,5 +67,37 @@ public class AgendaInfoActivity extends Activity {
 			dateTimePicKDialog.dateTimePicKDialog(remindDateTime);
 		}
 	});
+	
+	popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
+    menu = popupMenu.getMenu(); 
+    
+ //é€šè¿‡XMLå¯¼å…¥èœå•æ 
+    MenuInflater menuInflater = getMenuInflater();  
+    menuInflater.inflate(R.menu.agenda_info_menu, menu); 
+   
+    // è®¾ç½®ç›‘å¬äº‹ä»¶
+    popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
+
+    	@Override  
+    	public boolean onMenuItemClick(MenuItem item) {  
+    		switch (item.getItemId()) {  
+    		case R.id.edit:  
+    			Toast.makeText(AgendaInfoActivity.this, "ç¼–è¾‘æ—¥ç¨‹",  
+    					Toast.LENGTH_LONG).show();  
+    			break;   
+    		case R.id.delete:  
+    			Toast.makeText(AgendaInfoActivity.this, "åˆ é™¤æ—¥ç¨‹",  
+    					Toast.LENGTH_LONG).show();  
+    		break;  
+    		default:  
+    			break;  
+    		}  
+    		return false;  
+    	}  
+    });  
 }
+
+public void popupmenu(View v) {  
+    popupMenu.show();  
+}  
 }

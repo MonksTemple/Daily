@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <application
@@ -15,10 +15,9 @@
         android:theme="@style/AppTheme" >
         <activity
              android:name=".AgendaInfoActivity"
+             android:theme="@style/AppTheme"
             android:label="@string/title_activity_agenda_info" >
-             
-            
-            
+
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -42,10 +41,12 @@
         </activity>
         <activity
             android:name=".ClassInfoActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_class_info" >
         </activity>
         <activity
             android:name=".PersonClassInfoActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_person_class_info" >
         </activity>
         <activity
@@ -58,18 +59,22 @@
         </activity>
         <activity
             android:name=".TaskInfoActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_task_info" >
         </activity>
         <activity
             android:name=".TastListActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_tast_list" >
         </activity>
         <activity
            android:name=".AgendaListActivity"
+           android:theme="@style/AppTheme"
             android:label="@string/title_activity_agenda_list" >
         </activity>
         <activity
             android:name=".ClassListActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_class_list" >
         </activity>
         
@@ -77,12 +82,14 @@
         <!-- 团队列表 -->
         <activity
             android:name=".TeamListActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_team_list" >
         </activity>
         
         <!-- 团队页面 -->
         <activity
             android:name=".TeamActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_team" >       
         </activity>
         
@@ -101,18 +108,21 @@
         <!-- 活动列表 -->
         <activity
             android:name=".ActListActivity"
-            android:label="@string/title_activity_act_list" >    
+            android:theme="@style/AppTheme"
+            android:label="@string/title_activity_act_list" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>     
         </activity>
         
         <!-- 活动信息 -->
         <activity
             android:name=".ActInfoActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_act_info" >
             
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>    
+               
         </activity>
         
         <activity

@@ -10,19 +10,27 @@
         android:layout_height="1px"
         android:background="#b2b2b2" />
 
-    <LinearLayout
-        android:id="@+id/text"
+    <RelativeLayout 
+         android:id="@+id/body"
         android:layout_below="@id/line1"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <LinearLayout
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="2pt"
+        android:layout_marginBottom="2pt"
+        android:layout_centerVertical="true"
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/ItemTitle"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
+            android:maxWidth="150pt"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5pt"
-            android:layout_marginTop="2pt"
             android:text="AAA"
             android:textColor="@color/black"
             android:textSize="20dip" >
@@ -30,9 +38,9 @@
 
         <TextView
             android:id="@+id/ItemText"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
+            android:maxWidth="150pt"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2pt"
             android:layout_marginLeft="5pt"
             android:layout_marginTop="1pt"
             android:text="BBB"
@@ -40,17 +48,27 @@
         </TextView>
     </LinearLayout>
     
+    <View
+        android:id="@+id/line2"
+        android:layout_toLeftOf="@+id/addC"
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:minHeight="26pt"
+        android:background="@color/black"
+         />
+    
     <ImageView
-            android:id="@+id/addC"
+            android:id="@id/addC"
             android:layout_width="13pt"
             android:layout_height="13pt"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10pt"
+            android:layout_marginLeft="10pt"
             android:src="@drawable/add" />
-
+</RelativeLayout>
     <View
-        android:layout_below="@id/text"
+        android:layout_below="@id/body"
         android:layout_width="fill_parent"
         android:layout_height="1px"
         android:background="#b2b2b2" />

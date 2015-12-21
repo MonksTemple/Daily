@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
     
-	<RelativeLayout
+<RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="30pt"
@@ -27,23 +27,16 @@
             android:textColor="@color/white"
             android:textSize="10pt" />
 
-        <ImageView
-            android:id="@+id/cross"
-            android:layout_width="10pt"
-            android:layout_height="10pt"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5pt"
-            android:layout_toLeftOf="@+id/lines"
-            android:src="@drawable/flesh" />
+
 
         <ImageView
-            android:id="@id/lines"
+            android:id="@+id/addperson"
             android:layout_width="10pt"
             android:layout_height="10pt"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10pt"
-            android:src="@drawable/lines" />
+            android:src="@drawable/addperson" />
     </RelativeLayout>
 
     <EditText

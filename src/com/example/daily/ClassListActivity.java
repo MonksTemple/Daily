@@ -6,13 +6,19 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class ClassListActivity extends Activity {
-
+	private PopupMenu popupMenu;  
+	private Menu menu;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,7 +27,7 @@ public class ClassListActivity extends Activity {
 		
 		ListView list = (ListView) findViewById(R.id.classListView); 
 
-		//Éú³É¶¯Ì¬Êı×é£¬²¢ÇÒ×ªÔØÊı¾İ  
+		//ï¿½ï¿½ï¿½É¶ï¿½Ì¬ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
 		HashMap<String, String> map1 = new HashMap<String, String>(); 
@@ -32,17 +38,46 @@ public class ClassListActivity extends Activity {
 		map2.put("ItemText", "ddddd");  
 		mylist.add(map1);  
 		mylist.add(map2);
-		//Éú³ÉÊÊÅäÆ÷£¬Êı×é===¡·ListItem  
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½===ï¿½ï¿½ListItem  
 		SimpleAdapter mSchedule = new SimpleAdapter(this,  
-				mylist,//Êı¾İÀ´Ô´   
-				R.layout.two_decimal_item,//ListItemµÄXMLÊµÏÖ  
+				mylist,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´   
+				R.layout.two_decimal_item,//ListItemï¿½ï¿½XMLÊµï¿½ï¿½  
 
-				//¶¯Ì¬Êı×éÓëListItem¶ÔÓ¦µÄ×ÓÏî          
+				//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ListItemï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½          
 				new String[] {"ItemTitle", "ItemText"},   
 
-				//ListItemµÄXMLÎÄ¼şÀïÃæµÄÁ½¸öTextView ID  
+				//ListItemï¿½ï¿½XMLï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TextView ID  
 				new int[] {R.id.ItemTitle,R.id.ItemText});  
-		//Ìí¼Ó²¢ÇÒÏÔÊ¾  
+		//ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾  
 		list.setAdapter(mSchedule); 
+
+
+		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
+	    menu = popupMenu.getMenu(); 
+	    
+	 //é€šè¿‡XMLå¯¼å…¥èœå•æ 
+	    MenuInflater menuInflater = getMenuInflater();  
+	    menuInflater.inflate(R.menu.class_list_menu, menu); 
+	   
+	    // è®¾ç½®ç›‘å¬äº‹ä»¶
+	    popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
+
+	    	@Override  
+	    	public boolean onMenuItemClick(MenuItem item) {  
+	    		switch (item.getItemId()) {  
+	    		case R.id.create:  
+	    			Toast.makeText(ClassListActivity.this, "åˆ›å»ºè¯¾ç¨‹ç»„",  
+	    					Toast.LENGTH_LONG).show();  
+	    			break; 
+	    		default:  
+	    			break;  
+	    		}  
+	    		return false;  
+	    	}  
+	    });  
 	}
+
+	public void popupmenu(View v) {  
+	    popupMenu.show();  
+	}  
 }

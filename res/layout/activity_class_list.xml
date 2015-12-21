@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="3pt"
             android:layout_toRightOf="@id/re"
-            android:text="课程组信息"
+            android:text="课程组列表"
             android:textColor="@color/white"
             android:textSize="10pt" />
 
@@ -40,6 +40,7 @@
             android:id="@id/lines"
             android:layout_width="10pt"
             android:layout_height="10pt"
+             android:onClick="popupmenu"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10pt"

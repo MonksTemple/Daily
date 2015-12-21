@@ -5,11 +5,20 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class TeamActivity extends Activity {
 
+	private PopupMenu popupMenu;  
+	private Menu menu;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -45,6 +54,42 @@ public class TeamActivity extends Activity {
 				new int[] {R.id.ItemTitle,R.id.ItemText});  
 		//
 		list.setAdapter(mSchedule); 
+
+
+		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
+	    menu = popupMenu.getMenu(); 
+	    
+	 //通过XML导入菜单栏
+	    MenuInflater menuInflater = getMenuInflater();  
+	    menuInflater.inflate(R.menu.task_list_menu, menu); 
+	   
+	    // 设置监听事件
+	    popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
+
+	    	@Override  
+	    	public boolean onMenuItemClick(MenuItem item) {  
+	    		switch (item.getItemId()) {  
+	    		case R.id.checkTeam:  
+	    			Toast.makeText(TeamActivity.this, "查看团队信息",  
+	    					Toast.LENGTH_LONG).show();  
+	    			break; 
+	    		case R.id.checkMen:  
+	    			Toast.makeText(TeamActivity.this, "查看成员列表",  
+	    					Toast.LENGTH_LONG).show();  
+	    			break;
+	    		case R.id.delete:  
+	    			Toast.makeText(TeamActivity.this, "退出团队",  
+	    					Toast.LENGTH_LONG).show();  
+	    			break;
+	    		default:  
+	    			break;  
+	    		}  
+	    		return false;  
+	    	}  
+	    });  
 	}
 
+	public void popupmenu(View v) {  
+	    popupMenu.show();  
+	}  
 }

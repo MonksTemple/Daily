@@ -5,15 +5,51 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class ActListActivity extends Activity {
-
+	private PopupMenu popupMenu;  
+	private Menu menu; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_act_list);
+		
+		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
+        menu = popupMenu.getMenu(); 
+        
+     //通过XML导入菜单栏
+        MenuInflater menuInflater = getMenuInflater();  
+        menuInflater.inflate(R.menu.act_list_menu, menu); 
+       
+        // 设置监听事件
+        popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
+
+        	@Override  
+        	public boolean onMenuItemClick(MenuItem item) {  
+        		switch (item.getItemId()) {  
+        		case R.id.create:  
+        			Toast.makeText(ActListActivity.this, "发布活动",  
+        					Toast.LENGTH_LONG).show();  
+        			break;   
+        		case R.id.delete:  
+        			Toast.makeText(ActListActivity.this, "撤销活动",  
+        					Toast.LENGTH_LONG).show();  
+        		break;  
+        		default:  
+        			break;  
+        		}  
+        		return false;  
+        	}  
+        });  
 		
 		ListView list = (ListView) findViewById(R.id.actListView); 
 		  
@@ -22,12 +58,12 @@ public class ActListActivity extends Activity {
 		HashMap<String, String> map1 = new HashMap<String, String>(); 
 		HashMap<String, String> map2 = new HashMap<String, String>();  
 		HashMap<String, String> map3 = new HashMap<String, String>();  
-		map1.put("ItemTitle", "北交大乒乓球协会“星星杯”比赛");  
-		map1.put("ItemText", "乒乓球协会的活动是根据国家的体育方针。。。");  
-		map2.put("ItemTitle", "129活动来啦");  
-		map2.put("ItemText", "129活动又称129抗日救亡运动。。。");  
-		map3.put("ItemTitle", "2015跨年晚会");  
-		map3.put("ItemText", "“跨年晚会”是指在西元（阳历，公历）年末。。。");  
+		map1.put("ItemTitle", "111");  
+		map1.put("ItemText", "aaa");  
+		map2.put("ItemTitle", "BBB");  
+		map2.put("ItemText", "bbb");  
+		map3.put("ItemTitle", "CCC");  
+		map3.put("ItemText", "ccc");  
 		mylist.add(map1);  
 		mylist.add(map2);
 		mylist.add(map3);
@@ -40,5 +76,10 @@ public class ActListActivity extends Activity {
 
 		list.setAdapter(mSchedule); 
 	}
+	
+	public void popupmenu(View v) {  
+        popupMenu.show();  
+    }  
+	
 
 }
