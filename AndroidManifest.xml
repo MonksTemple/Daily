@@ -14,17 +14,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-             android:name=".AgendaInfoActivity"
-             android:theme="@style/AppTheme"
-            android:label="@string/title_activity_agenda_info" >
-
+            android:name=".AgendaInfoActivity"
+            android:label="@string/title_activity_agenda_info"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".LoginActivity"
             android:contentDescription="@string/app_name"
             android:label="@string/app_name" >
-            
-            
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -41,13 +38,13 @@
         </activity>
         <activity
             android:name=".ClassInfoActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_class_info" >
+            android:label="@string/title_activity_class_info"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".PersonClassInfoActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_person_class_info" >
+            android:label="@string/title_activity_person_class_info"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".PsersonTaskInfoActivity"
@@ -59,83 +56,114 @@
         </activity>
         <activity
             android:name=".TaskInfoActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_task_info" >
+            android:label="@string/title_activity_task_info"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".TastListActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_tast_list" >
+            android:label="@string/title_activity_tast_list"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
-           android:name=".AgendaListActivity"
-           android:theme="@style/AppTheme"
-            android:label="@string/title_activity_agenda_list" >
+            android:name=".AgendaListActivity"
+            android:label="@string/title_activity_agenda_list"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".ClassListActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_class_list" >
+            android:label="@string/title_activity_class_list"
+            android:theme="@style/AppTheme" >
         </activity>
-        
-    <!-- scx -->
+
+        <!-- scx -->
         <!-- 团队列表 -->
         <activity
             android:name=".TeamListActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_team_list" >
+            android:label="@string/title_activity_team_list"
+            android:theme="@style/AppTheme" >
         </activity>
-        
+
         <!-- 团队页面 -->
         <activity
             android:name=".TeamActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_team" >       
+            android:label="@string/title_activity_team"
+            android:theme="@style/AppTheme" >
         </activity>
-        
+
         <!-- 团队信息 -->
         <activity
             android:name=".TeamInfoActivity"
             android:label="@string/title_activity_team_info" >
         </activity>
-        
+
         <!-- 团队成员 -->
         <activity
             android:name=".TeamMemListActivity"
-            android:label="@string/title_activity_team_memlist" >                                    
+            android:label="@string/title_activity_team_memlist" >
         </activity>
-        
+
         <!-- 活动列表 -->
         <activity
             android:name=".ActListActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_act_list" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>     
+            android:label="@string/title_activity_act_list"
+            android:theme="@style/AppTheme" >
+           
         </activity>
-        
+
         <!-- 活动信息 -->
         <activity
             android:name=".ActInfoActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_act_info" >
-            
-               
+            android:label="@string/title_activity_act_info"
+            android:theme="@style/AppTheme" >
         </activity>
-        
         <activity
             android:name=".ActHoldActActivity"
             android:label="@string/title_activity_act_holdact" >
         </activity>
-        
+
         <!-- 活动成员 -->
         <activity
             android:name=".ActMemListActivity"
-            android:label="@string/title_activity_act_memlist" >                                         
+            android:label="@string/title_activity_act_memlist" >
         </activity>
-        
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/title_activity_main" >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MondayActivity"
+            android:label="@string/title_activity_monday" >
+        </activity>
+        <activity
+            android:name=".TuesdayActivity"
+            android:label="@string/title_activity_tuesday" >
+        </activity>
+        <activity
+            android:name=".WedActivity"
+            android:label="@string/title_activity_wed" >
+        </activity>
+        <activity
+            android:name=".ThurActivity"
+            android:label="@string/title_activity_thur" >
+        </activity>
+        <activity
+            android:name=".FriActivity"
+            android:label="@string/title_activity_fri" >
+        </activity>
+        <activity
+            android:name=".SatActivity"
+            android:label="@string/title_activity_sat" >
+        </activity>
+        <activity
+            android:name=".SunActivity"
+            android:label="@string/title_activity_sun" >
+        </activity>
     </application>
 
 </manifest>

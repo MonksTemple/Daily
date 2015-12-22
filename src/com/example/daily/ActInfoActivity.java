@@ -36,7 +36,17 @@ public class ActInfoActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_act_info);
-		
+		initial();
+		//初始化菜单栏
+		initialMenu();
+	}
+	
+	public void popupmenu(View v) {  
+        popupMenu.show();  
+    }  
+	
+	
+	public void initial(){
 		actNameText = (EditText) findViewById(R.id.actNameText); 
 		actIntroText = (EditText) findViewById(R.id.actIntroText); 
 		actSponserText = (EditText) findViewById(R.id.actSponserText); 
@@ -47,8 +57,10 @@ public class ActInfoActivity extends Activity {
 		
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
         menu = popupMenu.getMenu(); 
-        
-     //通过XML导入菜单栏
+	}
+	
+	public void initialMenu(){
+		//通过XML导入菜单栏
         MenuInflater menuInflater = getMenuInflater();  
         menuInflater.inflate(R.menu.act_info_menu, menu); 
        
@@ -78,9 +90,6 @@ public class ActInfoActivity extends Activity {
         });  
 	}
 	
-	public void popupmenu(View v) {  
-        popupMenu.show();  
-    }  
 	
 }
 

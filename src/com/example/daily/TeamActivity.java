@@ -19,15 +19,29 @@ public class TeamActivity extends Activity {
 
 	private PopupMenu popupMenu;  
 	private Menu menu;
+	ListView list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_team);
-		
-		ListView list = (ListView) findViewById(R.id.teamView); 
 
-		//
+		initial();
+		initialMenu();
+		loadList();
+	}
+
+	public void popupmenu(View v) {  
+	    popupMenu.show();  
+	}  
+	
+	public void initial(){
+		list = (ListView) findViewById(R.id.teamView); 
+		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
+	    menu = popupMenu.getMenu(); 
+	}
+	
+	public void loadList(){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
 		HashMap<String, String> map1 = new HashMap<String, String>(); 
@@ -54,12 +68,10 @@ public class TeamActivity extends Activity {
 				new int[] {R.id.ItemTitle,R.id.ItemText});  
 		//
 		list.setAdapter(mSchedule); 
-
-
-		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
-	    menu = popupMenu.getMenu(); 
-	    
-	 //通过XML导入菜单栏
+	}
+	
+	public void initialMenu(){
+		 //通过XML导入菜单栏
 	    MenuInflater menuInflater = getMenuInflater();  
 	    menuInflater.inflate(R.menu.task_list_menu, menu); 
 	   
@@ -88,8 +100,4 @@ public class TeamActivity extends Activity {
 	    	}  
 	    });  
 	}
-
-	public void popupmenu(View v) {  
-	    popupMenu.show();  
-	}  
 }

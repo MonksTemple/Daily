@@ -25,79 +25,89 @@ public class AgendaInfoActivity extends Activity {
 
 	private PopupMenu popupMenu;  
 	private Menu menu; 
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_agenda_info);
-		
-	//创建时间选择器
-	startDateTime = (EditText) findViewById(R.id.startime);
-	endDateTime = (EditText) findViewById(R.id.endtime);
-	remindDateTime = (EditText) findViewById(R.id.remindtime);
+		//初始化控件
+		initial();
+		//初始化菜单栏
+		initialMenu();
+		//设置时间选择控件
+		setUpTime();
+	}
 
-	startDateTime.setText(initStartDateTime);
-	endDateTime.setText(initEndDateTime);
-	remindDateTime.setText(initRemindDateTime);
+	public void popupmenu(View v) {  
+		popupMenu.show();  
+	}  
 
-	startDateTime.setOnClickListener(new OnClickListener() {
-		public void onClick(View v) {
+	public void initial(){
+		//创建时间选择器
+		startDateTime = (EditText) findViewById(R.id.startime);
+		endDateTime = (EditText) findViewById(R.id.endtime);
+		remindDateTime = (EditText) findViewById(R.id.remindtime);
+		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
+		menu = popupMenu.getMenu(); 
+	}
 
-			DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
-					AgendaInfoActivity.this, initEndDateTime);
-			dateTimePicKDialog.dateTimePicKDialog(startDateTime);
+	public void initialMenu(){
+		//通过XML导入菜单栏
+		MenuInflater menuInflater = getMenuInflater();  
+		menuInflater.inflate(R.menu.agenda_info_menu, menu); 
 
-		}
-	});
+		// 设置监听事件
+		popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
 
-	endDateTime.setOnClickListener(new OnClickListener() {
+			@Override  
+			public boolean onMenuItemClick(MenuItem item) {  
+				switch (item.getItemId()) {  
+				case R.id.edit:  
+					Toast.makeText(AgendaInfoActivity.this, "编辑日程",  
+							Toast.LENGTH_LONG).show();  
+					break;   
+				case R.id.delete:  
+					Toast.makeText(AgendaInfoActivity.this, "删除日程",  
+							Toast.LENGTH_LONG).show();  
+					break;  
+				default:  
+					break;  
+				}  
+				return false;  
+			}  
+		});  
+	}
 
-		public void onClick(View v) {
-			DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
-					AgendaInfoActivity.this, initEndDateTime);
-			dateTimePicKDialog.dateTimePicKDialog(endDateTime);
-		}
-	});
-	
-	remindDateTime.setOnClickListener(new OnClickListener() {
+	public void setUpTime(){
+		startDateTime.setText(initStartDateTime);
+		endDateTime.setText(initEndDateTime);
+		remindDateTime.setText(initRemindDateTime);
+		startDateTime.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
 
-		public void onClick(View v) {
-			DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
-					AgendaInfoActivity.this, initRemindDateTime);
-			dateTimePicKDialog.dateTimePicKDialog(remindDateTime);
-		}
-	});
-	
-	popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
-    menu = popupMenu.getMenu(); 
-    
- //通过XML导入菜单栏
-    MenuInflater menuInflater = getMenuInflater();  
-    menuInflater.inflate(R.menu.agenda_info_menu, menu); 
-   
-    // 设置监听事件
-    popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						AgendaInfoActivity.this, initEndDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(startDateTime);
 
-    	@Override  
-    	public boolean onMenuItemClick(MenuItem item) {  
-    		switch (item.getItemId()) {  
-    		case R.id.edit:  
-    			Toast.makeText(AgendaInfoActivity.this, "编辑日程",  
-    					Toast.LENGTH_LONG).show();  
-    			break;   
-    		case R.id.delete:  
-    			Toast.makeText(AgendaInfoActivity.this, "删除日程",  
-    					Toast.LENGTH_LONG).show();  
-    		break;  
-    		default:  
-    			break;  
-    		}  
-    		return false;  
-    	}  
-    });  
-}
+			}
+		});
 
-public void popupmenu(View v) {  
-    popupMenu.show();  
-}  
+		endDateTime.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						AgendaInfoActivity.this, initEndDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(endDateTime);
+			}
+		});
+
+		remindDateTime.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						AgendaInfoActivity.this, initRemindDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(remindDateTime);
+			}
+		});
+	}
 }

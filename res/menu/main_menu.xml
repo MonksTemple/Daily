@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/classes"
+        android:title="课程组列表"/>
+    <item
+        android:id="@+id/act"
+        android:title="活动列表"/>
+    <item
+        android:id="@+id/team"
+        android:title="团队列表"/>
+    <item
+        android:id="@+id/agenda"
+        android:title="日程列表"/>
+     <item
+        android:id="@+id/user"
+        android:title="账号管理"/>
+</menu>

@@ -16,7 +16,6 @@
     <string name="title_activity_tast_list">TastListActivity</string>
     <string name="title_activity_agenda_info">AgendaInfoActivity</string>
     <string name="title_activity_agenda_list">AgendaListActivity</string>
-    
     <string name="title_activity_team_list">TeamListActivity</string>
     <string name="title_activity_team_info">TeamInfoActivity</string>
     <string name="title_activity_team">TeamActivity</string>
@@ -24,6 +23,14 @@
     <string name="title_activity_act_list">ActListActivity</string>
     <string name="title_activity_act_info">ActInfoActivity</string>
     <string name="title_activity_act_holdact">ActHoldActActivity</string>
-	<string name="title_activity_act_memlist">ActMemListActivity</string>
-    
+    <string name="title_activity_act_memlist">ActMemListActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_monday">MondayActivity</string>
+    <string name="title_activity_tuesday">TuesdayActivity</string>
+    <string name="title_activity_wed">WedActivity</string>
+    <string name="title_activity_thur">ThurActivity</string>
+    <string name="title_activity_fri">FriActivity</string>
+    <string name="title_activity_sat">SatActivity</string>
+    <string name="title_activity_sun">SunActivity</string>
+
 </resources>

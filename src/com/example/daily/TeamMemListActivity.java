@@ -10,15 +10,21 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class TeamMemListActivity extends Activity {
-
+	ListView list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_team_memlist);
-		
-		ListView list = (ListView) findViewById(R.id.teamMemListView); 
-		
+		initial();
+		loadList();
+	}
+	
+	public void initial(){
+		list= (ListView) findViewById(R.id.teamMemListView); ;
+	}
+	
+	public void loadList(){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
 		HashMap<String, String> map1 = new HashMap<String, String>(); 
