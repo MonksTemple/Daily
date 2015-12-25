@@ -106,7 +106,6 @@ public class CalendarView extends View {
 		mViewWidth = w;
 		mViewHight = h;
 		mCellSpace = Math.min(mViewHight / TOTAL_ROW, mViewWidth / TOTAL_COL);
-		mCellSpace=143;
 		if (!callBackCellSpace) {
 			
 			mCallBack.onMesureCellHeight(mCellSpace);

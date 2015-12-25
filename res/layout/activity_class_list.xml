@@ -14,6 +14,7 @@
             android:id="@+id/re"
             android:layout_width="18pt"
             android:layout_height="18pt"
+            android:onClick="clickBack"
             android:layout_centerVertical="true"
             android:src="@drawable/returna" />
 

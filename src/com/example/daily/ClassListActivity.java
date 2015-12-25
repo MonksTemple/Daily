@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,8 +54,10 @@ public class ClassListActivity extends Activity {
 	    	public boolean onMenuItemClick(MenuItem item) {  
 	    		switch (item.getItemId()) {  
 	    		case R.id.create:  
-	    			Toast.makeText(ClassListActivity.this, "创建课程组",  
-	    					Toast.LENGTH_LONG).show();  
+	    			Intent intent = new Intent();
+					intent = new Intent(ClassListActivity.this, ClassInfoActivity.class);
+					startActivity(intent);
+					ClassListActivity.this.finish(); 
 	    			break; 
 	    		default:  
 	    			break;  
@@ -88,5 +91,14 @@ public class ClassListActivity extends Activity {
 						new int[] {R.id.ItemTitle,R.id.ItemText});  
 				//��Ӳ�����ʾ  
 				list.setAdapter(mSchedule);
+	}
+	
+	
+	public void clickBack(View view){	
+		//界面跳转
+		Intent intent = new Intent();
+		intent = new Intent(ClassListActivity.this, CalendarActivity.class);
+		startActivity(intent);
+		ClassListActivity.this.finish();
 	}
 }

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.PopupMenu;
 import android.widget.SlidingDrawer;
@@ -38,7 +40,6 @@ public class CalendarActivity extends Activity implements CallBack{
 	private TextView showMonthView;
 	private TextView showWeekView;
 	private CalendarViewBuilder builder = new CalendarViewBuilder();
-	private View line;
 	private View mContentPager;
 	private CustomDate mClickDate;
 	private CustomDate lastDate;
@@ -47,6 +48,8 @@ public class CalendarActivity extends Activity implements CallBack{
 	private Menu menu;
 	private Typeface typeface;
 	Date dates=new Date();
+	
+	Calendar cal=Calendar.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,6 @@ public class CalendarActivity extends Activity implements CallBack{
 		showMonthView = (TextView)this.findViewById(R.id.show_month_view);
 		showYearView = (TextView)this.findViewById(R.id.show_year_view);
 		showWeekView = (TextView)this.findViewById(R.id.show_week_view);
-		line=this.findViewById(R.id.line);
 		views = builder.createMassCalendarViews(this, 5, this);
 		mContentPager = this.findViewById(R.id.contentPager);
 		showMonthView.setOnClickListener(new changeDateListener());
@@ -117,10 +119,10 @@ public class CalendarActivity extends Activity implements CallBack{
 		changeDate(date);
 	}
 
+	//事件响应
 	@Override
 	public void changeDate(CustomDate date) {
 		//得到农历
-		Calendar cal=Calendar.getInstance();
 		cal.set(Calendar.YEAR, date.year);
 		cal.set(Calendar.MARCH,date.month-1);
 		cal.set(Calendar.DAY_OF_MONTH,date.day);
@@ -205,7 +207,17 @@ public class CalendarActivity extends Activity implements CallBack{
 
 	public void popupmenu(View v) {  
 		popupMenu.show();  
-	} 
+	}
+	
+	public void clickSure(View view){
+		int week = cal.get(Calendar.DAY_OF_WEEK) - 1;
+		
+		//界面跳转
+		Intent intent = new Intent();
+		intent = new Intent(CalendarActivity.this, MainActivity.class);
+		startActivity(intent);
+		CalendarActivity.this.finish();
+	}
 
 }  
 

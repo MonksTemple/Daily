@@ -1,5 +1,6 @@
 package com.example.daily;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -85,6 +86,7 @@ public class MainActivity extends Activity {
 		viewContainter.add(view6);
 		viewContainter.add(view7);
 
+		pager.setCurrentItem(3);
 		pager.setAdapter(new MyViewPagerAdapter(viewContainter,titleContainer));
 		pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer));
 	}
@@ -117,24 +119,35 @@ public class MainActivity extends Activity {
 			public boolean onMenuItemClick(MenuItem item) {  
 				switch (item.getItemId()) {  
 				case R.id.classes:  
-					Toast.makeText(MainActivity.this, "课程组列表",  
-							Toast.LENGTH_LONG).show();  
+					//界面跳转
+					Intent intent1 = new Intent();
+					intent1 = new Intent(MainActivity.this, ClassListActivity.class);
+					startActivity(intent1);
+					MainActivity.this.finish();
 					break;   
 				case R.id.act:  
-					Toast.makeText(MainActivity.this, "活动列表",  
-							Toast.LENGTH_LONG).show();  
+					Intent intent2 = new Intent();
+					intent2 = new Intent(MainActivity.this, ActListActivity.class);
+					startActivity(intent2);
+					MainActivity.this.finish();  
 					break;  
 				case R.id.team:  
-					Toast.makeText(MainActivity.this, "团队列表",  
-							Toast.LENGTH_LONG).show();  
+					Intent intent3 = new Intent();
+					intent3 = new Intent(MainActivity.this, TeamListActivity.class);
+					startActivity(intent3);
+					MainActivity.this.finish();
 					break;   
 				case R.id.agenda:  
-					Toast.makeText(MainActivity.this, "日程列表",  
-							Toast.LENGTH_LONG).show();  
+					Intent intent4 = new Intent();
+					intent4 = new Intent(MainActivity.this, AgendaListActivity.class);
+					startActivity(intent4);
+					MainActivity.this.finish(); 
 					break;  
 				case R.id.user:  
-					Toast.makeText(MainActivity.this, "账号管理",  
-							Toast.LENGTH_LONG).show();  
+					Intent intent5 = new Intent();
+					intent5 = new Intent(MainActivity.this, UserInfoActivity.class);
+					startActivity(intent5);
+					MainActivity.this.finish();
 					break; 
 				default:  
 					break;  
@@ -147,6 +160,14 @@ public class MainActivity extends Activity {
 	public void popupmenu(View v) {  
 		popupMenu.show();  
 	} 
+	
+	public void clickBack(View view){	
+		//界面跳转
+		Intent intent = new Intent();
+		intent = new Intent(MainActivity.this, CalendarActivity.class);
+		startActivity(intent);
+//		MainActivity.this.finish();
+	}
 
 }
 

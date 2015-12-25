@@ -2,6 +2,7 @@ package com.example.daily;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -70,11 +71,16 @@ public class ActInfoActivity extends Activity {
         	@Override  
         	public boolean onMenuItemClick(MenuItem item) {  
         		switch (item.getItemId()) {  
-        		case R.id.change:  
+        		case R.id.change: 
+        			changeMemInfo();
         			Toast.makeText(ActInfoActivity.this, "修改成员信息",  
         					Toast.LENGTH_LONG).show();  
         			break;  
         		case R.id.check:  
+        			Intent intent = new Intent();
+        			intent = new Intent(ActInfoActivity.this, ActListActivity.class);
+        			startActivity(intent);
+        			ActInfoActivity.this.finish();
         			Toast.makeText(ActInfoActivity.this, "查看活动列表",  
         					Toast.LENGTH_LONG).show();  
         			break;  
@@ -90,7 +96,9 @@ public class ActInfoActivity extends Activity {
         });  
 	}
 	
-	
+	public void changeMemInfo(){
+		
+	}
 }
 
 
