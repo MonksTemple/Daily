@@ -1,6 +1,6 @@
 package com.example.daily;
 
-import com.example.component.DateTimePickDialogUtil;
+import com.example.util.DateTimePickDialogUtil;
 
 import android.app.Activity;
 import android.os.Bundle;

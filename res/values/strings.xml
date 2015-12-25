@@ -32,5 +32,6 @@
     <string name="title_activity_fri">FriActivity</string>
     <string name="title_activity_sat">SatActivity</string>
     <string name="title_activity_sun">SunActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
 
 </resources>
