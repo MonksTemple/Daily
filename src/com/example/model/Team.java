@@ -4,14 +4,14 @@ import java.util.Set;
 
 public class Team {
 
-	private int tId;             //�Ŷӱ��
-	private String name;         //�Ŷ�����
-	private String description;  //�ŶӼ��
-	private int type;            //�Ŷ�����,TypeΪ1��ʱ��Ϊ�Ŷ��飬typeΪ2��ʱ��Ϊ�γ���
-	private int cno;             //�γ�id
-	private User creator;        //������
-	private Set activities;      //���ŶӴ����Ļ
-	private Set members;         //���Ŷ����еĳ�Ա
+	private int tId;             //团队编号
+	private String name;         //团队名称
+	private String description;  //团队简介
+	private int type;            //团队类型,Type为1的时候为团队组，type为2的时候为课程组
+	private int cno;             //课程id
+	private User creator;        //创建人
+	private Set activities;      //该团队创建的活动
+	private Set members;         //该团队所有的成员
 	
 	
 	public int gettId() {
