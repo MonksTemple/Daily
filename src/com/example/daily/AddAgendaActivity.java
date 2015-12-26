@@ -5,19 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-public class UserInfoActivity extends Activity {
+public class AddAgendaActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_user_info);
+		setContentView(R.layout.activity_add_agenda);
 	}
 	
-	public void edit(){
+	//提交信息
+	void sure(View view){
 		Intent intent1 = new Intent();
-		intent1 = new Intent(UserInfoActivity.this, ChangeUserInfoActivity.class);
+		intent1 = new Intent(AddAgendaActivity.this, AgendaListActivity.class);
 		startActivity(intent1);
-		UserInfoActivity.this.finish();
+		AddAgendaActivity.this.finish();
 	}
 }

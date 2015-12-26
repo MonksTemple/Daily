@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,7 +51,12 @@ public class TeamListActivity extends Activity {
 	    	@Override  
 	    	public boolean onMenuItemClick(MenuItem item) {  
 	    		switch (item.getItemId()) {  
-	    		case R.id.edit:  
+	    		case R.id.edit: 
+	    			//界面跳转到创建团队
+	    			Intent intent = new Intent();
+	    			intent = new Intent(TeamListActivity.this, TeamCreateActivity.class);
+	    			startActivity(intent);
+	    			TeamListActivity.this.finish();
 	    			Toast.makeText(TeamListActivity.this, "创建团队",  
 	    					Toast.LENGTH_LONG).show();  
 	    			break; 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,6 +53,10 @@ public class AgendaListActivity extends Activity {
 	    	public boolean onMenuItemClick(MenuItem item) {  
 	    		switch (item.getItemId()) {  
 	    		case R.id.create:  
+	    			Intent intent1 = new Intent();
+        			intent1 = new Intent(AgendaListActivity.this, AddAgendaActivity.class);
+        			startActivity(intent1);
+        			AgendaListActivity.this.finish();
 	    			Toast.makeText(AgendaListActivity.this, "创建日程",  
 	    					Toast.LENGTH_LONG).show();  
 	    			break;   

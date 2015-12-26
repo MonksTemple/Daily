@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -82,10 +83,18 @@ public class TeamActivity extends Activity {
 	    	public boolean onMenuItemClick(MenuItem item) {  
 	    		switch (item.getItemId()) {  
 	    		case R.id.checkTeam:  
+	    			Intent intent1 = new Intent();
+        			intent1 = new Intent(TeamActivity.this, TeamInfoActivity.class);
+        			startActivity(intent1);
+        			TeamActivity.this.finish();
 	    			Toast.makeText(TeamActivity.this, "查看团队信息",  
 	    					Toast.LENGTH_LONG).show();  
 	    			break; 
 	    		case R.id.checkMen:  
+	    			Intent intent2 = new Intent();
+        			intent2 = new Intent(TeamActivity.this, ActMemListActivity.class);
+        			startActivity(intent2);
+        			TeamActivity.this.finish();
 	    			Toast.makeText(TeamActivity.this, "查看成员列表",  
 	    					Toast.LENGTH_LONG).show();  
 	    			break;

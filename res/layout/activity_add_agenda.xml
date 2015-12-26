@@ -24,11 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/re"
-            android:text="活动信息"
+            android:text="个人日程信息"
             android:layout_marginLeft="3pt"
             android:textColor="@color/white"
             android:textSize="10pt"
             />
+        
         
     </RelativeLayout>
     
@@ -51,7 +52,7 @@
             android:id="@+id/taskname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="活动名称：    "
+            android:text="日程名称：    "
             android:layout_centerVertical="true"
             android:textColor="@color/black"
             android:textSize="7pt" />
@@ -80,7 +81,7 @@
             android:id="@+id/intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="活动简介：    "           
+            android:text="日程简介：    "           
             android:textColor="@color/black"
             android:textSize="7pt" />
            
@@ -100,35 +101,6 @@
          </RelativeLayout>
          
          
-         
-         <RelativeLayout 
-             android:layout_width="fill_parent"
-             android:layout_height="60dp"
-             android:layout_marginLeft="5pt"
-            android:layout_marginRight="5pt"
-             >
-           <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="活动举办方："
-            android:layout_centerVertical="true"
-            android:textColor="@color/black"
-            android:textSize="7pt" />
-           
-            <EditText
-             android:background="@drawable/et"
-             android:id="@+id/createname"
-             android:layout_width="match_parent"
-             android:layout_height="40dp"
-             android:layout_toRightOf="@id/name"
-             android:layout_centerVertical="true"
-             android:hint=" 开心超人"
-             android:textSize="7pt"
-             android:textColor="@color/black"/>
-             
-         </RelativeLayout>
-          
          
           <RelativeLayout 
              android:layout_width="fill_parent"
@@ -152,7 +124,8 @@
              android:layout_height="40dp"
              android:layout_toRightOf="@id/stime"
              android:layout_centerVertical="true"
-             android:hint=" 2015-12-30"
+             android:editable="false"
+             android:clickable="true"
              android:textSize="7pt"
              android:textColor="@color/black"/>
              
@@ -181,6 +154,8 @@
              android:layout_toRightOf="@id/etime"
              android:layout_centerVertical="true"
              android:hint=" 2015-01-30"
+             android:clickable="true"
+             android:editable="false"
              android:textSize="7pt"
              android:textColor="@color/black"/>
              
@@ -236,25 +211,25 @@
              android:layout_height="40dp"
              android:layout_toRightOf="@id/rtime"
              android:layout_centerVertical="true"
-             android:hint=" 2015-01-30"
+             android:editable="false"
              android:textSize="7pt"
+             android:clickable="true"
              android:textColor="@color/black"/>
              
          </RelativeLayout>
          
-      <Button
-      	android:id="@+id/sure"
-      	android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="15pt"
+       <Button
+      android:id="@+id/sure"
+      android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5pt"
         android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
-        android:text="发布活动"
-        android:onClick="clickSure"
+        android:text="提交信息"
         android:textSize="15dp"
         android:background="@color/theme"
       />
-         
+        
     </LinearLayout>
         
 </RelativeLayout>

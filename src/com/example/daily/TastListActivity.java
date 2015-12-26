@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,10 +53,18 @@ public class TastListActivity extends Activity {
 	    	public boolean onMenuItemClick(MenuItem item) {  
 	    		switch (item.getItemId()) {  
 	    		case R.id.checkClass:  
+	    			Intent intent1 = new Intent();
+        			intent1 = new Intent(TastListActivity.this, ClassInfoActivity.class);
+        			startActivity(intent1);
+        			TastListActivity.this.finish();
 	    			Toast.makeText(TastListActivity.this, "查看课程组信息",  
 	    					Toast.LENGTH_LONG).show();  
 	    			break; 
 	    		case R.id.checkMen:  
+	    			Intent intent2 = new Intent();
+        			intent2 = new Intent(TastListActivity.this, ActMemListActivity.class);
+        			startActivity(intent2);
+        			TastListActivity.this.finish();
 	    			Toast.makeText(TastListActivity.this, "查看成员列表",  
 	    					Toast.LENGTH_LONG).show();  
 	    			break; 

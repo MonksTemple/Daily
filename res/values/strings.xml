@@ -33,5 +33,7 @@
     <string name="title_activity_sat">SatActivity</string>
     <string name="title_activity_sun">SunActivity</string>
     <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_team_create">TeamCreateActivity</string>
+    <string name="title_activity_add_agenda">AddAgendaActivity</string>
 
 </resources>
