@@ -105,4 +105,12 @@ public class TastListActivity extends Activity {
 		list.setAdapter(mSchedule); 
 	}
 	
+	public void back(){	
+		//界面跳转
+		Intent intent = new Intent();
+		intent = new Intent(TastListActivity.this, CalendarActivity.class);
+		startActivity(intent);
+		TastListActivity.this.finish();
+	}
+	
 }

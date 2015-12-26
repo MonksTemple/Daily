@@ -89,4 +89,11 @@ public class TeamListActivity extends Activity {
 		list.setAdapter(mSchedule); 
 
 	}
+	
+	public void back(View view){
+		Intent intent1 = new Intent();
+		intent1 = new Intent(TeamListActivity.this, CalendarActivity.class);
+		startActivity(intent1);
+		TeamListActivity.this.finish();
+	}
 }
