@@ -29,7 +29,6 @@ public class ClassListActivity extends Activity {
 		initial();
 		initialMenu();
 		loadList();
-	 
 	}
 
 	public void popupmenu(View v) {  
