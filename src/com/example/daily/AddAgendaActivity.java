@@ -14,12 +14,21 @@ public class AddAgendaActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_agenda);
 	}
-	
+
 	//提交信息
-	void sure(View view){
+	public void sure(View view){
 		Intent intent1 = new Intent();
 		intent1 = new Intent(AddAgendaActivity.this, AgendaListActivity.class);
 		startActivity(intent1);
 		AddAgendaActivity.this.finish();
 	}
+
+	//返回箭头
+	public void back(View view){
+		Intent intent = new Intent();
+		intent = new Intent(AddAgendaActivity.this, AgendaListActivity.class);
+		startActivity(intent);
+		AddAgendaActivity.this.finish();
+	}
+
 }

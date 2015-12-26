@@ -23,8 +23,8 @@ public class ActListActivity extends Activity {
 	private PopupMenu popupMenu;  
 	private Menu menu; 
 	ListView list;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,54 +36,54 @@ public class ActListActivity extends Activity {
 		//加载列表
 		loadList();
 	}
-	
-	public void popupmenu(View v) {  
-        popupMenu.show();  
-    }  
-	
-	public void initial(){
-		
-		
-		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
-        menu = popupMenu.getMenu(); 
-        list = (ListView) findViewById(R.id.actListView); 
-        
-       
-	}
-	
-	public void initialMenu(){
-		 //通过XML导入菜单栏
-        MenuInflater menuInflater = getMenuInflater();  
-        menuInflater.inflate(R.menu.act_list_menu, menu); 
-       
-        // 设置监听事件
-        popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
 
-        	@Override  
-        	public boolean onMenuItemClick(MenuItem item) {  
-        		switch (item.getItemId()) { 
-        		//发布活动
-        		case R.id.create:  
-        			Intent intent = new Intent();
-        			intent = new Intent(ActListActivity.this, ActHoldActActivity.class);
-        			startActivity(intent);
-        			ActListActivity.this.finish();
-        			Toast.makeText(ActListActivity.this, "发布活动",  
-        					Toast.LENGTH_LONG).show();  
-        			break;   
-        		case R.id.delete:  
-        			Toast.makeText(ActListActivity.this, "撤销活动",  
-        					Toast.LENGTH_LONG).show();  
-        		break;  
-        		default:  
-        			break;  
-        		}  
-        		return false;  
-        	}  
-        });  
+	public void popupmenu(View v) {  
+		popupMenu.show();  
+	}  
+
+	public void initial(){
+
+
+		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
+		menu = popupMenu.getMenu(); 
+		list = (ListView) findViewById(R.id.actListView); 
+
+
 	}
-	
-	
+
+	public void initialMenu(){
+		//通过XML导入菜单栏
+		MenuInflater menuInflater = getMenuInflater();  
+		menuInflater.inflate(R.menu.act_list_menu, menu); 
+
+		// 设置监听事件
+		popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
+
+			@Override  
+			public boolean onMenuItemClick(MenuItem item) {  
+				switch (item.getItemId()) { 
+				//发布活动
+				case R.id.create:  
+					Intent intent = new Intent();
+					intent = new Intent(ActListActivity.this, ActHoldActActivity.class);
+					startActivity(intent);
+					ActListActivity.this.finish();
+					Toast.makeText(ActListActivity.this, "发布活动",  
+							Toast.LENGTH_LONG).show();  
+					break;   
+				case R.id.delete:  
+					Toast.makeText(ActListActivity.this, "撤销活动",  
+							Toast.LENGTH_LONG).show();  
+					break;  
+				default:  
+					break;  
+				}  
+				return false;  
+			}  
+		});  
+	}
+
+
 	public void loadList(){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
@@ -107,6 +107,14 @@ public class ActListActivity extends Activity {
 				new int[] {R.id.ItemTitle,R.id.ItemText});  
 
 		list.setAdapter(mSchedule); 
+	}
+
+	//返回箭头
+	public void back(View view){
+		Intent intent = new Intent();
+		intent = new Intent(ActListActivity.this, CalendarActivity.class);
+		startActivity(intent);
+		ActListActivity.this.finish();
 	}
 
 }

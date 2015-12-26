@@ -15,7 +15,16 @@ public class TeamCreateActivity extends Activity {
 		setContentView(R.layout.activity_team_create);
 	}
 	
-	void sure(View view){
+	//提交按钮
+	public void sure(View view){
+		Intent intent = new Intent();
+		intent = new Intent(TeamCreateActivity.this, TeamListActivity.class);
+		startActivity(intent);
+		TeamCreateActivity.this.finish();
+	}
+	
+	//返回箭头
+	public void back(View view){
 		Intent intent = new Intent();
 		intent = new Intent(TeamCreateActivity.this, TeamListActivity.class);
 		startActivity(intent);

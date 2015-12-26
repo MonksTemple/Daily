@@ -1,9 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical">
+<RelativeLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="${relativePackage}.${activityClass}" >
+    android:background="@color/white">
 
     <RelativeLayout 
         android:id="@+id/title"
@@ -15,6 +17,7 @@
             android:id="@+id/re"
             android:layout_width="18pt"
             android:layout_height="18pt"
+            android:onClick="back"
             android:src="@drawable/returna"
             android:layout_centerVertical="true"
             />
@@ -250,6 +253,7 @@
         android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:text="提交信息"
+        android:onClick="sure"
         android:textSize="15dp"
         android:background="@color/theme"
       />
@@ -257,3 +261,4 @@
     </LinearLayout>
         
 </RelativeLayout>
+</ScrollView>

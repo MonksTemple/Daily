@@ -3,6 +3,7 @@ package com.example.daily;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class ActHoldActActivity extends Activity  {
 
@@ -13,7 +14,14 @@ public class ActHoldActActivity extends Activity  {
 		setContentView(R.layout.activity_act_holdact);
 	}
 	
-	void clickSure(){
+	public void clickSure(View view){
+		Intent intent = new Intent();
+		intent = new Intent(ActHoldActActivity.this, ActListActivity.class);
+		startActivity(intent);
+		ActHoldActActivity.this.finish();
+	}
+	
+	public void back(View view){
 		Intent intent = new Intent();
 		intent = new Intent(ActHoldActActivity.this, ActListActivity.class);
 		startActivity(intent);

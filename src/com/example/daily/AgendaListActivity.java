@@ -93,4 +93,12 @@ public class AgendaListActivity extends Activity {
 		list.setAdapter(mSchedule); 
 	}
 	
+	//返回箭头
+		public void back(View view){
+			Intent intent = new Intent();
+			intent = new Intent(AgendaListActivity.this, CalendarActivity.class);
+			startActivity(intent);
+			AgendaListActivity.this.finish();
+		}
+	
 }

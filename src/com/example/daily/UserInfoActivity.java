@@ -6,19 +6,25 @@ import com.example.view.UserView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+<<<<<<< HEAD
+=======
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+>>>>>>> d30c11f7cce339dde84705f5c7ce4038842bf925
 import android.widget.TextView;
 
 public class UserInfoActivity extends Activity implements UserView{
 	private TextView userNameText;
 	private TextView snoText;
 	private TextView telText;
-	
-		
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_info);
-		
+
 		userNameText = (TextView)findViewById(R.id.username);
 		snoText = (TextView)findViewById(R.id.sno);
 		telText = (TextView)findViewById(R.id.tel);
@@ -26,7 +32,7 @@ public class UserInfoActivity extends Activity implements UserView{
 
 	@Override
 	public User getUser() {
-		
+
 		return null;
 	}
 
@@ -36,11 +42,19 @@ public class UserInfoActivity extends Activity implements UserView{
 		snoText.setText(user.getUserId());
 		telText.setText(user.getPhoneno());
 	}
-	
-	public void edit(){
+
+	public void edit(View view){
 		Intent intent1 = new Intent();
 		intent1 = new Intent(UserInfoActivity.this, ChangeUserInfoActivity.class);
 		startActivity(intent1);
+		UserInfoActivity.this.finish();
+	}
+
+	//返回箭头
+	public void back(View view){
+		Intent intent = new Intent();
+		intent = new Intent(UserInfoActivity.this, CalendarActivity.class);
+		startActivity(intent);
 		UserInfoActivity.this.finish();
 	}
 }

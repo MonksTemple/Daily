@@ -16,6 +16,7 @@
             android:id="@+id/re"
             android:layout_width="18pt"
             android:layout_height="18pt"
+            android:onClick="back"
             android:src="@drawable/returna"
             android:layout_centerVertical="true"
             />
@@ -276,6 +277,7 @@
         android:layout_marginRight="10pt"
         android:text="提交信息"
         android:textSize="15dp"
+        android:onClick="sure"
         android:background="@color/theme"
       />
         

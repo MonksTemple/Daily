@@ -30,12 +30,12 @@ public class ActInfoActivity extends Activity {
 	EditText endTime;
 	EditText place;
 	EditText remindTime;
-	
+
 	ImageView lines;
 	ImageView cross;
-	
+
 	Button sure;
-	
+
 	private PopupMenu popupMenu;  
 	private Menu menu; 
 
@@ -48,12 +48,12 @@ public class ActInfoActivity extends Activity {
 		//初始化菜单栏
 		initialMenu();
 	}
-	
+
 	public void popupmenu(View v) {  
-        popupMenu.show();  
-    }  
-	
-	
+		popupMenu.show();  
+	}  
+
+
 	public void initial(){
 		actName=(EditText) findViewById(R.id.actNameText);
 		actDes=(EditText) findViewById(R.id.actIntroText);
@@ -65,67 +65,83 @@ public class ActInfoActivity extends Activity {
 		lines=(ImageView) findViewById(R.id.lines);
 		cross=(ImageView) findViewById(R.id.cross);
 		sure=(Button) findViewById(R.id.sure);
-		
+
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
-        menu = popupMenu.getMenu(); 
-        
-        actName.setEnabled(false);
-        actDes.setEnabled(false);
-        actCreator.setEnabled(false);
-        place.setEnabled(false);
-        startTime.setClickable(false);
-        endTime.setClickable(false);
-        remindTime.setClickable(false);
-        sure.setVisibility(4);
+		menu = popupMenu.getMenu(); 
+
+		actName.setEnabled(false);
+		actDes.setEnabled(false);
+		actCreator.setEnabled(false);
+		place.setEnabled(false);
+		startTime.setClickable(false);
+		endTime.setClickable(false);
+		remindTime.setClickable(false);
+		sure.setVisibility(4);
 	}
-	
+
 	public void initialMenu(){
 		//通过XML导入菜单栏
-        MenuInflater menuInflater = getMenuInflater();  
-        menuInflater.inflate(R.menu.act_info_menu, menu); 
-       
-        // 设置监听事件
-        popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
+		MenuInflater menuInflater = getMenuInflater();  
+		menuInflater.inflate(R.menu.act_info_menu, menu); 
 
-        	@Override  
-        	public boolean onMenuItemClick(MenuItem item) {  
-        		switch (item.getItemId()) {  
-        		case R.id.change: 
-        			changeInfo();
-        			Toast.makeText(ActInfoActivity.this, "修改活动信息",  
-        					Toast.LENGTH_LONG).show();  
-        			break;  
-        		case R.id.check:  
-        			Intent intent = new Intent();
-        			intent = new Intent(ActInfoActivity.this, ActListActivity.class);
-        			startActivity(intent);
-        			ActInfoActivity.this.finish();
-        			Toast.makeText(ActInfoActivity.this, "查看活动列表",  
-        					Toast.LENGTH_LONG).show();  
-        			break;  
-        		case R.id.delete:  
-        			Toast.makeText(ActInfoActivity.this, "撤销活动",  
-        					Toast.LENGTH_LONG).show();  
-        		break;  
-        		default:  
-        			break;  
-        		}  
-        		return false;  
-        	}  
-        });  
+		// 设置监听事件
+		popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
+
+			@Override  
+			public boolean onMenuItemClick(MenuItem item) {  
+				switch (item.getItemId()) {  
+				case R.id.change: 
+					changeInfo();
+					Toast.makeText(ActInfoActivity.this, "修改活动信息",  
+							Toast.LENGTH_LONG).show();  
+					break;  
+				case R.id.check:  
+					Intent intent = new Intent();
+					intent = new Intent(ActInfoActivity.this, ActListActivity.class);
+					startActivity(intent);
+					ActInfoActivity.this.finish();
+					Toast.makeText(ActInfoActivity.this, "查看活动列表",  
+							Toast.LENGTH_LONG).show();  
+					break;  
+				case R.id.delete:  
+					Toast.makeText(ActInfoActivity.this, "撤销活动",  
+							Toast.LENGTH_LONG).show();  
+					break;  
+				default:  
+					break;  
+				}  
+				return false;  
+			}  
+		});  
 	}
-	
+
 	public void changeInfo(){
 		actName.setEnabled(false);
-        actDes.setEnabled(false);
-        actCreator.setEnabled(false);
-        place.setEnabled(false);
-        startTime.setClickable(false);
-        endTime.setClickable(false);
-        remindTime.setClickable(false);
-        sure.setVisibility(0);
-        lines.setVisibility(4);
-        cross.setVisibility(4);
+		actDes.setEnabled(false);
+		actCreator.setEnabled(false);
+		place.setEnabled(false);
+		startTime.setClickable(false);
+		endTime.setClickable(false);
+		remindTime.setClickable(false);
+		sure.setVisibility(0);
+		lines.setVisibility(4);
+		cross.setVisibility(4);
+	}
+
+	//返回箭头
+	public void back(){
+		Intent intent = new Intent();
+		intent = new Intent(ActInfoActivity.this, ActListActivity.class);
+		startActivity(intent);
+		ActInfoActivity.this.finish();
+	}
+
+	//确定按钮
+	public void sure(View view){
+		Intent intent = new Intent();
+		intent = new Intent(ActInfoActivity.this, ActListActivity.class);
+		startActivity(intent);
+		ActInfoActivity.this.finish();
 	}
 }
 

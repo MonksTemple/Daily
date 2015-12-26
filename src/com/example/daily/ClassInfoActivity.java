@@ -95,7 +95,7 @@ public class ClassInfoActivity extends Activity {
 	}
 
 	//点击提交信息按钮
-	public void clickButton(){
+	public void clickButton(View view){
 		//界面跳转
 		Intent intent = new Intent();
 		intent = new Intent(ClassInfoActivity.this, ClassListActivity.class);

@@ -31,15 +31,7 @@
             android:textSize="10pt"
             />
         
-        <ImageView 
-            android:id="@+id/cross"
-            android:layout_width="10pt"
-            android:layout_height="10pt"
-            android:layout_marginRight="5pt"
-            android:src="@drawable/cross"
-            android:layout_toLeftOf="@+id/lines"
-            android:layout_centerVertical="true"
-            />
+        
         
         <ImageView 
             android:id="@id/lines"
@@ -157,6 +149,7 @@
         android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:text="提交信息"
+        android:onClick="clickButton"
         android:textSize="15dp"
         android:background="@color/theme"
       />
