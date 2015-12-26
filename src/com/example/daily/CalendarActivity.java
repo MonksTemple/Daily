@@ -178,29 +178,44 @@ public class CalendarActivity extends Activity implements CallBack{
 			public boolean onMenuItemClick(MenuItem item) {  
 				switch (item.getItemId()) {  
 				case R.id.classes:  
-					Toast.makeText(CalendarActivity.this, "课程组列表",  
-							Toast.LENGTH_LONG).show();  
+					//界面跳转到课程列表
+					Intent intent1 = new Intent();
+					intent1 = new Intent(CalendarActivity.this, ClassListActivity.class);
+					startActivity(intent1);
+					CalendarActivity.this.finish();
 					break;   
-				case R.id.act:  
-					Toast.makeText(CalendarActivity.this, "活动列表",  
-							Toast.LENGTH_LONG).show();  
+				case R.id.act: 
+					//界面跳转到活动列表
+					Intent intent2 = new Intent();
+					intent2 = new Intent(CalendarActivity.this, ActListActivity.class);
+					startActivity(intent2);
+					CalendarActivity.this.finish();  
 					break;  
-				case R.id.team:  
-					Toast.makeText(CalendarActivity.this, "团队列表",  
-							Toast.LENGTH_LONG).show();  
+				case R.id.team: 
+					//界面跳转到团队列表
+					Intent intent3 = new Intent();
+					intent3 = new Intent(CalendarActivity.this, TeamListActivity.class);
+					startActivity(intent3);
+					CalendarActivity.this.finish();
 					break;   
-				case R.id.agenda:  
-					Toast.makeText(CalendarActivity.this, "日程列表",  
-							Toast.LENGTH_LONG).show();  
+				case R.id.agenda: 
+					//界面跳转到日程列表
+					Intent intent4 = new Intent();
+					intent4 = new Intent(CalendarActivity.this, AgendaListActivity.class);
+					startActivity(intent4);
+					CalendarActivity.this.finish(); 
 					break;  
 				case R.id.user:  
-					Toast.makeText(CalendarActivity.this, "账号管理",  
-							Toast.LENGTH_LONG).show();  
+					//界面跳转到用户信息
+					Intent intent5 = new Intent();
+					intent5 = new Intent(CalendarActivity.this, UserInfoActivity.class);
+					startActivity(intent5);
+					CalendarActivity.this.finish();
 					break; 
 				default:  
 					break;  
 				}  
-				return false;  
+				return false; 
 			}  
 		});  
 	}

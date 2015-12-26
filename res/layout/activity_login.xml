@@ -116,6 +116,7 @@
         android:layout_alignParentLeft="true"
         android:background="@color/theme"
         android:textColor="#ffffff"
+        android:onClick="login"
         android:textSize="15dp"
         android:text="登    录" />
     
@@ -125,6 +126,7 @@
         android:layout_height="43dp"
         android:background="@color/theme"
         android:textColor="#ffffff"
+        android:onClick="register"
         android:textSize="15dp"
         android:layout_alignParentRight="true"
         android:text="注    册" />

@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
@@ -19,6 +23,8 @@ public class ActListActivity extends Activity {
 	private PopupMenu popupMenu;  
 	private Menu menu; 
 	ListView list;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,9 +42,13 @@ public class ActListActivity extends Activity {
     }  
 	
 	public void initial(){
+		
+		
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
         menu = popupMenu.getMenu(); 
         list = (ListView) findViewById(R.id.actListView); 
+        
+       
 	}
 	
 	public void initialMenu(){
@@ -51,8 +61,13 @@ public class ActListActivity extends Activity {
 
         	@Override  
         	public boolean onMenuItemClick(MenuItem item) {  
-        		switch (item.getItemId()) {  
+        		switch (item.getItemId()) { 
+        		//发布活动
         		case R.id.create:  
+        			Intent intent = new Intent();
+        			intent = new Intent(ActListActivity.this, ActHoldActActivity.class);
+        			startActivity(intent);
+        			ActListActivity.this.finish();
         			Toast.makeText(ActListActivity.this, "发布活动",  
         					Toast.LENGTH_LONG).show();  
         			break;   

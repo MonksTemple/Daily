@@ -68,7 +68,7 @@ public class ClassListActivity extends Activity {
 	}
 	
 	public void loadList(){
-		//���ɶ�̬���飬����ת������  
+
 				ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
 				HashMap<String, String> map1 = new HashMap<String, String>(); 
@@ -79,23 +79,21 @@ public class ClassListActivity extends Activity {
 				map2.put("ItemText", "ddddd");  
 				mylist.add(map1);  
 				mylist.add(map2);
-				//����������������===��ListItem  
 				SimpleAdapter mSchedule = new SimpleAdapter(this,  
-						mylist,//������Դ   
-						R.layout.two_decimal_item,//ListItem��XMLʵ��  
+						mylist, 
+						R.layout.two_decimal_item, 
 
-						//��̬������ListItem��Ӧ������          
+					    
 						new String[] {"ItemTitle", "ItemText"},   
-
-						//ListItem��XML�ļ����������TextView ID  
+ 
 						new int[] {R.id.ItemTitle,R.id.ItemText});  
-				//��Ӳ�����ʾ  
+
 				list.setAdapter(mSchedule);
 	}
 	
 	
 	public void clickBack(View view){	
-		//界面跳转
+		//界面跳转到日历界面
 		Intent intent = new Intent();
 		intent = new Intent(ClassListActivity.this, CalendarActivity.class);
 		startActivity(intent);

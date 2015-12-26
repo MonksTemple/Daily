@@ -14,20 +14,27 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class ActInfoActivity extends Activity {
-	private EditText actNameText;
-	private EditText actIntroText;
-	private EditText actSponserText;
-	private EditText actStartTimeText;
-	private EditText actEndTimeText;
-	private EditText actPlaceText;
-	private EditText actRemindTimeText;
+	EditText actName;
+	EditText actDes;
+	EditText actCreator;
+	EditText startTime;
+	EditText endTime;
+	EditText place;
+	EditText remindTime;
+	
+	ImageView lines;
+	ImageView cross;
+	
+	Button sure;
 	
 	private PopupMenu popupMenu;  
 	private Menu menu; 
@@ -48,16 +55,28 @@ public class ActInfoActivity extends Activity {
 	
 	
 	public void initial(){
-		actNameText = (EditText) findViewById(R.id.actNameText); 
-		actIntroText = (EditText) findViewById(R.id.actIntroText); 
-		actSponserText = (EditText) findViewById(R.id.actSponserText); 
-		actStartTimeText = (EditText) findViewById(R.id.actStartTimeText); 
-		actEndTimeText = (EditText) findViewById(R.id.actEndTimeText); 
-		actPlaceText = (EditText) findViewById(R.id.actPlaceText); 
-		actRemindTimeText = (EditText) findViewById(R.id.actRemindTimeText); 
+		actName=(EditText) findViewById(R.id.actNameText);
+		actDes=(EditText) findViewById(R.id.actIntroText);
+		actCreator=(EditText) findViewById(R.id.actSponserText);
+		startTime=(EditText) findViewById(R.id.actStartTimeText);
+		endTime=(EditText) findViewById(R.id.actEndTimeText);
+		place=(EditText) findViewById(R.id.actPlaceText);
+		remindTime=(EditText) findViewById(R.id.actRemindTimeText);
+		lines=(ImageView) findViewById(R.id.lines);
+		cross=(ImageView) findViewById(R.id.cross);
+		sure=(Button) findViewById(R.id.sure);
 		
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
         menu = popupMenu.getMenu(); 
+        
+        actName.setEnabled(false);
+        actDes.setEnabled(false);
+        actCreator.setEnabled(false);
+        place.setEnabled(false);
+        startTime.setClickable(false);
+        endTime.setClickable(false);
+        remindTime.setClickable(false);
+        sure.setVisibility(4);
 	}
 	
 	public void initialMenu(){
@@ -72,8 +91,8 @@ public class ActInfoActivity extends Activity {
         	public boolean onMenuItemClick(MenuItem item) {  
         		switch (item.getItemId()) {  
         		case R.id.change: 
-        			changeMemInfo();
-        			Toast.makeText(ActInfoActivity.this, "修改成员信息",  
+        			changeInfo();
+        			Toast.makeText(ActInfoActivity.this, "修改活动信息",  
         					Toast.LENGTH_LONG).show();  
         			break;  
         		case R.id.check:  
@@ -96,8 +115,17 @@ public class ActInfoActivity extends Activity {
         });  
 	}
 	
-	public void changeMemInfo(){
-		
+	public void changeInfo(){
+		actName.setEnabled(false);
+        actDes.setEnabled(false);
+        actCreator.setEnabled(false);
+        place.setEnabled(false);
+        startTime.setClickable(false);
+        endTime.setClickable(false);
+        remindTime.setClickable(false);
+        sure.setVisibility(0);
+        lines.setVisibility(4);
+        cross.setVisibility(4);
 	}
 }
 
