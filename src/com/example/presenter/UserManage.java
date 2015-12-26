@@ -23,7 +23,6 @@ public class UserManage {
 	
 	public boolean login(){
 		User user = userView.getUser();
-		
 		return true;
 	}
 	
