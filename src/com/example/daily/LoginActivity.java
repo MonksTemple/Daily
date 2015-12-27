@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity implements UserView{
 	private EditText account_text;
@@ -34,21 +35,24 @@ public class LoginActivity extends Activity implements UserView{
 	}
 
 	public void login(View view){
-		
 		//判断
 		//...
-		//如果成功登录
-		if(userManage.login()){
-
+		if(account_text.getText().toString() == null || account_text.getText().toString().length() <= 0
+			|| password_text.getText().toString() == null || password_text.getText().toString().length() <= 0){
+			
+			Toast.makeText(getApplicationContext(),"请完整填写的信息", Toast.LENGTH_SHORT).show();
 		}else{
-
+			//如果成功登录
+			if(userManage.login()){
+				//登录界面跳转
+				Intent intent = new Intent();
+				intent = new Intent(LoginActivity.this, CalendarActivity.class);
+				startActivity(intent);
+				LoginActivity.this.finish();
+			}else{
+				Toast.makeText(getApplicationContext(),"账号密码错误", Toast.LENGTH_SHORT).show();
+			}
 		}
-		
-		//登录界面跳转
-		Intent intent = new Intent();
-		intent = new Intent(LoginActivity.this, CalendarActivity.class);
-		startActivity(intent);
-		LoginActivity.this.finish();
 	}
 
 	public void register(View view){

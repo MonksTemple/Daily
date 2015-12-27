@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context="${relativePackage}.${activityClass}">
-
+	
     <RelativeLayout 
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -61,6 +61,7 @@
             />
          
          <EditText
+             android:id="@+id/nameText"
              android:layout_width="match_parent"
              android:layout_height="45dp"
              android:layout_toRightOf="@id/user"
@@ -81,12 +82,12 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="5pt"
             android:text="新密码："
-
             android:textColor="@color/black"
             android:textSize="7pt"
             />
          
          <EditText
+             android:id="@+id/passwordText"
              android:layout_width="fill_parent"
              android:layout_height="45dp"
              android:inputType="textPassword"
@@ -114,6 +115,7 @@
             />
          
          <EditText
+             android:id="@+id/password2"
              android:layout_width="match_parent"
              android:layout_height="45dp"
              android:inputType="textPassword"
@@ -141,6 +143,7 @@
             />
          
          <EditText
+             android:id="@+id/snoNum"
              android:layout_width="match_parent"
              android:layout_height="45dp"
              android:layout_toRightOf="@id/stuno"
@@ -156,6 +159,7 @@
         android:background="@color/theme"
         android:textColor="#ffffff"
         android:textSize="15dp"
+        android:onClick="register"
         android:layout_below="@id/body"
         android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
