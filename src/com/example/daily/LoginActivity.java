@@ -38,7 +38,7 @@ public class LoginActivity extends Activity implements UserView{
 				Intent intent = new Intent();
 				intent = new Intent(LoginActivity.this, CalendarActivity.class);
 				startActivity(intent);
-				//LoginActivity.this.finish();	
+				LoginActivity.this.finish();	
 				//Toast.makeText(get, "登陆成功",Toast.LENGTH_LONG).show();
 			}else {
 				Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT)
