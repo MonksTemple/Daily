@@ -47,7 +47,7 @@ public class UserManage {
 		map.put("type", "01");
 		map.put("user", userString);
 		String resp = ConnectUtil.getResponse(map);
-		if(resp == "false"){
+		if(resp.equals("false")){
 			return false;
 		}
 				

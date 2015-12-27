@@ -62,36 +62,38 @@ public class LoginActivity extends Activity implements UserView{
 			
 			Toast.makeText(getApplicationContext(),"请完整填写的信息", Toast.LENGTH_SHORT).show();
 		}else{
+			new Thread (){
+				public void run() {
+					
+					Message msg = new Message();
+					Bundle bundle = new Bundle();
+					if(userManage.login()){
+						bundle.putString("login", "true");
+						msg.setData(bundle);
+						handler.sendMessage(msg);
+					}
+					else{
+						bundle.putString("login", "false");
+						msg.setData(bundle);
+						handler.sendMessage(msg);
+					}
+					
+				}
+			}.start();
+			
 			//如果成功登录
-			if(userManage.login()){
+			
 				//登录界面跳转
 				Intent intent = new Intent();
 				intent = new Intent(LoginActivity.this, CalendarActivity.class);
 				startActivity(intent);
 				LoginActivity.this.finish();
-			}else{
-				Toast.makeText(getApplicationContext(),"账号密码错误", Toast.LENGTH_SHORT).show();
 			}
 		}
 
-		new Thread (){
-			public void run() {
-				Message msg = new Message();
-				Bundle bundle = new Bundle();
-				if(userManage.login()){
-					bundle.putString("login", "true");
-					msg.setData(bundle);
-					handler.sendMessage(msg);
-				}
-				else{
-					bundle.putString("login", "false");
-					msg.setData(bundle);
-					handler.sendMessage(msg);
-				}
-			}
-		}.start();
 
-	}
+
+	
 
 	public void register(View view){
 		//注册界面跳转
@@ -116,7 +118,4 @@ public class LoginActivity extends Activity implements UserView{
 		// TODO Auto-generated method stub
 
 	}
-
-
-
 }
