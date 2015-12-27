@@ -1,12 +1,12 @@
 package com.example.daily;
 
 import com.example.model.User;
+import com.example.presenter.UserManage;
 import com.example.view.UserView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +16,7 @@ public class UserInfoActivity extends Activity implements UserView{
 	private TextView userNameText;
 	private TextView snoText;
 	private TextView telText;
-
+	private UserManage userManage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,9 @@ public class UserInfoActivity extends Activity implements UserView{
 		userNameText = (TextView)findViewById(R.id.username);
 		snoText = (TextView)findViewById(R.id.sno);
 		telText = (TextView)findViewById(R.id.tel);
+		
+		
+		userManage = new UserManage(this);
 	}
 
 	@Override

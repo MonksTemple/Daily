@@ -3,12 +3,14 @@ package com.example.daily;
 import com.example.util.DateTimePickDialogUtil;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -18,6 +20,10 @@ public class AgendaInfoActivity extends Activity {
 	private EditText startDateTime;
 	private EditText endDateTime;
 	private EditText remindDateTime;
+	private EditText aName;
+	private EditText aInfo;
+	private EditText place;
+	Button sure;
 
 	private String initStartDateTime = "2015年12月30日 10:44"; // ��ʼ����ʼʱ��
 	private String initEndDateTime = "2015年01月30日 11:44"; // ��ʼ������ʱ��
@@ -47,8 +53,19 @@ public class AgendaInfoActivity extends Activity {
 		startDateTime = (EditText) findViewById(R.id.startime);
 		endDateTime = (EditText) findViewById(R.id.endtime);
 		remindDateTime = (EditText) findViewById(R.id.remindtime);
-		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
+		popupMenu = new PopupMenu(this, findViewById(R.id.lines)); 
+		aName=(EditText) findViewById(R.id.tname);
+		aInfo=(EditText) findViewById(R.id.info);
+		place=(EditText) findViewById(R.id.place);
+		sure=(Button) findViewById(R.id.sure);
 		menu = popupMenu.getMenu(); 
+		startDateTime.setClickable(false);
+		endDateTime.setClickable(false);
+		remindDateTime.setClickable(false);
+		aName.setEnabled(false);
+		aInfo.setEnabled(false);
+		place.setEnabled(false);
+		sure.setVisibility(4);
 	}
 
 	public void initialMenu(){
@@ -63,8 +80,7 @@ public class AgendaInfoActivity extends Activity {
 			public boolean onMenuItemClick(MenuItem item) {  
 				switch (item.getItemId()) {  
 				case R.id.edit:  
-					Toast.makeText(AgendaInfoActivity.this, "编辑日程",  
-							Toast.LENGTH_LONG).show();  
+					edit();
 					break;   
 				case R.id.delete:  
 					Toast.makeText(AgendaInfoActivity.this, "删除日程",  
@@ -76,6 +92,16 @@ public class AgendaInfoActivity extends Activity {
 				return false;  
 			}  
 		});  
+	}
+	
+	public void edit(){
+		startDateTime.setClickable(true);
+		endDateTime.setClickable(true);
+		remindDateTime.setClickable(true);
+		aName.setEnabled(true);
+		aInfo.setEnabled(true);
+		place.setEnabled(true);
+		sure.setVisibility(0);
 	}
 
 	public void setUpTime(){
@@ -109,5 +135,19 @@ public class AgendaInfoActivity extends Activity {
 				dateTimePicKDialog.dateTimePicKDialog(remindDateTime);
 			}
 		});
+	}
+	
+	public void sure(View view){
+		Intent intent = new Intent();
+		intent = new Intent(AgendaInfoActivity.this, AgendaListActivity.class);
+		startActivity(intent);
+		AgendaInfoActivity.this.finish();
+	}
+	
+	public void back(View view){
+		Intent intent = new Intent();
+		intent = new Intent(AgendaInfoActivity.this, AgendaListActivity.class);
+		startActivity(intent);
+		AgendaInfoActivity.this.finish();
 	}
 }

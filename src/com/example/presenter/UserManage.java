@@ -33,10 +33,16 @@ public class UserManage {
 		userView = tempUserView;
 	}
 	
-	public boolean register(User user) {
-		
-		
-		
+	public boolean register() {
+		User user = userView.getUser();
+		String userString = JSON.toJSONString(user);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "02");
+		map.put("user", userString);
+		String resp = ConnectUtil.getResponse(map);
+		if(resp.equals("false")){
+			return false;
+		}
 		return true;
 	}
 	
@@ -58,7 +64,8 @@ public class UserManage {
 	}
 	
 	public boolean modify(User user){
-
+		
+		
 		return true;
 	}
 	

@@ -10,10 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class TastListActivity extends Activity {
@@ -39,6 +41,7 @@ public class TastListActivity extends Activity {
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 	    menu = popupMenu.getMenu();
 	    list = (ListView) findViewById(R.id.classListView); 
+	    setListListener();
 	}
 	
 	public void initialMenu(){
@@ -91,21 +94,21 @@ public class TastListActivity extends Activity {
 		map2.put("ItemText", "ddddd");  
 		mylist.add(map1);  
 		mylist.add(map2);
-		//����������������===��ListItem  
+		//                ===  ListItem  
 		SimpleAdapter mSchedule = new SimpleAdapter(this,  
-				mylist,//������Դ   
-				R.layout.two_decimal_item,//ListItem��XMLʵ��  
+				mylist,//      Դ   
+				R.layout.two_decimal_item,//ListItem  XMLʵ    
 
-				//��̬������ListItem��Ӧ������          
+				//  ̬      ListItem  Ӧ                
 				new String[] {"ItemTitle", "ItemText"},   
 
-				//ListItem��XML�ļ����������TextView ID  
+				//ListItem  XML ļ          TextView ID  
 				new int[] {R.id.ItemTitle,R.id.ItemText});  
-		//��Ӳ�����ʾ  
+		//  Ӳ     ʾ  
 		list.setAdapter(mSchedule); 
 	}
 	
-	public void back(){	
+	public void back(View view){	
 		//界面跳转
 		Intent intent = new Intent();
 		intent = new Intent(TastListActivity.this, CalendarActivity.class);
@@ -113,4 +116,21 @@ public class TastListActivity extends Activity {
 		TastListActivity.this.finish();
 	}
 	
+	
+	private void setListListener() {
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO 自动生成的方法存根
+				Intent intent =new Intent();
+				intent.setClass(TastListActivity.this, TaskInfoActivity.class);
+				intent.putExtra("index", id);
+				System.out.println(id);
+				startActivity(intent);
+			}
+
+		});
+	}
 }
