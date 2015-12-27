@@ -10,10 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class AgendaListActivity extends Activity {
@@ -39,6 +41,7 @@ public class AgendaListActivity extends Activity {
 		list = (ListView) findViewById(R.id.classListView);
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 	    menu = popupMenu.getMenu(); 
+	    setListListener();
 	}
 	
 	public void initialMenu(){
@@ -100,5 +103,21 @@ public class AgendaListActivity extends Activity {
 			startActivity(intent);
 			AgendaListActivity.this.finish();
 		}
-	
+
+		private void setListListener() {
+			list.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO 自动生成的方法存根
+					Intent intent =new Intent();
+					intent.setClass(AgendaListActivity.this, AgendaInfoActivity.class);
+					intent.putExtra("index", id);
+					System.out.println(id);
+					startActivity(intent);
+				}
+
+			});
+		}
 }

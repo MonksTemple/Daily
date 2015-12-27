@@ -18,32 +18,32 @@ public class RegisterActivity extends Activity implements UserView{
 	private EditText pwdText;
 	private EditText pwd2Text;
 	private EditText snoText;
-	
+
 	private UserManage userManage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		
+
 		nameText = (EditText) findViewById(R.id.nameText);
 		pwdText = (EditText) findViewById(R.id.passwordText);
 		pwd2Text = (EditText) findViewById(R.id.password2);
 		snoText =  (EditText) findViewById(R.id.snoNum);
-			
+
 	}
-	
+
 	public void register(View view){
 		if(nameText.getText().toString() == null || nameText.getText().toString().length() <= 0 
-			|| pwdText.getText().toString() == null || pwdText.getText().toString().length() <= 0 
-			|| pwd2Text.getText().toString() == null || pwd2Text.getText().toString().length() <= 0 
-			|| snoText.getText().toString() == null || snoText.getText().toString().length() <= 0){
+				|| pwdText.getText().toString() == null || pwdText.getText().toString().length() <= 0 
+				|| pwd2Text.getText().toString() == null || pwd2Text.getText().toString().length() <= 0 
+				|| snoText.getText().toString() == null || snoText.getText().toString().length() <= 0){
 			Toast.makeText(getApplicationContext(),"请完整填写信息", Toast.LENGTH_SHORT).show();
 		}else{
 			User user = new User();
 			user.setUserName(nameText.getText().toString());
 			user.setPassword(pwdText.getText().toString());
-			
+
 			if(userManage.register(user)){
 				Intent intent = new Intent();
 				intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -52,13 +52,17 @@ public class RegisterActivity extends Activity implements UserView{
 			}else{
 				Toast.makeText(getApplicationContext(),"信息错误", Toast.LENGTH_SHORT).show();
 			}
-			
-			
+
+
 		}
 	}
-	
-	void back(View view){
-		
+
+	public void back(View view){
+		//注册界面跳转
+		Intent intent = new Intent();
+		intent = new Intent(RegisterActivity.this, LoginActivity.class);
+		startActivity(intent);
+		RegisterActivity.this.finish();
 	}
 
 	@Override
@@ -70,6 +74,6 @@ public class RegisterActivity extends Activity implements UserView{
 	@Override
 	public void setUser(User user) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

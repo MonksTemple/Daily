@@ -14,7 +14,7 @@ public class TeamInfoActivity extends Activity {
 	Button sure;
 
 	ImageView pen;
-	ImageView cross;
+//	ImageView cross;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,14 @@ public class TeamInfoActivity extends Activity {
 		teamDescription=(EditText) findViewById(R.id.info);
 		sure=(Button) findViewById(R.id.sure);
 		pen=(ImageView) findViewById(R.id.edit);
-		cross=(ImageView) findViewById(R.id.cross);
+//		cross=(ImageView) findViewById(R.id.cross);
 
 		teamName.setEnabled(false);
 		teamDescription.setEnabled(false);
 		sure.setVisibility(4);
 	}
 
-	void back(){
+	public void back(View view){
 		//界面跳转到创建团队
 		Intent intent = new Intent();
 		intent = new Intent(TeamInfoActivity.this, TastListActivity.class);
@@ -45,20 +45,21 @@ public class TeamInfoActivity extends Activity {
 	}
 
 	//编辑信息
-	void edit(){
+	public void edit(View view){
 		sure.setVisibility(0);
-		cross.setVisibility(0);
+		pen.setVisibility(4);
+//		cross.setVisibility(0);
 	}
 
-	void cross(){
-		//删除团队
-		Intent intent = new Intent();
-		intent = new Intent(TeamInfoActivity.this, TeamListActivity.class);
-		startActivity(intent);
-		TeamInfoActivity.this.finish();
-	}
+//	void cross(){
+//		//删除团队
+//		Intent intent = new Intent();
+//		intent = new Intent(TeamInfoActivity.this, TeamListActivity.class);
+//		startActivity(intent);
+//		TeamInfoActivity.this.finish();
+//	}
 	
-	void sure(View view){
+	public void sure(View view){
 		//修改完信息并提交
 		Intent intent = new Intent();
 		intent = new Intent(TeamInfoActivity.this, TeamListActivity.class);

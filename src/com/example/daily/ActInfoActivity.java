@@ -32,7 +32,6 @@ public class ActInfoActivity extends Activity {
 	EditText remindTime;
 
 	ImageView lines;
-	ImageView cross;
 
 	Button sure;
 
@@ -63,7 +62,7 @@ public class ActInfoActivity extends Activity {
 		place=(EditText) findViewById(R.id.actPlaceText);
 		remindTime=(EditText) findViewById(R.id.actRemindTimeText);
 		lines=(ImageView) findViewById(R.id.lines);
-		cross=(ImageView) findViewById(R.id.cross);
+//		cross=(ImageView) findViewById(R.id.cross);
 		sure=(Button) findViewById(R.id.sure);
 
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
@@ -97,10 +96,10 @@ public class ActInfoActivity extends Activity {
 					break;  
 				case R.id.check:  
 					Intent intent = new Intent();
-					intent = new Intent(ActInfoActivity.this, ActListActivity.class);
+					intent = new Intent(ActInfoActivity.this, ActMemListActivity.class);
 					startActivity(intent);
 					ActInfoActivity.this.finish();
-					Toast.makeText(ActInfoActivity.this, "查看活动列表",  
+					Toast.makeText(ActInfoActivity.this, "查看成员列表",  
 							Toast.LENGTH_LONG).show();  
 					break;  
 				case R.id.delete:  
@@ -125,11 +124,11 @@ public class ActInfoActivity extends Activity {
 		remindTime.setClickable(false);
 		sure.setVisibility(0);
 		lines.setVisibility(4);
-		cross.setVisibility(4);
+//		cross.setVisibility(4);
 	}
 
 	//返回箭头
-	public void back(){
+	public void back(View view){
 		Intent intent = new Intent();
 		intent = new Intent(ActInfoActivity.this, ActListActivity.class);
 		startActivity(intent);
