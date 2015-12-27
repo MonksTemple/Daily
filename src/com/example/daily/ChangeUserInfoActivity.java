@@ -1,11 +1,15 @@
 package com.example.daily;
 
+import com.alibaba.fastjson.JSON;
 import com.example.model.User;
 import com.example.presenter.UserManage;
 import com.example.view.UserView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +30,9 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 	private String strTel;
 	private String strPwd;
 	private String strPwd2;
+	private User  tempUser;
+	
+	private SharedPreferences sp;
 	
 	private UserManage userManage;
 	
@@ -35,14 +42,21 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			Bundle bundle  = msg.getData();
-			String login = bundle.getString("register");
-			if (login.equals("true")) {//为true说明登陆成功
+			String modify = bundle.getString("modify");
+			if (modify.equals("true")) {//为true说明修改成功		
+				sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
+				
+				
+				Editor editor=sp.edit();
+				editor.putString("user", JSON.toJSONString(getUser()));
+				editor.commit();
+				
 				Intent intent1 = new Intent();
 				intent1 = new Intent(ChangeUserInfoActivity.this, UserInfoActivity.class);
 				startActivity(intent1);
 				ChangeUserInfoActivity.this.finish();
 			}else {
-				Toast.makeText(ChangeUserInfoActivity.this, "注册失败", Toast.LENGTH_SHORT)
+				Toast.makeText(ChangeUserInfoActivity.this, "修改失败", Toast.LENGTH_SHORT)
 				.show();
 			}
 		}
@@ -60,9 +74,13 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 		snoText = (TextView) findViewById(R.id.sno);
 		userNameText = (TextView) findViewById(R.id.sname);
 		
-		telText.setText("18813090935");
-		snoText.setText("13301043");
-		userNameText.setText("张三");
+		SharedPreferences sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
+		String user = sp.getString("user", "");
+		tempUser = JSON.parseObject(user, User.class);
+		
+		telText.setText(tempUser.getPhoneno());
+		snoText.setText(tempUser.getUserId()+"");
+		userNameText.setText(tempUser.getUserName());
 		
 		userManage = new UserManage(this);
 	}
@@ -80,45 +98,45 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 		strPwd = pwdText.getText().toString();
 		strPwd2 = ipwdText.getText().toString();
 		
-		//如果两项都为空  则为不修改
-		if((strTel == "" || strTel == null) && (strPwd == "" || strPwd == null)){
-			
+		//没有修改密码
+		if(strPwd.length() <= 0 || strPwd == null || strPwd2.length() <= 0 || strPwd2 == null){
+			strPwd = tempUser.getPassword();
 		}
-		//如果手机号不为空  密码为空  则为修改手机号码
-		else if(!(strTel == "" || strTel == null) && (strPwd == "" || strPwd == null)){
-			new Thread (){
-				public void run() {
-					Message msg = new Message();
-					Bundle bundle = new Bundle();
+		//手机号码为空
+		if(strTel.length() <= 0 || strTel == null){
+			strTel = tempUser.getPhoneno();
+		}
+			
+		new Thread (){
+			public void run() {
+				Message msg = new Message();
+				Bundle bundle = new Bundle();
 
-					if(userManage.register()){
-						bundle.putString("register", "true");
-						msg.setData(bundle);
-						handler.sendMessage(msg);
-					}
-					else{
-						bundle.putString("register", "false");
-						msg.setData(bundle);
-						handler.sendMessage(msg);
-					}
-					
+				if(userManage.modify()){
+					bundle.putString("modify", "true");	
+				
+					msg.setData(bundle);
+					handler.sendMessage(msg);
 				}
-			}.start();	
-		}
-		//如果手机号不为空  密码为空  则为修改手机号码
-		else if((strTel == "" || strTel == null) && !(strPwd == "" || strPwd == null)){
-			
-		}
-		
-		
+				else{
+					bundle.putString("modify", "false");
+					msg.setData(bundle);
+					handler.sendMessage(msg);
+				}
+				
+			}
+		}.start();	
 	}
-
-	
 	
 	@Override
 	public User getUser() {
-		// TODO Auto-generated method stub
-		return null;
+		SharedPreferences sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
+		String user = sp.getString("user", "");
+		User returnUser = JSON.parseObject(user, User.class);
+		
+		returnUser.setPhoneno(strTel);
+		returnUser.setPassword(strPwd);
+		return returnUser;
 	}
 
 	@Override

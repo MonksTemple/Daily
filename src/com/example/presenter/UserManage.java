@@ -18,6 +18,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.alibaba.fastjson.JSON;
 import com.example.model.Activity;
 import com.example.model.Team;
@@ -61,8 +64,16 @@ public class UserManage {
 		return true;
 	}
 	
-	public boolean modify(User user){
-		
+	public boolean modify(){
+		User user = userView.getUser();
+		String userString = JSON.toJSONString(user);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "04");
+		map.put("user", userString);
+		String resp = ConnectUtil.getResponse(map);
+		if(resp.equals("false")){
+			return false;
+		}
 		return true;
 	}
 	

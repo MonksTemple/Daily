@@ -1,11 +1,14 @@
 package com.example.daily;
 
+import com.alibaba.fastjson.JSON;
 import com.example.model.User;
 import com.example.presenter.UserManage;
 import com.example.view.UserView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,20 +30,18 @@ public class UserInfoActivity extends Activity implements UserView{
 		snoText = (TextView)findViewById(R.id.sno);
 		telText = (TextView)findViewById(R.id.tel);
 		
-		
-		
-		
-		userNameText.setText("张三");
-		snoText.setText("13301043");
-		telText.setText("19913090935");
-		
-		
+		userNameText.setText(this.getUser().getUserName());
+		snoText.setText(this.getUser().getUserId() + "");
+		telText.setText(this.getUser().getPhoneno());
 	}
 
 	@Override
 	public User getUser() {
-
-		return null;
+		SharedPreferences sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
+		String user = sp.getString("user", "");
+		User  returnUser = JSON.parseObject(user, User.class);
+		
+		return returnUser;
 	}
 
 	@Override

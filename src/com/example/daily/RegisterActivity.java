@@ -16,10 +16,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class RegisterActivity extends Activity implements UserView{
+	private EditText idText;
 	private EditText nameText;
 	private EditText pwdText;
 	private EditText pwd2Text;
-	private EditText snoText;
+	private EditText phoneText;
 	
 	private UserManage userManage;
 	
@@ -47,19 +48,21 @@ public class RegisterActivity extends Activity implements UserView{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		
-		nameText = (EditText) findViewById(R.id.nameText);
+		idText =  (EditText) findViewById(R.id.sno);
 		pwdText = (EditText) findViewById(R.id.passwordText);
 		pwd2Text = (EditText) findViewById(R.id.password2);
-		snoText =  (EditText) findViewById(R.id.snoNum);
+		nameText = (EditText) findViewById(R.id.nameText);
+		phoneText = (EditText) findViewById(R.id.phoneText);
 			
 		userManage = new UserManage(this);
 	}
 	
 	public void register(View view){
-		if(nameText.getText().toString() == null || nameText.getText().toString().length() <= 0 
+		if(idText.getText().toString() == null || idText.getText().toString().length() <= 0 
 			|| pwdText.getText().toString() == null || pwdText.getText().toString().length() <= 0 
 			|| pwd2Text.getText().toString() == null || pwd2Text.getText().toString().length() <= 0 
-			|| snoText.getText().toString() == null || snoText.getText().toString().length() <= 0){
+			|| nameText.getText().toString() == null || nameText.getText().toString().length() <= 0
+			|| phoneText.getText().toString() == null || phoneText.getText().toString().length() <= 0){
 			Toast.makeText(getApplicationContext(),"请完整填写信息", Toast.LENGTH_SHORT).show();
 		}else{
 			//若两次密码不相同
@@ -95,8 +98,10 @@ public class RegisterActivity extends Activity implements UserView{
 	@Override
 	public User getUser() {
 		User user = new User();
-		user.setUserId(Integer.parseInt(nameText.getText().toString()));
+		user.setUserId(Integer.parseInt(idText.getText().toString()));
 		user.setPassword(pwdText.getText().toString());
+		user.setUserName(nameText.getText().toString());
+		user.setPhoneno(phoneText.getText().toString());
 		return user;
 	}
 
