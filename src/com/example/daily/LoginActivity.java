@@ -55,45 +55,31 @@ public class LoginActivity extends Activity implements UserView{
 
 	public void login(View view){
 		//判断
-		//...
-
 		if(account_text.getText().toString() == null || account_text.getText().toString().length() <= 0
 			|| password_text.getText().toString() == null || password_text.getText().toString().length() <= 0){
 			
 			Toast.makeText(getApplicationContext(),"请完整填写的信息", Toast.LENGTH_SHORT).show();
 		}else{
-			new Thread (){
-				public void run() {
-					
-					Message msg = new Message();
-					Bundle bundle = new Bundle();
-					if(userManage.login()){
-						bundle.putString("login", "true");
-						msg.setData(bundle);
-						handler.sendMessage(msg);
+				new Thread (){
+					public void run() {
+						
+						Message msg = new Message();
+						Bundle bundle = new Bundle();
+						if(userManage.login()){
+							bundle.putString("login", "true");
+							msg.setData(bundle);
+							handler.sendMessage(msg);
+						}
+						else{
+							bundle.putString("login", "false");
+							msg.setData(bundle);
+							handler.sendMessage(msg);
+						}
+						
 					}
-					else{
-						bundle.putString("login", "false");
-						msg.setData(bundle);
-						handler.sendMessage(msg);
-					}
-					
-				}
-			}.start();
-			
-			//如果成功登录
-			
-				//登录界面跳转
-				Intent intent = new Intent();
-				intent = new Intent(LoginActivity.this, CalendarActivity.class);
-				startActivity(intent);
-				LoginActivity.this.finish();
+				}.start();
 			}
 		}
-
-
-
-	
 
 	public void register(View view){
 		//注册界面跳转
