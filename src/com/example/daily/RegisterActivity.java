@@ -35,7 +35,6 @@ public class RegisterActivity extends Activity implements UserView{
 				intent = new Intent(RegisterActivity.this, LoginActivity.class);
 				startActivity(intent);
 				RegisterActivity.this.finish();
-				//Toast.makeText(get, "登陆成功",Toast.LENGTH_LONG).show();
 			}else {
 				Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT)
 				.show();
@@ -84,24 +83,8 @@ public class RegisterActivity extends Activity implements UserView{
 						}
 						
 					}
-				}.start();
-				
-				
-				
+				}.start();	
 			}
-			
-			
-			
-//			if(userManage.register(user)){
-//				Intent intent = new Intent();
-//				intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//				startActivity(intent);
-//				RegisterActivity.this.finish();
-//			}else{
-//				Toast.makeText(getApplicationContext(),"信息错误", Toast.LENGTH_SHORT).show();
-//			}
-			
-			
 		}
 	}
 	
@@ -119,7 +102,6 @@ public class RegisterActivity extends Activity implements UserView{
 
 	@Override
 	public void setUser(User user) {
-		// TODO Auto-generated method stub
 		
 	}
 }

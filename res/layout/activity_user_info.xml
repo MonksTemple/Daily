@@ -79,7 +79,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_toRightOf="@id/name"
-             android:text="张三"
+             android:text=""
              android:textSize="7pt"
              android:layout_centerVertical="true"
              android:textColor="@color/black" />
@@ -113,7 +113,7 @@
              android:layout_height="wrap_content"
              android:layout_toRightOf="@id/stuno"
              android:layout_centerVertical="true"
-             android:text="13301100"
+             android:text=""
              android:textSize="7pt"
              android:textColor="@color/black"/>
              
@@ -145,7 +145,7 @@
              android:layout_height="wrap_content"
              android:layout_toRightOf="@id/pho"
              android:layout_centerVertical="true"
-             android:text="11111111111"
+             android:text=""
              android:textSize="7pt"
              android:textColor="@color/black" />
              
