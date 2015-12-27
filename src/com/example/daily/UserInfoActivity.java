@@ -6,10 +6,7 @@ import com.example.view.UserView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
 
-=======
->>>>>>> 28df22f8dbf57fbcea15a6ffbb61ea7b3e6bcaac
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;

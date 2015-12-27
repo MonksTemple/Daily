@@ -56,7 +56,7 @@ public class LoginActivity extends Activity implements UserView{
 	public void login(View view){
 		//判断
 		//...
-<<<<<<< HEAD
+
 		if(account_text.getText().toString() == null || account_text.getText().toString().length() <= 0
 			|| password_text.getText().toString() == null || password_text.getText().toString().length() <= 0){
 			
@@ -73,24 +73,12 @@ public class LoginActivity extends Activity implements UserView{
 				Toast.makeText(getApplicationContext(),"账号密码错误", Toast.LENGTH_SHORT).show();
 			}
 		}
-=======
-		//如果成功登录
-//		if(userManage.login()){
-//
-//		}else{
-//
-//		}
+
 		new Thread (){
 			public void run() {
 				Message msg = new Message();
 				Bundle bundle = new Bundle();
 				if(userManage.login()){
-					//登录界面跳转
-//					Intent intent = new Intent();
-//					intent = new Intent(LoginActivity.this, CalendarActivity.class);
-//					startActivity(intent);
-//					LoginActivity.this.finish();	
-					//Toast.makeText(get, "登陆成功",Toast.LENGTH_LONG).show();
 					bundle.putString("login", "true");
 					msg.setData(bundle);
 					handler.sendMessage(msg);
@@ -102,7 +90,7 @@ public class LoginActivity extends Activity implements UserView{
 				}
 			}
 		}.start();
->>>>>>> 28df22f8dbf57fbcea15a6ffbb61ea7b3e6bcaac
+
 	}
 
 	public void register(View view){
