@@ -6,12 +6,9 @@ import com.example.view.UserView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
-=======
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
->>>>>>> d30c11f7cce339dde84705f5c7ce4038842bf925
 import android.widget.TextView;
 
 public class UserInfoActivity extends Activity implements UserView{

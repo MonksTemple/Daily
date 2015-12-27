@@ -4,21 +4,43 @@ import com.example.model.User;
 import com.example.presenter.UserManage;
 import com.example.view.UserView;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity implements UserView{
 	private EditText account_text;
 	private EditText password_text;
 	private UserManage userManage;
-
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			Bundle bundle  = msg.getData();
+			String login = bundle.getString("login");
+			if (login.equals("true")) {//为true说明登陆成功
+				Intent intent = new Intent();
+				intent = new Intent(LoginActivity.this, CalendarActivity.class);
+				startActivity(intent);
+				LoginActivity.this.finish();	
+				//Toast.makeText(get, "登陆成功",Toast.LENGTH_LONG).show();
+			}else {
+				Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT)
+				.show();
+			}
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +51,6 @@ public class LoginActivity extends Activity implements UserView{
 		password_text = (EditText)findViewById(R.id.password);
 		
 		userManage = new UserManage(this);
-
-		
 	}
 
 	public void login(View view){
@@ -38,17 +58,33 @@ public class LoginActivity extends Activity implements UserView{
 		//判断
 		//...
 		//如果成功登录
-		if(userManage.login()){
-
-		}else{
-
-		}
-		
-		//登录界面跳转
-		Intent intent = new Intent();
-		intent = new Intent(LoginActivity.this, CalendarActivity.class);
-		startActivity(intent);
-		LoginActivity.this.finish();
+//		if(userManage.login()){
+//
+//		}else{
+//
+//		}
+		new Thread (){
+			public void run() {
+				Message msg = new Message();
+				Bundle bundle = new Bundle();
+				if(userManage.login()){
+					//登录界面跳转
+//					Intent intent = new Intent();
+//					intent = new Intent(LoginActivity.this, CalendarActivity.class);
+//					startActivity(intent);
+//					LoginActivity.this.finish();	
+					//Toast.makeText(get, "登陆成功",Toast.LENGTH_LONG).show();
+					bundle.putString("login", "true");
+					msg.setData(bundle);
+					handler.sendMessage(msg);
+				}
+				else{
+					bundle.putString("login", "false");
+					msg.setData(bundle);
+					handler.sendMessage(msg);
+				}
+			}
+		}.start();
 	}
 
 	public void register(View view){
@@ -63,7 +99,7 @@ public class LoginActivity extends Activity implements UserView{
 	@Override
 	public User getUser() {
 		User returnUser = new User();
-		returnUser.setUserName(account_text.getText().toString());
+		returnUser.setUserId(Integer.valueOf(account_text.getText().toString()));
 		returnUser.setPassword(password_text.getText().toString());
 
 		return returnUser;
