@@ -3,7 +3,10 @@ package com.example.daily;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.component.ActLvAdapter;
+
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,12 +22,11 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
-public class ActListActivity extends Activity {
+public class ActListActivity extends ListActivity {
 	private PopupMenu popupMenu;  
 	private Menu menu; 
 	ListView list;
-
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,11 +44,9 @@ public class ActListActivity extends Activity {
 	}  
 
 	public void initial(){
-
-
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 		menu = popupMenu.getMenu(); 
-		list = (ListView) findViewById(R.id.actListView); 
+		list = (ListView) findViewById(android.R.id.list); 
 
 
 	}
@@ -67,7 +67,7 @@ public class ActListActivity extends Activity {
 					Intent intent = new Intent();
 					intent = new Intent(ActListActivity.this, ActHoldActActivity.class);
 					startActivity(intent);
-					ActListActivity.this.finish();
+//					ActListActivity.this.finish();
 					Toast.makeText(ActListActivity.this, "发布活动",  
 							Toast.LENGTH_LONG).show();  
 					break;   
@@ -85,29 +85,39 @@ public class ActListActivity extends Activity {
 
 
 	public void loadList(){
-		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
+		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
 
-		HashMap<String, String> map1 = new HashMap<String, String>(); 
-		HashMap<String, String> map2 = new HashMap<String, String>();  
-		HashMap<String, String> map3 = new HashMap<String, String>();  
+		HashMap<String, Object> map1 = new HashMap<String, Object>(); 
+		HashMap<String, Object> map2 = new HashMap<String, Object>();  
+		HashMap<String, Object> map3 = new HashMap<String, Object>();  
 		map1.put("ItemTitle", "111");  
-		map1.put("ItemText", "aaa");  
+		map1.put("ItemText", "aaa"); 
+		map1.put("pic", R.drawable.add);
 		map2.put("ItemTitle", "BBB");  
-		map2.put("ItemText", "bbb");  
+		map2.put("ItemText", "bbb");
+		map2.put("pic", R.drawable.minus);
 		map3.put("ItemTitle", "CCC");  
 		map3.put("ItemText", "ccc");  
+		map3.put("pic", R.drawable.minus);
 		mylist.add(map1);  
 		mylist.add(map2);
 		mylist.add(map3);
 
-		SimpleAdapter mSchedule = new SimpleAdapter(this,  
+		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
 				mylist,
 				R.layout.two_decimal_item,         
-				new String[] {"ItemTitle", "ItemText"},   
-				new int[] {R.id.ItemTitle,R.id.ItemText});  
+				new String[] {"ItemTitle", "ItemText","pic"},   
+				new int[] {R.id.ItemTitle,R.id.ItemText,R.id.addC},ActListActivity.this);  
 
 		list.setAdapter(mSchedule); 
 	}
+	
+	@Override
+    protected void onListItemClick(ListView l, View v, int position, long id){
+        // TODO Auto-generated method stub
+        super.onListItemClick(l, v, position, id);
+        l.getItemAtPosition(position);
+    }
 
 	//返回箭头
 	public void back(View view){

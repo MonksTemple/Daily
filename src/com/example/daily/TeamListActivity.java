@@ -3,6 +3,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.component.ActLvAdapter;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,7 +58,7 @@ public class TeamListActivity extends Activity {
 	    			Intent intent = new Intent();
 	    			intent = new Intent(TeamListActivity.this, TeamCreateActivity.class);
 	    			startActivity(intent);
-	    			TeamListActivity.this.finish();
+//	    			TeamListActivity.this.finish();
 	    			Toast.makeText(TeamListActivity.this, "创建团队",  
 	    					Toast.LENGTH_LONG).show();  
 	    			break; 
@@ -68,26 +70,33 @@ public class TeamListActivity extends Activity {
 	    });  
 	}
 	
-	public void loadList(){
-		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
-		HashMap<String, String> map1 = new HashMap<String, String>(); 
-		HashMap<String, String> map2 = new HashMap<String, String>();  
-		map1.put("ItemTitle", "北交大乒乓球协会");  
-		map1.put("ItemText", "乒乓球协会的活动是根据国家的体育方针。。。");  
-		map2.put("ItemTitle", "学生会");  
-		map2.put("ItemText", "学生会是在党委领导下，团委指导下。。。");  
+	public void loadList(){
+		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
+
+		HashMap<String, Object> map1 = new HashMap<String, Object>(); 
+		HashMap<String, Object> map2 = new HashMap<String, Object>();  
+		HashMap<String, Object> map3 = new HashMap<String, Object>();  
+		map1.put("ItemTitle", "111");  
+		map1.put("ItemText", "aaa"); 
+		map1.put("pic", R.drawable.add);
+		map2.put("ItemTitle", "BBB");  
+		map2.put("ItemText", "bbb");
+		map2.put("pic", R.drawable.minus);
+		map3.put("ItemTitle", "CCC");  
+		map3.put("ItemText", "ccc");  
+		map3.put("pic", R.drawable.minus);
 		mylist.add(map1);  
 		mylist.add(map2);
+		mylist.add(map3);
 
-		SimpleAdapter mSchedule = new SimpleAdapter(this,  
+		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
 				mylist,
 				R.layout.two_decimal_item,         
-				new String[] {"ItemTitle", "ItemText"},   
-				new int[] {R.id.ItemTitle,R.id.ItemText});  
+				new String[] {"ItemTitle", "ItemText","pic"},   
+				new int[] {R.id.ItemTitle,R.id.ItemText,R.id.addC},TeamListActivity.this);  
 
 		list.setAdapter(mSchedule); 
-
 	}
 	
 	public void back(View view){

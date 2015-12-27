@@ -44,7 +44,7 @@ public class UserInfoActivity extends Activity implements UserView{
 		Intent intent1 = new Intent();
 		intent1 = new Intent(UserInfoActivity.this, ChangeUserInfoActivity.class);
 		startActivity(intent1);
-		UserInfoActivity.this.finish();
+//		UserInfoActivity.this.finish();
 	}
 
 	//返回箭头

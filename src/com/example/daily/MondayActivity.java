@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -29,6 +32,8 @@ public class MondayActivity extends Activity {
 		initial();
 		//加载日程列表
 		loadList();
+
+		setOnListListener();
 	}
 
 	public void initial(){
@@ -89,5 +94,24 @@ public class MondayActivity extends Activity {
 
 		list.setAdapter(mSchedule); 
 
+	}
+
+
+	private void setOnListListener() {
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO 自动生成的方法存根
+
+				Intent intent =new Intent();
+				intent.setClass(MondayActivity.this, AgendaInfoActivity.class);
+				intent.putExtra("index", id);
+				System.out.println(id);
+				startActivity(intent);
+			}
+
+		});
 	}
 }

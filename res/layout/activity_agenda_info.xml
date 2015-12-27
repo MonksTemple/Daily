@@ -245,6 +245,7 @@
         android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:text="提交信息"
+        android:textColor="@color/btnC"
         android:textSize="15dp"
         android:background="@color/theme"
       />
