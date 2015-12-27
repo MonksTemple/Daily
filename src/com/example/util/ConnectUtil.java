@@ -15,7 +15,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 public class ConnectUtil {
-	private static String URL = "http://192.168.191.1:8080/Tell/TellServlet";
+	private static String URL = "http://192.168.23.1:8080/Tell/TellServlet";
 	
 	public static String getResponse(Map<String, String> map){
 		HttpClient client = new DefaultHttpClient();
