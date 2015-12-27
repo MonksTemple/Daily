@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -54,10 +56,15 @@ public class CalendarActivity extends Activity implements CallBack{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		SharedPreferences sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
+		String user = sp.getString("user", "");
+		System.out.println(user);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_calendar);
 		findViewbyId();
 		initialMenu();
+		
+
 	}
 	
 	
