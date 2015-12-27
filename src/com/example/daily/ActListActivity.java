@@ -115,8 +115,11 @@ public class ActListActivity extends ListActivity {
 	@Override
     protected void onListItemClick(ListView l, View v, int position, long id){
         // TODO Auto-generated method stub
-        super.onListItemClick(l, v, position, id);
-        l.getItemAtPosition(position);
+		Intent intent =new Intent();
+		intent.setClass(ActListActivity.this, ActInfoActivity.class);
+		intent.putExtra("index", id);
+		System.out.println(id);
+		startActivity(intent);
     }
 
 	//返回箭头

@@ -110,6 +110,7 @@
         android:onClick="sure"
         android:text="提交信息"
         android:textSize="15dp"
+        android:textColor="@color/btnC"
         android:background="@color/theme"
       />
         

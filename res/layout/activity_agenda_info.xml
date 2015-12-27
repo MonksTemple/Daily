@@ -16,6 +16,7 @@
             android:layout_width="18pt"
             android:layout_height="18pt"
             android:src="@drawable/returna"
+            android:onClick="back"
             android:layout_centerVertical="true"
             />
         
@@ -30,18 +31,10 @@
             android:textSize="10pt"
             />
         
-        <ImageView 
-            android:id="@+id/cross"
-            android:layout_width="10pt"
-            android:layout_height="10pt"
-            android:layout_marginRight="5pt"
-            android:src="@drawable/cross"
-            android:layout_toLeftOf="@+id/lines"
-            android:layout_centerVertical="true"
-            />
+        
         
         <ImageView 
-            android:id="@id/lines"
+            android:id="@+id/lines"
             android:layout_width="10pt"
             android:layout_height="10pt"
             android:layout_marginRight="10pt"
@@ -247,6 +240,7 @@
         android:text="提交信息"
         android:textColor="@color/btnC"
         android:textSize="15dp"
+        android:onClick="sure"
         android:background="@color/theme"
       />
         

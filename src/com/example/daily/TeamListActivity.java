@@ -12,10 +12,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class TeamListActivity extends Activity {
@@ -40,6 +42,7 @@ public class TeamListActivity extends Activity {
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 	    menu = popupMenu.getMenu(); 
 	    list = (ListView) findViewById(R.id.teamListView); 
+	    setListListener();
 	}
 	
 	public void initialMenu(){
@@ -104,5 +107,22 @@ public class TeamListActivity extends Activity {
 		intent1 = new Intent(TeamListActivity.this, CalendarActivity.class);
 		startActivity(intent1);
 		TeamListActivity.this.finish();
+	}
+	
+	private void setListListener() {
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO 自动生成的方法存根
+				Intent intent =new Intent();
+				intent.setClass(TeamListActivity.this, TeamInfoActivity.class);
+				intent.putExtra("index", id);
+				System.out.println(id);
+				startActivity(intent);
+			}
+
+		});
 	}
 }

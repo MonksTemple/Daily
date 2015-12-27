@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 
 
+
 import com.example.daily.R;
 
 import android.app.Activity;
@@ -14,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
@@ -81,7 +83,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 	 * @return
 	 */
 	public AlertDialog dateTimePicKDialog(final EditText inputDate) {
-		LinearLayout dateTimeLayout = (LinearLayout) activity
+		RelativeLayout dateTimeLayout = (RelativeLayout) activity
 				.getLayoutInflater().inflate(R.layout.common_datetime, null);
 		datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
 		timePicker = (TimePicker) dateTimeLayout.findViewById(R.id.timepicker);

@@ -31,21 +31,12 @@
             android:textSize="10pt"
             />
         
-        <ImageView 
-            android:id="@+id/cross"
-            android:layout_width="10pt"
-            android:layout_height="10pt"
-            android:layout_marginRight="5pt"
-            android:src="@drawable/cross"
-            android:onClick="cross"
-            android:layout_toLeftOf="@+id/edit"
-            android:layout_centerVertical="true"
-            />
+        
         
         <ImageView 
-            android:id="@id/edit"
-            android:layout_width="10pt"
-            android:layout_height="10pt"
+            android:id="@+id/edit"
+            android:layout_width="13pt"
+            android:layout_height="13pt"
             android:layout_marginRight="10pt"
             android:src="@drawable/pen1"
             android:onClick="edit"
