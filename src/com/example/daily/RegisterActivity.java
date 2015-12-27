@@ -20,7 +20,7 @@ public class RegisterActivity extends Activity implements UserView{
 	private EditText pwdText;
 	private EditText pwd2Text;
 	private EditText snoText;
-
+	
 	private UserManage userManage;
 	
 	private Handler handler = new Handler(){
@@ -46,41 +46,25 @@ public class RegisterActivity extends Activity implements UserView{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-
+		
 		nameText = (EditText) findViewById(R.id.nameText);
 		pwdText = (EditText) findViewById(R.id.passwordText);
 		pwd2Text = (EditText) findViewById(R.id.password2);
 		snoText =  (EditText) findViewById(R.id.snoNum);
-<<<<<<< HEAD
-
-=======
 			
 		userManage = new UserManage(this);
->>>>>>> 89131b995df200660be7bd1319a7a6174d1a2ad1
 	}
-
+	
 	public void register(View view){
 		if(nameText.getText().toString() == null || nameText.getText().toString().length() <= 0 
-				|| pwdText.getText().toString() == null || pwdText.getText().toString().length() <= 0 
-				|| pwd2Text.getText().toString() == null || pwd2Text.getText().toString().length() <= 0 
-				|| snoText.getText().toString() == null || snoText.getText().toString().length() <= 0){
+			|| pwdText.getText().toString() == null || pwdText.getText().toString().length() <= 0 
+			|| pwd2Text.getText().toString() == null || pwd2Text.getText().toString().length() <= 0 
+			|| snoText.getText().toString() == null || snoText.getText().toString().length() <= 0){
 			Toast.makeText(getApplicationContext(),"请完整填写信息", Toast.LENGTH_SHORT).show();
 		}else{
-<<<<<<< HEAD
-			User user = new User();
-			user.setUserName(nameText.getText().toString());
-			user.setPassword(pwdText.getText().toString());
-
-			if(userManage.register(user)){
-				Intent intent = new Intent();
-				intent = new Intent(RegisterActivity.this, LoginActivity.class);
-				startActivity(intent);
-				RegisterActivity.this.finish();
-=======
 			//若两次密码不相同
 			if(!(pwd2Text.getText().toString()).equals(pwdText.getText().toString())){
 				Toast.makeText(getApplicationContext(),"两次密码不相同 请重新输入", Toast.LENGTH_SHORT).show();
->>>>>>> 89131b995df200660be7bd1319a7a6174d1a2ad1
 			}else{
 				new Thread (){
 					public void run() {
@@ -101,36 +85,11 @@ public class RegisterActivity extends Activity implements UserView{
 					}
 				}.start();	
 			}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-
-=======
-			
-			
-			
-//			if(userManage.register(user)){
-//				Intent intent = new Intent();
-//				intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//				startActivity(intent);
-//				RegisterActivity.this.finish();
-//			}else{
-//				Toast.makeText(getApplicationContext(),"信息错误", Toast.LENGTH_SHORT).show();
-//			}
-			
-			
->>>>>>> 89131b995df200660be7bd1319a7a6174d1a2ad1
->>>>>>> 76ea4ad6bc350410ef0a00d233e303f210b9f23d
 		}
 	}
-
-	public void back(View view){
-		//注册界面跳转
-		Intent intent = new Intent();
-		intent = new Intent(RegisterActivity.this, LoginActivity.class);
-		startActivity(intent);
-		RegisterActivity.this.finish();
+	
+	void back(View view){
+		
 	}
 
 	@Override
@@ -143,11 +102,6 @@ public class RegisterActivity extends Activity implements UserView{
 
 	@Override
 	public void setUser(User user) {
-<<<<<<< HEAD
 		
-=======
-		// TODO Auto-generated method stub
-
->>>>>>> 76ea4ad6bc350410ef0a00d233e303f210b9f23d
 	}
 }
