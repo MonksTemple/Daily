@@ -62,13 +62,10 @@ public class UserManage {
 	
 	public boolean logout(int userId){
 		
-		
-		
 		return true;
 	}
 	
 	public boolean modify(User user){
-		
 		
 		return true;
 	}
