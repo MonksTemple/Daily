@@ -56,17 +56,18 @@ public class TeamListActivity extends Activity {
 	    	@Override  
 	    	public boolean onMenuItemClick(MenuItem item) {  
 	    		switch (item.getItemId()) {  
-	    		case R.id.edit: 
-	    			//界面跳转到创建团队
-	    			Intent intent = new Intent();
-	    			intent = new Intent(TeamListActivity.this, TeamCreateActivity.class);
-	    			startActivity(intent);
-//	    			TeamListActivity.this.finish();
-	    			Toast.makeText(TeamListActivity.this, "创建团队",  
-	    					Toast.LENGTH_LONG).show();  
-	    			break; 
-	    		default:  
-	    			break;  
+		    		//点击右上角菜单
+		    		case R.id.edit: 
+		    			//界面跳转到创建团队
+		    			Intent intent = new Intent();
+		    			intent = new Intent(TeamListActivity.this, TeamCreateActivity.class);
+		    			startActivity(intent);
+		    			//TeamListActivity.this.finish();
+		    			Toast.makeText(TeamListActivity.this, "创建团队",  
+		    					Toast.LENGTH_LONG).show();  
+		    			break; 
+		    		default:  
+		    			break;  
 	    		}  
 	    		return false;  
 	    	}  

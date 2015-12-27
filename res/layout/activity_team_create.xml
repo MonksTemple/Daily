@@ -59,7 +59,7 @@
            
            <EditText
              android:background="@drawable/et"
-             android:id="@+id/cname"
+             android:id="@+id/teamName"
              android:layout_width="match_parent"
              android:layout_height="45dp"
              android:layout_toRightOf="@id/classname"
@@ -87,7 +87,7 @@
            
             <EditText
              android:background="@drawable/et"
-             android:id="@+id/info"
+             android:id="@+id/teamInfo"
              android:layout_width="match_parent"
              android:layout_height="70pt"
              android:layout_toRightOf="@id/intro"
