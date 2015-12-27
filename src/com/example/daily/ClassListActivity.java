@@ -3,6 +3,8 @@ package com.example.daily;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.component.ActLvAdapter;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,7 +58,7 @@ public class ClassListActivity extends Activity {
 	    			Intent intent = new Intent();
 					intent = new Intent(ClassListActivity.this, ClassInfoActivity.class);
 					startActivity(intent);
-					ClassListActivity.this.finish(); 
+//					ClassListActivity.this.finish(); 
 	    			break; 
 	    		default:  
 	    			break;  
@@ -68,27 +70,33 @@ public class ClassListActivity extends Activity {
 	
 	public void loadList(){
 
-				ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
+		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
 
-				HashMap<String, String> map1 = new HashMap<String, String>(); 
-				HashMap<String, String> map2 = new HashMap<String, String>();  
-				map1.put("ItemTitle", "AAAAA");  
-				map1.put("ItemText", "bbbbbb");  
-				map2.put("ItemTitle", "CCCCC");  
-				map2.put("ItemText", "ddddd");  
-				mylist.add(map1);  
-				mylist.add(map2);
-				SimpleAdapter mSchedule = new SimpleAdapter(this,  
-						mylist, 
-						R.layout.two_decimal_item, 
+		HashMap<String, Object> map1 = new HashMap<String, Object>(); 
+		HashMap<String, Object> map2 = new HashMap<String, Object>();  
+		HashMap<String, Object> map3 = new HashMap<String, Object>();  
+		map1.put("ItemTitle", "111");  
+		map1.put("ItemText", "aaa"); 
+		map1.put("pic", R.drawable.add);
+		map2.put("ItemTitle", "BBB");  
+		map2.put("ItemText", "bbb");
+		map2.put("pic", R.drawable.minus);
+		map3.put("ItemTitle", "CCC");  
+		map3.put("ItemText", "ccc");  
+		map3.put("pic", R.drawable.minus);
+		mylist.add(map1);  
+		mylist.add(map2);
+		mylist.add(map3);
 
-					    
-						new String[] {"ItemTitle", "ItemText"},   
- 
-						new int[] {R.id.ItemTitle,R.id.ItemText});  
+		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
+				mylist,
+				R.layout.two_decimal_item,         
+				new String[] {"ItemTitle", "ItemText","pic"},   
+				new int[] {R.id.ItemTitle,R.id.ItemText,R.id.addC},ClassListActivity.this);  
 
-				list.setAdapter(mSchedule);
+		list.setAdapter(mSchedule); 
 	}
+	
 	
 	
 	public void clickBack(View view){	

@@ -62,7 +62,7 @@
         android:textSize="7pt"/>
 
     <ListView
-        android:id="@+id/actListView"
+        android:id="@id/android:list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/finds"

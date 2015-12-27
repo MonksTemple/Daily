@@ -163,6 +163,7 @@
         android:onClick="clickSure"
         android:text="查看事件列表"
         android:textSize="15dp"
+        android:textColor="@color/btnC"
         android:background="@color/theme"
       />
 </LinearLayout>

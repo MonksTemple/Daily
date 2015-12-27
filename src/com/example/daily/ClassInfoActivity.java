@@ -20,7 +20,6 @@ public class ClassInfoActivity extends Activity {
 	EditText description;
 	Button sure;
 	ImageView lines;
-	ImageView cross;
 
 	private PopupMenu popupMenu;  
 	private Menu menu; 
@@ -45,7 +44,6 @@ public class ClassInfoActivity extends Activity {
 		description=(EditText) findViewById(R.id.info);
 		sure=(Button) findViewById(R.id.sure);
 		lines=(ImageView) findViewById(R.id.lines);
-		cross=(ImageView) findViewById(R.id.cross);
 		sure.setVisibility(4);  //0 为可见，4为不可见，8为Gone
 		className.setEnabled(false);
 		createPerson.setEnabled(false);
@@ -72,7 +70,6 @@ public class ClassInfoActivity extends Activity {
 					createPerson.setEnabled(true);
 					description.setEnabled(true);
 					lines.setVisibility(8); 
-					cross.setVisibility(8);
 					break; 
 				case R.id.delete:  
 					Toast.makeText(ClassInfoActivity.this, "撤销课程组",  

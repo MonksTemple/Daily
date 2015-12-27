@@ -253,6 +253,7 @@
         android:text="发布活动"
         android:onClick="clickSure"
         android:textSize="15dp"
+        android:textColor="@color/btnC"
         android:background="@color/theme"
       />
          

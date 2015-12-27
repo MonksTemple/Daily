@@ -19,7 +19,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.PopupMenu;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.Toast;
 public class MainActivity extends Activity {
@@ -118,37 +120,19 @@ public class MainActivity extends Activity {
 			@Override  
 			public boolean onMenuItemClick(MenuItem item) {  
 				switch (item.getItemId()) {  
-				case R.id.classes:  
-					//界面跳转
-					Intent intent1 = new Intent();
-					intent1 = new Intent(MainActivity.this, ClassListActivity.class);
-					startActivity(intent1);
-					MainActivity.this.finish();
-					break;   
+				
 				case R.id.act:  
-					Intent intent2 = new Intent();
-					intent2 = new Intent(MainActivity.this, ActListActivity.class);
-					startActivity(intent2);
-					MainActivity.this.finish();  
+					Toast.makeText(MainActivity.this, "活动列表",  
+							Toast.LENGTH_LONG).show(); 
 					break;  
-				case R.id.team:  
-					Intent intent3 = new Intent();
-					intent3 = new Intent(MainActivity.this, TeamListActivity.class);
-					startActivity(intent3);
-					MainActivity.this.finish();
+				case R.id.task:  
+					Toast.makeText(MainActivity.this, "任务列表",  
+							Toast.LENGTH_LONG).show(); 
 					break;   
 				case R.id.agenda:  
-					Intent intent4 = new Intent();
-					intent4 = new Intent(MainActivity.this, AgendaListActivity.class);
-					startActivity(intent4);
-					MainActivity.this.finish(); 
+					Toast.makeText(MainActivity.this, "日程列表",  
+							Toast.LENGTH_LONG).show();  
 					break;  
-				case R.id.user:  
-					Intent intent5 = new Intent();
-					intent5 = new Intent(MainActivity.this, UserInfoActivity.class);
-					startActivity(intent5);
-					MainActivity.this.finish();
-					break; 
 				default:  
 					break;  
 				}  
@@ -156,6 +140,7 @@ public class MainActivity extends Activity {
 			}  
 		});  
 	}
+	
 
 	public void popupmenu(View v) {  
 		popupMenu.show();  
@@ -166,7 +151,7 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent();
 		intent = new Intent(MainActivity.this, CalendarActivity.class);
 		startActivity(intent);
-//		MainActivity.this.finish();
+		MainActivity.this.finish();
 	}
 
 }

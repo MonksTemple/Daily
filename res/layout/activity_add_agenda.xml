@@ -228,6 +228,7 @@
         android:layout_marginRight="10pt"
         android:text="提交信息"
         android:onClick="sure"
+        android:textColor="@color/btnC"
         android:textSize="15dp"
         android:background="@color/theme"
       />

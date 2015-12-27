@@ -56,7 +56,7 @@ public class AgendaListActivity extends Activity {
 	    			Intent intent1 = new Intent();
         			intent1 = new Intent(AgendaListActivity.this, AddAgendaActivity.class);
         			startActivity(intent1);
-        			AgendaListActivity.this.finish();
+//        			AgendaListActivity.this.finish();
 	    			Toast.makeText(AgendaListActivity.this, "创建日程",  
 	    					Toast.LENGTH_LONG).show();  
 	    			break;   

@@ -169,7 +169,7 @@ public class CalendarActivity extends Activity implements CallBack{
 
 		//通过XML导入菜单栏
 		MenuInflater menuInflater = getMenuInflater();  
-		menuInflater.inflate(R.menu.main_menu, menu); 
+		menuInflater.inflate(R.menu.calendar_menu, menu); 
 
 		// 设置监听事件
 		popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
@@ -182,35 +182,35 @@ public class CalendarActivity extends Activity implements CallBack{
 					Intent intent1 = new Intent();
 					intent1 = new Intent(CalendarActivity.this, ClassListActivity.class);
 					startActivity(intent1);
-					CalendarActivity.this.finish();
+//					CalendarActivity.this.finish();
 					break;   
 				case R.id.act: 
 					//界面跳转到活动列表
 					Intent intent2 = new Intent();
 					intent2 = new Intent(CalendarActivity.this, ActListActivity.class);
 					startActivity(intent2);
-					CalendarActivity.this.finish();  
+//					CalendarActivity.this.finish();  
 					break;  
 				case R.id.team: 
 					//界面跳转到团队列表
 					Intent intent3 = new Intent();
 					intent3 = new Intent(CalendarActivity.this, TeamListActivity.class);
 					startActivity(intent3);
-					CalendarActivity.this.finish();
+//					CalendarActivity.this.finish();
 					break;   
 				case R.id.agenda: 
 					//界面跳转到日程列表
 					Intent intent4 = new Intent();
 					intent4 = new Intent(CalendarActivity.this, AgendaListActivity.class);
 					startActivity(intent4);
-					CalendarActivity.this.finish(); 
+//					CalendarActivity.this.finish(); 
 					break;  
 				case R.id.user:  
 					//界面跳转到用户信息
 					Intent intent5 = new Intent();
 					intent5 = new Intent(CalendarActivity.this, UserInfoActivity.class);
 					startActivity(intent5);
-					CalendarActivity.this.finish();
+//					CalendarActivity.this.finish();
 					break; 
 				default:  
 					break;  
