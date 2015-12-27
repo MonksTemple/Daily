@@ -67,7 +67,7 @@
              android:layout_width="match_parent"
              android:layout_height="45dp"
              android:layout_toRightOf="@id/pho"
-             android:hint=" 11111111111"
+             android:hint=""
              android:textSize="7pt"
              android:layout_centerVertical="true"
              android:textColor="@color/black" />
@@ -97,7 +97,7 @@
              android:layout_height="45dp"
              android:layout_toRightOf="@id/pass"
              android:layout_centerVertical="true"
-             android:hint=" 密码"
+             android:hint=" "
             android:inputType="textPassword"
              android:textSize="7pt"
              android:textColor="@color/black"/>
@@ -126,7 +126,7 @@
              android:layout_height="45dp"
              android:layout_toRightOf="@id/ipass"
              android:layout_centerVertical="true"
-             android:hint=" 确认密码"
+             android:hint=""
             android:inputType="textPassword"
              android:textSize="7pt"
              android:textColor="@color/black" />
@@ -169,7 +169,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_toRightOf="@id/stuno"
-             android:text="13301100"
+             android:text=""
              android:textSize="7pt"
              android:layout_centerVertical="true"
              android:textColor="@color/black" />
@@ -204,7 +204,7 @@
              android:layout_height="wrap_content"
              android:layout_toRightOf="@id/name"
              android:layout_centerVertical="true"
-             android:text="张三"
+             android:text=""
              android:textSize="7pt"
              android:textColor="@color/black"/>
              

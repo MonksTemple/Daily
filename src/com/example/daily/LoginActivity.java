@@ -6,7 +6,10 @@ import com.example.view.UserView;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +25,8 @@ public class LoginActivity extends Activity implements UserView{
 	private EditText account_text;
 	private EditText password_text;
 	private UserManage userManage;
+	private SharedPreferences sp;
+	
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -45,8 +50,8 @@ public class LoginActivity extends Activity implements UserView{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-
+		setContentView(R.layout.activity_login);	
+		sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
 		account_text = (EditText)findViewById(R.id.username);
 		password_text = (EditText)findViewById(R.id.password);
 		
@@ -65,8 +70,12 @@ public class LoginActivity extends Activity implements UserView{
 						
 						Message msg = new Message();
 						Bundle bundle = new Bundle();
-						if(userManage.login()){
+						String myUser = userManage.login();
+						if(!myUser.equals("false")){
 							bundle.putString("login", "true");
+							Editor editor=sp.edit();
+							editor.putString("user", myUser);
+							editor.commit();
 							msg.setData(bundle);
 							handler.sendMessage(msg);
 						}

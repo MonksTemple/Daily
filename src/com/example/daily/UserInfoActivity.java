@@ -16,7 +16,7 @@ public class UserInfoActivity extends Activity implements UserView{
 	private TextView userNameText;
 	private TextView snoText;
 	private TextView telText;
-	private UserManage userManage;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,13 @@ public class UserInfoActivity extends Activity implements UserView{
 		telText = (TextView)findViewById(R.id.tel);
 		
 		
-		userManage = new UserManage(this);
+		
+		
+		userNameText.setText("张三");
+		snoText.setText("13301043");
+		telText.setText("19913090935");
+		
+		
 	}
 
 	@Override
