@@ -1,5 +1,9 @@
 package com.example.daily;
 
+import com.example.presenter.ActManage;
+import com.example.util.DateUtil;
+import com.example.view.ActView;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,22 +26,23 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
-public class ActInfoActivity extends Activity {
-	EditText actName;
-	EditText actDes;
-	EditText actCreator;
-	EditText startTime;
-	EditText endTime;
-	EditText place;
-	EditText remindTime;
+public class ActInfoActivity extends Activity implements ActView{
+	private EditText actName;
+	private EditText actDes;
+	private EditText actCreator;
+	private EditText startTime;
+	private EditText endTime;
+	private EditText place;
+	private EditText remindTime;
 
-	ImageView lines;
-
-	Button sure;
+	private ImageView lines;
+	private Button sure;
 
 	private PopupMenu popupMenu;  
 	private Menu menu; 
-
+	
+	private ActManage actManage;
+	com.example.model.Activity act;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -46,6 +51,7 @@ public class ActInfoActivity extends Activity {
 		initial();
 		//初始化菜单栏
 		initialMenu();
+		actManage=new ActManage(this);
 	}
 
 	public void popupmenu(View v) {  
@@ -62,7 +68,6 @@ public class ActInfoActivity extends Activity {
 		place=(EditText) findViewById(R.id.actPlaceText);
 		remindTime=(EditText) findViewById(R.id.actRemindTimeText);
 		lines=(ImageView) findViewById(R.id.lines);
-//		cross=(ImageView) findViewById(R.id.cross);
 		sure=(Button) findViewById(R.id.sure);
 
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
@@ -124,7 +129,6 @@ public class ActInfoActivity extends Activity {
 		remindTime.setClickable(false);
 		sure.setVisibility(0);
 		lines.setVisibility(4);
-//		cross.setVisibility(4);
 	}
 
 	//返回箭头
@@ -141,6 +145,29 @@ public class ActInfoActivity extends Activity {
 		intent = new Intent(ActInfoActivity.this, ActListActivity.class);
 		startActivity(intent);
 		ActInfoActivity.this.finish();
+	}
+
+	@Override
+	public com.example.model.Activity getActivity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setActivity(com.example.model.Activity activity) {
+		// TODO Auto-generated method stub
+		actName.setText(activity.getName());
+		actDes.setText(activity.getDescription());
+		actCreator.setText(activity.getTeam().getCreator().getUserName());
+		place.setText(activity.getPlace());
+		startTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));
+		endTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));
+		remindTime.setText(DateUtil.getStringFromDate(activity.getRemindTime()));
+	}
+	
+	public void getAct(){
+		Intent intent=this.getIntent();
+		intent.getBundleExtra("");
 	}
 }
 

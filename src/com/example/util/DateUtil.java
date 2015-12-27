@@ -120,38 +120,18 @@ public class DateUtil {
 	@SuppressLint("SimpleDateFormat") 
 	public static String getStringFromDate(Date date){
 		String dateString="";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
 		dateString=sdf.format(date);
 		return dateString;
 	}
 	
-	public static Date getPlanDateFromString(String dateString){
-		//System.out.println(dateString);
-		String datestring=StringUtil.getString(dateString);
-		if(datestring.equals(""))
-			return new Date();
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		Date date = new Date();
-		try {
-		//	System.out.println(dateString);
-			date = sdf.parse(dateString.toString().trim());
-		} catch (ParseException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-		return date;
-	}
-	
-	
-	@SuppressLint("SimpleDateFormat") 
 	public static Date getDateFromString(String dateString){
 		//System.out.println(dateString);
 		String datestring=StringUtil.getString(dateString);
 		if(datestring.equals(""))
 			return new Date();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
 		Date date = new Date();
 		try {
 		//	System.out.println(dateString);
@@ -162,6 +142,7 @@ public class DateUtil {
 		}
 		return date;
 	}
+	
 	
 	public static String changeDateFromString(String dateString){
 		String datestring=StringUtil.getString(dateString);
@@ -195,8 +176,8 @@ public class DateUtil {
 	public static String getDateBetween(String date1,String date2){
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		String dateBetween="";
-		Date d1=getPlanDateFromString(date1);
-		Date d2=getPlanDateFromString(date2);
+		Date d1=getDateFromString(date1);
+		Date d2=getDateFromString(date2);
 		String da1=sdf.format(d1);
 		String da2=sdf.format(d2);
 		dateBetween=(da1+"~"+da2);

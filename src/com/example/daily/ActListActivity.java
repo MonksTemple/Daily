@@ -2,13 +2,19 @@ package com.example.daily;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.example.component.ActLvAdapter;
+import com.example.presenter.ActManage;
+import com.example.util.DataUtil;
+import com.example.view.ActListView;
 
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,10 +28,25 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
-public class ActListActivity extends ListActivity {
+public class ActListActivity extends ListActivity implements ActListView {
 	private PopupMenu popupMenu;  
 	private Menu menu; 
 	ListView list;
+	ActManage actManage;
+	List<com.example.model.Activity> myList;
+	
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			Bundle bundle  = msg.getData();
+			ArrayList list = bundle.getParcelableArrayList("myList");
+			myList=(List<com.example.model.Activity>) list.get(0);
+			loadList(myList);
+		}
+	};
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +56,10 @@ public class ActListActivity extends ListActivity {
 		initial();
 		//初始化菜单栏
 		initialMenu();
+		actManage=new ActManage(this);
 		//加载列表
-		loadList();
+		loadData();
+		
 	}
 
 	public void popupmenu(View v) {  
@@ -47,9 +70,8 @@ public class ActListActivity extends ListActivity {
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 		menu = popupMenu.getMenu(); 
 		list = (ListView) findViewById(android.R.id.list); 
-
-
 	}
+	
 
 	public void initialMenu(){
 		//通过XML导入菜单栏
@@ -83,26 +105,38 @@ public class ActListActivity extends ListActivity {
 		});  
 	}
 
+	public void loadData(){
+		new Thread(){
+			public void run(){
+				
+				Message msg = new Message();
+				Bundle bundle = new Bundle();
+				ArrayList list=new ArrayList();
+				List<com.example.model.Activity> myList=actManage.showIsolateActivities();
+				list.add(myList);
+				bundle.putParcelableArrayList("myList", list);
+				msg.setData(bundle);
+				handler.sendMessage(msg);
+			}
+		}.start();
+	}
 
-	public void loadList(){
+	public void loadList(List<com.example.model.Activity> alist){	
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
-
-		HashMap<String, Object> map1 = new HashMap<String, Object>(); 
-		HashMap<String, Object> map2 = new HashMap<String, Object>();  
-		HashMap<String, Object> map3 = new HashMap<String, Object>();  
-		map1.put("ItemTitle", "111");  
-		map1.put("ItemText", "aaa"); 
-		map1.put("pic", R.drawable.add);
-		map2.put("ItemTitle", "BBB");  
-		map2.put("ItemText", "bbb");
-		map2.put("pic", R.drawable.minus);
-		map3.put("ItemTitle", "CCC");  
-		map3.put("ItemText", "ccc");  
-		map3.put("pic", R.drawable.minus);
-		mylist.add(map1);  
-		mylist.add(map2);
-		mylist.add(map3);
-
+		for(com.example.model.Activity act:alist){
+			String text=act.getDescription();
+			//限制text的长度
+			if(text.length()>DataUtil.TEXTLENTH){
+				text=text.substring(0,DataUtil.TEXTLENTH);
+				text+="...";
+			}
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("ItemTitle", act.getName());  
+			map.put("ItemText", text); 
+			map.put("pic", R.drawable.add);
+			mylist.add(map);
+		};
+		
 		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
 				mylist,
 				R.layout.two_decimal_item,         
@@ -117,7 +151,9 @@ public class ActListActivity extends ListActivity {
         // TODO Auto-generated method stub
 		Intent intent =new Intent();
 		intent.setClass(ActListActivity.this, ActInfoActivity.class);
-		intent.putExtra("index", id);
+		Bundle bundle=new Bundle();
+		bundle.putSerializable("act", new ArrayList().add(myList.get((int) id)));
+		intent.putExtras(bundle);
 		System.out.println(id);
 		startActivity(intent);
     }
@@ -128,6 +164,12 @@ public class ActListActivity extends ListActivity {
 		intent = new Intent(ActListActivity.this, CalendarActivity.class);
 		startActivity(intent);
 		ActListActivity.this.finish();
+	}
+
+	@Override
+	public void setActList(List<com.example.model.Activity> actList) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
