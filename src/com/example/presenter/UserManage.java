@@ -22,7 +22,6 @@ import com.alibaba.fastjson.JSON;
 import com.example.model.Activity;
 import com.example.model.Team;
 import com.example.model.User;
-import com.example.util.ConnectUtil;
 import com.example.view.UserView;
 
 public class UserManage {
