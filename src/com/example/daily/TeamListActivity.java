@@ -111,7 +111,7 @@ public class TeamListActivity extends Activity implements TeamListView{
 		    		case R.id.edit: 
 		    			//界面跳转到创建团队
 		    			Intent intent = new Intent();
-		    			intent = new Intent(TeamListActivity.this, TeamCreateActivity.class);
+		    			intent = new Intent(TeamListActivity.this, TeamInfoActivity.class);
 		    			startActivity(intent);
 		    			Toast.makeText(TeamListActivity.this, "创建团队",  
 		    					Toast.LENGTH_LONG).show();  
@@ -172,7 +172,7 @@ public class TeamListActivity extends Activity implements TeamListView{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent();
-				intent.setClass(TeamListActivity.this, TeamInfoActivity.class);
+				intent.setClass(TeamListActivity.this, ActListActivity.class);
 				intent.putExtra("team",teamList.get((int) id));
 				System.out.println(id);
 				startActivity(intent);
