@@ -2,14 +2,28 @@ package com.example.util;
 
 import java.io.Serializable;
 
-
+/**
+ * 自己定义一个日期类型 的类
+ */
 public class CustomDate implements Serializable{
 	
-	
+	/**序列化ID**/
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 全局变量 年份
+	 */
 	public int year;
+	/**
+	 * 全局变量 月份
+	 */
 	public int month;
+	/**
+	 * 全局变量  天数
+	 */
 	public int day;
+	/**
+	 * 全局变量周
+	 */
 	public int week;
 	
 	public CustomDate(int year,int month,int day){

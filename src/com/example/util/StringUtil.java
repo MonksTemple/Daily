@@ -5,12 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: zhouxin@easier.cn
  * 字符串的处理类
- * Date: 12-11-22
- * Time: 下午4:35
- * To change this template use File | Settings | File Templates.
  */
 public class StringUtil {
     /**
@@ -65,16 +60,7 @@ public class StringUtil {
     public static String getString(String str) {
         return str == null ? "" : str;
     }
-    
    
-    public static String getString(List<Integer> list){
-    	String stringList="";
-    	for(int i:list){
-    		stringList+=(String.valueOf(i)+",");
-    	}
-    	return stringList.substring(0, stringList.length());
-    }
-    
 
 }
 

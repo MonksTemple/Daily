@@ -6,12 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by IntelliJ IDEA.
  * 把公历时间处理成农历时间
- * User: zhouxin @easier.cn
- * Date: 12-11-21
- * Time: 下午3:56
- * To change this template use File | Settings | File Templates.
  */
 public class CalendarLunarUtil {
     /**
@@ -24,6 +19,9 @@ public class CalendarLunarUtil {
      */
     private final static String WEEK_NUMBER[] = {"日", "一", "二", "三", "四", "五", "六"};
 
+    /**
+     * 阴历的二进制数据
+     */
     private final static long[] LUNAR_INFO = new long[]{0x04bd8, 0x04ae0, 0x0a570,
             0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2,
             0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0,
@@ -149,7 +147,11 @@ public class CalendarLunarUtil {
         return Animals[(mLuchYear - 4) % 12];
     }
 
-    // ====== 传入 月日的offset 传回干支, 0=甲子
+    /**
+     * 传入 月日的offset 传回干支, 0=甲子
+     * @param num
+     * @return
+     */
     private static String cyclicalm(int num) {
         final String[] Gan = new String[]{"甲", "乙", "丙", "丁", "戊", "己", "庚",
                 "辛", "壬", "癸"};

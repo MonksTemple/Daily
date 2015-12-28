@@ -9,11 +9,22 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 
-
+/**
+ * 日期处理类
+ */
 public class DateUtil {
 
+	/**
+	 * 存储周一到周日的字符串
+	 */
 	public static String[] weekName = { "周日", "周一", "周二", "周三", "周四", "周五","周六" };
 
+	/**
+	 * 根据年份和月份得到 规定年规定月的天数
+	 * @param year
+	 * @param month
+	 * @return
+	 */
 	public static int getMonthDays(int year, int month) {
 		if (month > 12) {
 			month = 1;
@@ -38,28 +49,58 @@ public class DateUtil {
 		return days;
 	}
 
+	/**
+	 * 得到年份
+	 * @return
+	 */
 	public static int getYear() {
 		return Calendar.getInstance().get(Calendar.YEAR);
 	}
 
+	/**
+	 * 得到月份
+	 * @return
+	 */
 	public static int getMonth() {
 		return Calendar.getInstance().get(Calendar.MONTH) + 1;
 	}
 
+	/**
+	 * 得到当天是几号
+	 * @return
+	 */
 	public static int getCurrentMonthDay() {
 		return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 	}
 
+	/**
+	 * 得到当天是周几
+	 * @return
+	 */
 	public static int getWeekDay() {
 		return Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 	}
 
+	/**
+	 * 得到当时是几点
+	 * @return
+	 */
 	public static int getHour() {
 		return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 	}
+	
+	/**
+	 * 得到当时是几分
+	 * @return
+	 */
 	public static int getMinute() {
 		return Calendar.getInstance().get(Calendar.MINUTE);
 	}
+	
+	/**
+	 * 得到下个周日
+	 * @return
+	 */
 	public static CustomDate getNextSunday() {
 
 		Calendar c = Calendar.getInstance();
@@ -69,6 +110,14 @@ public class DateUtil {
 		return date;
 	}
 
+	/**
+	 * 获得当天的 年、月、日，并存储在int数组里面
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @param pervious
+	 * @return
+	 */
 	public static int[] getWeekSunday(int year, int month, int day, int pervious) {
 		int[] time = new int[3];
 		Calendar c = Calendar.getInstance();
@@ -83,6 +132,12 @@ public class DateUtil {
 
 	}
 
+	/**
+	 * 传入年份和月份 得到某一天是周几
+	 * @param year
+	 * @param month
+	 * @return
+	 */
 	public static int getWeekDayFromDate(int year, int month) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(getDateFromString(year, month));
@@ -93,6 +148,11 @@ public class DateUtil {
 		return week_index;
 	}
 
+	/**
+	 * 传入日期对象，得到某一天是周几
+	 * @param date
+	 * @return
+	 */
 	public static int getWeekDayFromDate(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -103,6 +163,12 @@ public class DateUtil {
 		return week_index;
 	}
 
+	/**
+	 * 将整型的年和月转化为日期类型
+	 * @param year
+	 * @param month
+	 * @return
+	 */
 	@SuppressLint("SimpleDateFormat")
 	public static Date getDateFromString(int year, int month) {
 		String dateString = year + "-" + (month > 9 ? month : ("0" + month))
@@ -117,6 +183,11 @@ public class DateUtil {
 		return date;
 	}
 
+	/**
+	 * 传入自定义的日期类型，判断是否是当天
+	 * @param CustomDate
+	 * @return 返回true说明是今天，返回false说明不是今天
+	 */
 	public static boolean isToday(CustomDate date){
 		return(date.year == DateUtil.getYear() &&
 				date.month == DateUtil.getMonth() 
@@ -129,6 +200,11 @@ public class DateUtil {
 	}
 
 
+	/**
+	 * 将Date日期对象转化为  "yyyy年MM月dd日 HH:mm" 格式的字符串
+	 * @param Date
+	 * @return
+	 */
 	@SuppressLint("SimpleDateFormat") 
 	public static String getStringFromDate(Date date){
 		String dateString="";
@@ -137,6 +213,11 @@ public class DateUtil {
 		return dateString;
 	}
 
+	/**
+	 * 将 "yyyy年MM月dd日 HH:mm" 格式的字符串 转化为Date 日期对象
+	 * @param dateString
+	 * @return
+	 */
 	public static Date getDateFromString(String dateString){
 		//System.out.println(dateString);
 		String datestring=StringUtil.getString(dateString);
@@ -155,23 +236,12 @@ public class DateUtil {
 		return date;
 	}
 
-
-	public static String changeDateFromString(String dateString){
-		String datestring=StringUtil.getString(dateString);
-		if(datestring.equals(""))
-			return "";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd");
-		Date date = new Date();
-		try {
-			date = sdf.parse(dateString.trim());
-		} catch (ParseException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-		return sdf1.format(date);
-	}
-
+	/**
+	 * 判断两个Date 对象是否是同一天
+	 * @param date1
+	 * @param date2
+	 * @return 返回true，则date1和date2就是同一天，返回false，则不是同一天
+	 */
 	public static boolean compareDates(Date date1,Date date2){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String d1=sdf.format(date1);
@@ -180,8 +250,9 @@ public class DateUtil {
 	}
 
 	/**
-	 * 得到前一天
-	 * @param date 传入的日期
+	 * 得到前n天
+	 * @param date 
+	 * @param int
 	 * @return
 	 */
 	public static Date getBackday(Date date,int n){
@@ -191,7 +262,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 得到明天的日期
+	 * 得到未来n天的日期
 	 * @param date
 	 * @return
 	 */
@@ -199,16 +270,5 @@ public class DateUtil {
 		for(int i=0;i<n;i++)
 			date.setDate(date.getDate()+1);
 		return date;
-	}
-
-	public static String getDateBetween(String date1,String date2){
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		String dateBetween="";
-		Date d1=getDateFromString(date1);
-		Date d2=getDateFromString(date2);
-		String da1=sdf.format(d1);
-		String da2=sdf.format(d2);
-		dateBetween=(da1+"~"+da2);
-		return dateBetween;
 	}
 }
