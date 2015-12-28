@@ -1,5 +1,7 @@
 package com.example.daily;
 
+import java.util.ArrayList;
+
 import com.example.presenter.ActManage;
 import com.example.util.DateUtil;
 import com.example.view.ActView;
@@ -167,7 +169,8 @@ public class ActInfoActivity extends Activity implements ActView{
 	
 	public void getAct(){
 		Intent intent=this.getIntent();
-		intent.getBundleExtra("");
+		Bundle a=intent.getBundleExtra("act");
+		
 	}
 }
 
