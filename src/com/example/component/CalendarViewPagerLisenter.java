@@ -12,7 +12,7 @@ public class CalendarViewPagerLisenter implements OnPageChangeListener {
 		super();
 		this.mShowViews = viewAdapter.getAllItems();
 	}
-
+	
 	@Override
 	public void onPageSelected(int arg0) {
 		measureDirection(arg0);

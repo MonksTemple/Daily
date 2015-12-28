@@ -12,6 +12,7 @@ import com.example.view.TeamListView;
 import com.example.view.TeamView;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,7 @@ public class TeamListActivity extends Activity implements TeamListView{
 	private PopupMenu popupMenu;  
 	private Menu menu;
 	private ListView list ;
+	private List<Team> teamList ;
 	
 	private TeamManage teamManage;
 	
@@ -42,14 +44,14 @@ public class TeamListActivity extends Activity implements TeamListView{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			Bundle bundle  = msg.getData();
-			String login = bundle.getString("createTeam");
-			if (login.equals("true")) {//为true说明创建成功
-				Intent intent = new Intent();
-				intent = new Intent(TeamListActivity.this, TeamListActivity.class);
-				startActivity(intent);
-				TeamListActivity.this.finish();
+			String info = bundle.getString("teamList");
+			if (info.equals("true")) {//为true说明创建成功
+				Toast.makeText(TeamListActivity.this, "成功", Toast.LENGTH_SHORT)
+				.show();
+				setTeamList(teamList);
+				//test();
 			}else {
-				Toast.makeText(TeamListActivity.this, "创建失败", Toast.LENGTH_SHORT)
+				Toast.makeText(TeamListActivity.this, "失败", Toast.LENGTH_SHORT)
 				.show();
 			}
 		}
@@ -116,51 +118,31 @@ public class TeamListActivity extends Activity implements TeamListView{
 				
 				Message msg = new Message();
 				Bundle bundle = new Bundle();
-				Set<Team> teamList = teamManage.ShowTeamList();
 				
-				if(teamManage.createTeam()){
-					bundle.putString("createTeam", "true");
+				teamList = 	teamManage.ShowTeamList();
+				
+				if(teamList.size() != 0){		
+					bundle.putString("teamList", "true");
+					//setTeamList();
+//					test();
+							
 					msg.setData(bundle);
-					
 					handler.sendMessage(msg);
 				}
 				else{
-					bundle.putString("createTeam", "false");
+					bundle.putString("teamList", "false");
 					msg.setData(bundle);
 					handler.sendMessage(msg);
 				}
 				
+				//test();
 			}
 		}.start();
 		
 		
 		
 		
-		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
-
-		HashMap<String, Object> map1 = new HashMap<String, Object>(); 
-		HashMap<String, Object> map2 = new HashMap<String, Object>();  
-		HashMap<String, Object> map3 = new HashMap<String, Object>();  
-		map1.put("ItemTitle", "111");  
-		map1.put("ItemText", "aaa"); 
-		map1.put("pic", R.drawable.add);
-		map2.put("ItemTitle", "BBB");  
-		map2.put("ItemText", "bbb");
-		map2.put("pic", R.drawable.minus);
-		map3.put("ItemTitle", "CCC");  
-		map3.put("ItemText", "ccc");  
-		map3.put("pic", R.drawable.minus);
-		mylist.add(map1);  
-		mylist.add(map2);
-		mylist.add(map3);
-
-		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
-				mylist,
-				R.layout.two_decimal_item,         
-				new String[] {"ItemTitle", "ItemText","pic"},   
-				new int[] {R.id.ItemTitle,R.id.ItemText,R.id.addC},TeamListActivity.this);  
-
-		list.setAdapter(mSchedule); 
+		
 	}
 	
 	public void back(View view){
@@ -189,8 +171,53 @@ public class TeamListActivity extends Activity implements TeamListView{
 
 	@Override
 	public void setTeamList(List<Team> teamList) {
-		// TODO Auto-generated method stub
+		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
 		
+		for(int i = 0; i < teamList.size(); i++){
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("ItemTitle", teamList.get(i).getName());  
+			map.put("ItemText",teamList.get(i).getDescription()); 
+			map.put("pic", R.drawable.add);
+			mylist.add(map);
+		}
+
+		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
+				mylist,
+				R.layout.two_decimal_item,         
+				new String[] {"ItemTitle", "ItemText","pic"},   
+				new int[] {R.id.ItemTitle,R.id.ItemText,R.id.addC},TeamListActivity.this);  
+
+		list.setAdapter(mSchedule); 
 	}
 
+	public void test(){
+		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ItemTitle", "1");  
+		map.put("ItemText", "2"); 
+		map.put("pic", R.drawable.add);
+		mylist.add(map);
+		
+		HashMap<String, Object> map1 = new HashMap<String, Object>();
+		map1.put("ItemTitle", "1");  
+		map1.put("ItemText", "2"); 
+		map1.put("pic", R.drawable.add);
+		mylist.add(map1);
+		
+		HashMap<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("ItemTitle", "1");  
+		map2.put("ItemText", "2"); 
+		map2.put("pic", R.drawable.add);
+		mylist.add(map2);
+
+		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
+				mylist,
+				R.layout.two_decimal_item,         
+				new String[] {"ItemTitle", "ItemText","pic"},   
+				new int[] {R.id.ItemTitle,R.id.ItemText,R.id.addC},TeamListActivity.this);  
+
+		list.setAdapter(mSchedule); 
+	}
+	
 }
