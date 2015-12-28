@@ -2,23 +2,41 @@ package com.example.component;
 
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
+/**
+ * 日历控件监听类
+ */
 public class CalendarViewPagerLisenter implements OnPageChangeListener {
 
 	private SildeDirection mDirection = SildeDirection.NO_SILDE;
 	int mCurrIndex = 498;
 	private CalendarView[] mShowViews;
 
+	/**
+	 * 构造函数
+	 *
+	 * @param viewAdapter
+	 */
 	public CalendarViewPagerLisenter(CustomViewPagerAdapter<CalendarView> viewAdapter) {
 		super();
 		this.mShowViews = viewAdapter.getAllItems();
 	}
 	
+	/*
+	 * 
+	 * @param arg0 
+	 * @see android.support.v4.view.ViewPager.OnPageChangeListener#onPageSelected(int)
+	 */
 	@Override
 	public void onPageSelected(int arg0) {
 		measureDirection(arg0);
 		updateCalendarView(arg0);
 	}
 
+	/**
+	 * 
+	 * 更新日历控件
+	 * @param arg0
+	 */
 	private void updateCalendarView(int arg0) {
 		if(mDirection == SildeDirection.RIGHT){
 			mShowViews[arg0 % mShowViews.length].rightSilde();
@@ -30,7 +48,7 @@ public class CalendarViewPagerLisenter implements OnPageChangeListener {
 
 	
 	/**
-	 * �жϻ�������
+	 * 
 	 * @param arg0
 	 */
 	private void measureDirection(int arg0) {
