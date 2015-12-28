@@ -163,7 +163,7 @@ public class ActInfoActivity extends Activity {
 		if(activity.getTeam()==null){
 			actCreator.setText("");
 		}else{
-			actCreator.setText(activity.getTeam().getCreator().getUserName());
+			actCreator.setText(activity.getTeam().getCreator().getUserName()==null?"":activity.getTeam().getCreator().getUserName());
 		}
 		place.setText(activity.getPlace());
 		startTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));

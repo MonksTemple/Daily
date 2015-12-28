@@ -1,9 +1,10 @@
 package com.example.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User {
+public class User implements Serializable{
 	private int userId;        //学生编号，或者教师编号
 	private String userName;   //用户名
 	private String password;   //密码
@@ -12,6 +13,28 @@ public class User {
 	private Set cTeams = new HashSet();          //该用户所建的所有的团队
 	private Set activities = new HashSet();     //该用户参加的所有的活动----即该用户的日程（不过包括完成的和未完成的）
 	private Set jTeams = new HashSet();         //该用户加入的所有的团队
+	
+	public User(){
+		this.userId = 0;
+		this.userName = "";
+		this.password = "";
+		this.phoneno = "";
+		this.notifications = null;
+		this.cTeams = null;
+		this.activities = null;
+		this.jTeams = null;		
+	}
+	
+	public User(User user){
+		this.userId = user.getUserId();
+		this.userName = user.getUserName();
+		this.password = user.getPassword();
+		this.phoneno = user.getPhoneno();
+		this.notifications = null;
+		this.cTeams = null;
+		this.activities = null;
+		this.jTeams = null;
+	}
 	
 	public int getUserId() {
 		return userId;

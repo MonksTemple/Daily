@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 
 import com.alibaba.fastjson.JSON;
 import com.example.model.Activity;
+import com.example.model.Team;
 import com.example.model.User;
 import com.example.util.ConnectUtil;
 import com.example.util.DateUtil;
@@ -49,6 +50,7 @@ public class ActManage {
 
 	}
 
+
 	public Set<Activity> showActivitiesByTeamId() {
 		Set<Activity> activitys = null;
 
@@ -57,77 +59,36 @@ public class ActManage {
 	}
 
 	/**
-	 * 根据当前用户的id号得到他的事件列表
+	 * @function 根据当前用户的id号得到需要的日程类型列表
 	 * @param uid
-	 * @return
+	 * @param type 需要获得的事件类型  Type为0的时候得到所有的列表，Type为1的时候为团队活动，type为2的时候为任务，type3 是个人活动，type4是单独的活动	
+	 * @return 日程列表
 	 */
-	public List<Activity> showActivitiesByUserId(int uid) {
+	public List<Activity> showAgendByUserId(int uid,int type) {
 		List<Activity> activitys = new ArrayList();
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("type", "25");
 		map.put("userId", uid+"");
 		String resp = ConnectUtil.getResponse(map);
 		if(!resp.equals("false")){		
-			try {
-				JSONArray actList = new JSONArray(resp);
-				int size=actList.length();
-				for(int i=0;i<size;i++){
-					JSONObject oj = actList.getJSONObject(i);
-					int type=oj.getInt("type");
-					//type为3 的时候为个人活动
-					if(type==3){
-						Activity a=new Activity();
-						a.setaId(oj.getInt("aId"));
-						a.setName(oj.getString("name"));
-						a.setDescription(oj.getString("description"));
-						a.setEndTime(DateUtil.getDateFromString(oj.getString("endTime")));
-						a.setStartTime(DateUtil.getDateFromString(oj.getString("startTime")));
-						a.setRemindTime(DateUtil.getDateFromString(oj.getString("remindTime")));
-						a.setPlace(oj.getString("place"));
-						activitys.add(a);
-					}
-				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			activitys=getActivityFromJson(resp,type);
 		}
 		return activitys;
-	}
+	}	
+	
 
 	/**
-	 * 获得个人发布的活动列表
+	 * @function 获得 需要类型的活动列表
+	 * @param type 需要获得的事件类型  Type为0的时候得到所有的列表，Type为1的时候为团队活动，type为2的时候为任务，type3 是个人活动，type4是单独的活动	
 	 * @return List<Activity>
 	 */
-	public List<Activity> showIsolateActivities() {
+	public List<Activity> showIsolateActivities(int type) {
 		List<Activity> activitys = new ArrayList();
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("type", "26");
 		String resp = ConnectUtil.getResponse(map);
 		if(!resp.equals("false")){		
-			try {
-				JSONArray actList = new JSONArray(resp);
-				int size=actList.length();
-				for(int i=0;i<size;i++){
-					JSONObject oj = actList.getJSONObject(i);
-					int type=oj.getInt("type");
-					//type为4的时候为单独活动
-					if(type==4){
-						Activity a=new Activity();
-						a.setaId(oj.getInt("aId"));
-						a.setName(oj.getString("name"));
-						a.setDescription(oj.getString("description"));
-						a.setEndTime(DateUtil.getDateFromString(oj.getString("endTime")));
-						a.setStartTime(DateUtil.getDateFromString(oj.getString("startTime")));
-						a.setRemindTime(DateUtil.getDateFromString(oj.getString("remindTime")));
-						a.setPlace(oj.getString("place"));
-						activitys.add(a);
-					}
-				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			activitys=getActivityFromJson(resp,type);
 		}
 		return activitys;
 	}
@@ -137,5 +98,70 @@ public class ActManage {
 
 
 		return users;
+	}
+	
+
+	/**
+	 * 
+	 * @param resp 传输过来的Json文件字符串
+	 * @param myType activity的类型 活动类型,Type为0的时候得到所有的列表，Type为1的时候为团队活动，type为2的时候为任务，type3 是个人活动，type4是单独的活动	
+	 * @return 对应类型的activity对象列表
+	 */
+	private List<Activity> getActivityFromJson(String resp,int myType){
+		List<Activity> activitys = new ArrayList();
+		try {
+			JSONArray actList = new JSONArray(resp);
+			int size=actList.length();
+			for(int i=0;i<size;i++){
+				JSONObject oj = actList.getJSONObject(i);
+				int type=oj.getInt("type");  //type只可能会为1，2，3
+				//type为4的时候为单独活动
+				if(type==myType){
+					Activity a=new Activity();
+					a.setaId(oj.getInt("aId"));
+					a.setName(oj.getString("name"));
+					a.setType(type);
+					a.setDescription(oj.getString("description"));
+					a.setEndTime(DateUtil.getDateFromString(oj.getString("endTime")));
+					a.setStartTime(DateUtil.getDateFromString(oj.getString("startTime")));
+					a.setRemindTime(DateUtil.getDateFromString(oj.getString("remindTime")));
+					a.setPlace(oj.getString("place"));
+					//设置Team
+					Team team=new Team();
+					User user=new User();
+					JSONObject toj = oj.getJSONObject("team");
+					JSONObject uoj=toj.getJSONObject("creator");
+					user.setUserName(uoj.getString("userName"));
+					team.setCreator(user);
+					a.setTeam(team);
+					activitys.add(a);
+				}
+				if(myType==0){
+					Activity a=new Activity();
+					a.setaId(oj.getInt("aId"));
+					a.setName(oj.getString("name"));
+					a.setType(type);
+					a.setDescription(oj.getString("description"));
+					a.setEndTime(DateUtil.getDateFromString(oj.getString("endTime")));
+					a.setStartTime(DateUtil.getDateFromString(oj.getString("startTime")));
+					a.setRemindTime(DateUtil.getDateFromString(oj.getString("remindTime")));
+					a.setPlace(oj.getString("place"));
+					//设置Team
+					Team team=new Team();
+					User user=new User();
+					JSONObject toj = oj.getJSONObject("team");
+					JSONObject uoj=toj.getJSONObject("creator");
+					user.setUserName(uoj.getString("userName"));
+					team.setCreator(user);
+					a.setTeam(team);
+					activitys.add(a);
+				}
+				
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return activitys;
 	}
 }

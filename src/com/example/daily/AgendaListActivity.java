@@ -160,7 +160,7 @@ public class AgendaListActivity extends Activity implements ActListView {
 					String user = sp.getString("user", "");
 					User users = JSON.parseObject(user,User.class);
 					int uid=users.getUserId();
-					List<com.example.model.Activity> myList=actManage.showActivitiesByUserId(uid);
+					List<com.example.model.Activity> myList=actManage.showAgendByUserId(uid,0);
 					list.add(myList);
 					bundle.putParcelableArrayList("myList", list);
 					msg.setData(bundle);
