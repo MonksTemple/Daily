@@ -156,7 +156,7 @@ public class ActInfoActivity extends Activity {
 		ActInfoActivity.this.finish();
 	}
 
-	public void setActivity(com.example.model.Activity activity) {
+	private void setActivity(com.example.model.Activity activity) {
 		// TODO Auto-generated method stub
 		actName.setText(activity.getName());
 		actDes.setText(activity.getDescription());

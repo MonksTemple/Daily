@@ -1,6 +1,7 @@
 package com.example.daily;
 
 import com.example.util.DateTimePickDialogUtil;
+import com.example.util.DateUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class AgendaInfoActivity extends Activity {
 
 	private PopupMenu popupMenu;  
 	private Menu menu; 
+	com.example.model.Activity act;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class AgendaInfoActivity extends Activity {
 		initialMenu();
 		//设置时间选择控件
 		setUpTime();
+		getAct();
 	}
 
 	public void popupmenu(View v) {  
@@ -149,5 +152,21 @@ public class AgendaInfoActivity extends Activity {
 		intent = new Intent(AgendaInfoActivity.this, AgendaListActivity.class);
 		startActivity(intent);
 		AgendaInfoActivity.this.finish();
+	}
+	
+	public void getAct(){
+		Intent intent= AgendaInfoActivity.this.getIntent(); 
+		act= (com.example.model.Activity)intent.getSerializableExtra("agenda");
+		setActivity(act);
+	}
+	
+	private void setActivity(com.example.model.Activity activity) {
+		// TODO Auto-generated method stub
+		aName.setText(activity.getName());
+		aInfo.setText(activity.getDescription());
+		place.setText(activity.getPlace());
+		startDateTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));
+		endDateTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));
+		remindDateTime.setText(DateUtil.getStringFromDate(activity.getRemindTime()));
 	}
 }
