@@ -1,14 +1,20 @@
 package com.example.model;
-
 import java.io.Serializable;
+
 
 public class Notification implements Serializable{
 
-	private int nId;             //通知的编号
-	//private int userId;          //用户
-	private String description;     //通知信息
-	private boolean state;           //是否已经阅读，0表示未读，1表示已读
-	private User user;           //用户
+	/**
+	 * @fieldName: serialVersionUID
+	 * @fieldType: long
+	 * @Description: TODO
+	 */
+	private static final long serialVersionUID = 1L;
+	private int nId;             //֪ͨ�ı��
+	//private int userId;          //�û�
+	private String description;     //֪ͨ��Ϣ
+	private boolean state;           //�Ƿ��Ѿ��Ķ���0��ʾδ����1��ʾ�Ѷ�
+	private User user;           //�û�
 	
 	public Notification(){
 		this.nId = 0;

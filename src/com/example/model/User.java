@@ -1,18 +1,24 @@
-package com.example.model;
 
+package com.example.model;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 public class User implements Serializable{
-	private int userId;        //学生编号，或者教师编号
-	private String userName;   //用户名
-	private String password;   //密码
-	private String phoneno;    //手机号码
-	private Set notifications = new HashSet();  //该用户的所有的通知信息 
-	private Set cTeams = new HashSet();          //该用户所建的所有的团队
-	private Set activities = new HashSet();     //该用户参加的所有的活动----即该用户的日程（不过包括完成的和未完成的）
-	private Set jTeams = new HashSet();         //该用户加入的所有的团队
+	/**
+	 * @fieldName: serialVersionUID
+	 * @fieldType: long
+	 * @Description: TODO
+	 */
+	private static final long serialVersionUID = 1L;
+	private int userId;        //ѧ����ţ����߽�ʦ���
+	private String userName;   //�û���
+	private String password;   //����
+	private String phoneno;    //�ֻ�����
+	private Set notifications = new HashSet();  //���û������е�֪ͨ��Ϣ 
+	private Set cTeams = new HashSet();          //���û����������е��Ŷ�
+	private Set activities = new HashSet();     //���û��μӵ����еĻ----�����û����ճ̣�����������ɵĺ�δ��ɵģ�
+	private Set jTeams = new HashSet();         //���û���������е��Ŷ�
 	
 	public User(){
 		this.userId = 0;

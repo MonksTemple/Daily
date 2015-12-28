@@ -59,9 +59,17 @@ public class TeamManage {
 	}
 	
 	//13
-	public Boolean modifyInfo(Team team){
-		
-		return null;
+	public Boolean modifyInfo(){
+		Team team = teamView.getTeam();
+		String teamString = JSON.toJSONString(team);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "13");
+		map.put("team", teamString);
+		String resp = ConnectUtil.getResponse(map);
+		if(resp.equals("false")){
+			return false;
+		}
+		return true;
 	}
 	
 	//14

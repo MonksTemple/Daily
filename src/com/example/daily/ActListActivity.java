@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.example.component.ActLvAdapter;
+import com.example.model.Activity;
 import com.example.presenter.ActManage;
 import com.example.util.DataUtil;
 import com.example.view.ActListView;
@@ -32,7 +33,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 	private Menu menu; 
 	ListView list;
 	ActManage actManage;
-	List<com.example.model.Activity> myList;
+	List<Activity> myList;
 	
 	private Handler handler = new Handler(){
 		@Override
