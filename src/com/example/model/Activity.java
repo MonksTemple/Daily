@@ -1,21 +1,47 @@
-﻿package com.example.model;
+package com.example.model;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-public class Activity  implements Serializable{
+public class Activity implements Serializable{
 
-	private int aId;               //活动id
-	private Team team;             //团队，如果是个人活动就为空
-	private String name;           //活动名称
-	private String description;    //活动简介
-	private Date startTime;        //开始时间
-	private Date endTime;          //结束时间
-	private String place;          //地点
-	private Date remindTime;       //提醒时间
-	private int type;              //活动类型，Type为1的时候为团队活动，type为2的时候为任务，type3 是个人活动，type4是单独的活动
-	private Set participants;      //活动的所有参与者
+	private int aId;               //�id
+	private Team team;             //�Ŷӣ�����Ǹ��˻��Ϊ��
+	private String name;           //�����
+	private String description;    //����
+	private Date startTime;        //��ʼʱ��
+	private Date endTime;          //����ʱ��
+	private String place;          //�ص�
+	private Date remindTime;       //����ʱ��
+	private int type;              //����ͣ�TypeΪ1��ʱ��Ϊ�Ŷӻ��typeΪ2��ʱ��Ϊ����type3 �Ǹ��˻��type4�ǵ����Ļ
+	private Set participants;      //������в�����
+	
+	public Activity(){
+		this.aId = 0;
+		this.name = "";
+		this.description = "";
+		this.startTime = new Date();
+		this.endTime =  new Date();
+		this.place = "";
+		this.remindTime = new Date();
+		this.type = 0;
+		this.team = null;
+		this.participants = null;
+	}
+	
+	public Activity(Activity activity){
+		this.aId = activity.getaId();
+		this.name = activity.getName();
+		this.description = activity.getDescription();
+		this.startTime = activity.getStartTime();
+		this.endTime = activity.getEndTime();
+		this.place = activity.getPlace();
+		this.remindTime = activity.getRemindTime();
+		this.type = activity.getType();
+		this.team = new Team(activity.getTeam());
+		this.participants = null;
+	}
 	
 	public int getaId() {
 		return aId;

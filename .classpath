@@ -3,8 +3,12 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="lib" path="K:/AndroidEclipse/sdk/sdk/extras/android/support/v4/android-support-v4.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="D:/program/Android_Sdk/extras/android/support/v4/android-support-v4.jar"/>
+=======
+>>>>>>> a7ee9488ea7ae4efe73dd7c7f63b1b41db92e022
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

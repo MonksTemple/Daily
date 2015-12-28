@@ -179,10 +179,24 @@ public class DateUtil {
 		return d1.equals(d2);
 	}
 	
-	public static String getYesterday(){
-		Date date=new Date();
+	/**
+	 * 得到前一天
+	 * @param date 传入的日期
+	 * @return
+	 */
+	public static Date getYesterday(Date date){
 		date.setDate(date.getDate()-1);
-		return getStringFromDate(date);
+		return date;
+	}
+	
+	/**
+	 * 得到明天的日期
+	 * @param date
+	 * @return
+	 */
+	public static Date getTomm(Date date){
+		date.setDate(date.getDate()+1);
+		return date;
 	}
 
 	public static String getDateBetween(String date1,String date2){

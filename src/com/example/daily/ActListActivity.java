@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.example.component.ActLvAdapter;
+import com.example.model.Activity;
 import com.example.presenter.ActManage;
 import com.example.util.DataUtil;
 import com.example.view.ActListView;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +33,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 	private Menu menu; 
 	ListView list;
 	ActManage actManage;
-	List<com.example.model.Activity> myList;
+	List<Activity> myList;
 	
 	private Handler handler = new Handler(){
 		@Override
@@ -110,7 +110,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 				Message msg = new Message();
 				Bundle bundle = new Bundle();
 				ArrayList list=new ArrayList();
-				List<com.example.model.Activity> myList=actManage.showIsolateActivities();
+				List<com.example.model.Activity> myList=actManage.showIsolateActivities(4);
 				list.add(myList);
 				bundle.putParcelableArrayList("myList", list);
 				msg.setData(bundle);

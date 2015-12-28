@@ -12,6 +12,7 @@ import com.example.view.TeamListView;
 import com.example.view.TeamView;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,33 +29,41 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * TODO
+ */
 public class TeamListActivity extends Activity implements TeamListView{
 
 	private PopupMenu popupMenu;  
 	private Menu menu;
 	private ListView list ;
+	private List<Team> teamList ;
 	
 	private TeamManage teamManage;
 	
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			Bundle bundle  = msg.getData();
-			String login = bundle.getString("createTeam");
-			if (login.equals("true")) {//为true说明创建成功
-				Intent intent = new Intent();
-				intent = new Intent(TeamListActivity.this, TeamListActivity.class);
-				startActivity(intent);
-				TeamListActivity.this.finish();
+			String info = bundle.getString("teamList");
+			if (info.equals("true")) {//为true说明创建成功
+				setTeamList(teamList);
 			}else {
-				Toast.makeText(TeamListActivity.this, "创建失败", Toast.LENGTH_SHORT)
+				Toast.makeText(TeamListActivity.this, "加载团队列表失败", Toast.LENGTH_SHORT)
 				.show();
 			}
 		}
 	};
 	
+	
+	/*
+	 * 
+	 * TODO
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,11 +75,19 @@ public class TeamListActivity extends Activity implements TeamListView{
 		initialMenu();
 		loadList();
 	}
-
+	/**
+	 * 
+	 * TODO
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 	    popupMenu.show();  
 	}  
 	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 	    menu = popupMenu.getMenu(); 
@@ -78,15 +95,15 @@ public class TeamListActivity extends Activity implements TeamListView{
 	    setListListener();
 	}
 	
-	//初始化菜单
+	/**
+	 * 
+	 * 初始化菜单项
+	 */
 	public void initialMenu(){
-		//通过XML导入菜单栏
 	    MenuInflater menuInflater = getMenuInflater();  
 	    menuInflater.inflate(R.menu.team_list_menu, menu); 
 	   
-	    // 设置监听事件
 	    popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {  
-
 	    	@Override  
 	    	public boolean onMenuItemClick(MenuItem item) {  
 	    		switch (item.getItemId()) {  
@@ -96,7 +113,6 @@ public class TeamListActivity extends Activity implements TeamListView{
 		    			Intent intent = new Intent();
 		    			intent = new Intent(TeamListActivity.this, TeamCreateActivity.class);
 		    			startActivity(intent);
-		    			//TeamListActivity.this.finish();
 		    			Toast.makeText(TeamListActivity.this, "创建团队",  
 		    					Toast.LENGTH_LONG).show();  
 		    			break; 
@@ -108,51 +124,80 @@ public class TeamListActivity extends Activity implements TeamListView{
 	    });  
 	}
 	
-	//加载团队列表
+	/**
+	 * 
+	 * 加载团队列表
+	 */
 	public void loadList(){
-		
 		new Thread (){
 			public void run() {
 				
 				Message msg = new Message();
-				Bundle bundle = new Bundle();
-				Set<Team> teamList = teamManage.ShowTeamList();
+				Bundle bundle = new Bundle();			
+				teamList = 	teamManage.ShowTeamList();
 				
-				if(teamManage.createTeam()){
-					bundle.putString("createTeam", "true");
+				if(teamList.size() != 0){		
+					bundle.putString("teamList", "true");					
 					msg.setData(bundle);
-					
 					handler.sendMessage(msg);
 				}
 				else{
-					bundle.putString("createTeam", "false");
+					bundle.putString("teamList", "false");
 					msg.setData(bundle);
 					handler.sendMessage(msg);
 				}
-				
 			}
 		}.start();
-		
-		
-		
-		
-		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
+	}
+	
+	/**
+	 * 
+	 * 点击左上角返回箭头返回日历页面
+	 * @param view
+	 */
+	public void back(View view){
+//		Intent intent1 = new Intent();
+//		intent1 = new Intent(TeamListActivity.this, CalendarActivity.class);
+//		startActivity(intent1);
+//		TeamListActivity.this.finish();
+		finish();
+	}
+	
+	/**
+	 * 
+	 * 设置列表点击事件
+	 */
+	private void setListListener() {
+		list.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent();
+				intent.setClass(TeamListActivity.this, TeamInfoActivity.class);
+				intent.putExtra("team",teamList.get((int) id));
+				System.out.println(id);
+				startActivity(intent);
+			}
 
-		HashMap<String, Object> map1 = new HashMap<String, Object>(); 
-		HashMap<String, Object> map2 = new HashMap<String, Object>();  
-		HashMap<String, Object> map3 = new HashMap<String, Object>();  
-		map1.put("ItemTitle", "111");  
-		map1.put("ItemText", "aaa"); 
-		map1.put("pic", R.drawable.add);
-		map2.put("ItemTitle", "BBB");  
-		map2.put("ItemText", "bbb");
-		map2.put("pic", R.drawable.minus);
-		map3.put("ItemTitle", "CCC");  
-		map3.put("ItemText", "ccc");  
-		map3.put("pic", R.drawable.minus);
-		mylist.add(map1);  
-		mylist.add(map2);
-		mylist.add(map3);
+		});
+	}
+	
+	
+	/**
+	 * 
+	 * 将得到的团队列表数据显示在用户界面上
+	 * @param teamList
+	 */
+	@Override
+	public void setTeamList(List<Team> teamList) {
+		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
+		
+		for(int i = 0; i < teamList.size(); i++){
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("ItemTitle", teamList.get(i).getName());  
+			map.put("ItemText",teamList.get(i).getDescription()); 
+			map.put("pic", R.drawable.add);
+			mylist.add(map);
+		}
 
 		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
 				mylist,
@@ -162,35 +207,4 @@ public class TeamListActivity extends Activity implements TeamListView{
 
 		list.setAdapter(mSchedule); 
 	}
-	
-	public void back(View view){
-		Intent intent1 = new Intent();
-		intent1 = new Intent(TeamListActivity.this, CalendarActivity.class);
-		startActivity(intent1);
-		TeamListActivity.this.finish();
-	}
-	
-	private void setListListener() {
-		list.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO 自动生成的方法存根
-				Intent intent =new Intent();
-				intent.setClass(TeamListActivity.this, TeamInfoActivity.class);
-				intent.putExtra("index", id);
-				System.out.println(id);
-				startActivity(intent);
-			}
-
-		});
-	}
-
-	@Override
-	public void setTeamList(List<Team> teamList) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

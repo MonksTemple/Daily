@@ -39,6 +39,8 @@ public class MainActivity extends Activity {
 	private PopupMenu popupMenu;  
 	private Menu menu;
 	Date date;
+	int type=0;
+	int weekDay=0;
 
 	@SuppressLint("ResourceAsColor")
 	@Override
@@ -96,7 +98,7 @@ public class MainActivity extends Activity {
 
 		
 		pager.setAdapter(new MyViewPagerAdapter(viewContainter,titleContainer));
-		pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer));
+		pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
 	}
 
 
@@ -128,17 +130,33 @@ public class MainActivity extends Activity {
 				switch (item.getItemId()) {  
 				
 				case R.id.act:  
+					type=1;
+					pager.getAdapter().notifyDataSetChanged();
+					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
+					pager.getAdapter().notifyDataSetChanged();
+					pager.childDrawableStateChanged(viewContainter.get(0));
+					pager.getAdapter().notifyDataSetChanged();
 					Toast.makeText(MainActivity.this, "活动列表",  
-							Toast.LENGTH_LONG).show(); 
+							Toast.LENGTH_SHORT).show(); 
 					break;  
 				case R.id.task:  
+					type=2;
+					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
 					Toast.makeText(MainActivity.this, "任务列表",  
-							Toast.LENGTH_LONG).show(); 
+							Toast.LENGTH_SHORT).show(); 
 					break;   
 				case R.id.agenda:  
+					type=3;
+					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
 					Toast.makeText(MainActivity.this, "日程列表",  
-							Toast.LENGTH_LONG).show();  
+							Toast.LENGTH_SHORT).show();  
 					break;  
+				case R.id.person:  
+					type=4;
+					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
+					Toast.makeText(MainActivity.this, "单独列表",  
+							Toast.LENGTH_SHORT).show();  
+					break; 
 				default:  
 					break;  
 				}  
@@ -164,7 +182,7 @@ public class MainActivity extends Activity {
 	public void getDate(){
 		Intent intent=getIntent();
 		date=(Date) intent.getSerializableExtra("date");
-		int weekDay=DateUtil.getWeekDayFromDate(date);
+		weekDay=DateUtil.getWeekDayFromDate(date);
 		pager.setCurrentItem(weekDay);
 	}
 }
@@ -206,7 +224,7 @@ class MyViewPagerAdapter extends PagerAdapter{
 
 	@Override
 	public int getItemPosition(Object object) {
-		return super.getItemPosition(object);
+		return POSITION_NONE;
 	}
 
 	@Override
@@ -219,16 +237,20 @@ class MyViewPagerAdapter extends PagerAdapter{
 class MyOnPageChangeListener implements OnPageChangeListener{  
 	private LocalActivityManager mactivityManager = null;
 	ArrayList<String> titleContainer = new ArrayList<String>();
+	Date date;
+	int type;
+	int currentPage;
 
-	public MyOnPageChangeListener(LocalActivityManager mactivityManager, ArrayList<String> titleContainer){
+	public MyOnPageChangeListener(LocalActivityManager mactivityManager, ArrayList<String> titleContainer,Date date,int type){
 		this.mactivityManager=mactivityManager;
 		this.titleContainer=titleContainer;
+		this.date=date;
+		this.type=type;
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
 		         Log.d("mainactivity", "--------changed:" + arg0);
-
 	}
 
 	@Override
@@ -241,7 +263,62 @@ class MyOnPageChangeListener implements OnPageChangeListener{
 	@Override
 	public void onPageSelected(int arg0) {
 		         Log.d("mainactivity", "------selected:" + arg0);
+		         loadCurActivity(arg0);
 	}
 
+	/** 
+     *  
+     * @param arg0:页面位置 
+     * @function:调用子Activity中的方法 
+     *  
+     */  
+    private void loadCurActivity(int arg0){  
+        Activity curActivity = mactivityManager.getActivity(titleContainer.get(arg0));  
+        switch(arg0){  
+        case 0:  
+        	currentPage=0;
+            if(curActivity != null && curActivity instanceof MondayActivity){  
+                ((MondayActivity)curActivity).loadData(date,type);;  
+            }  
+            break;  
+        case 1:  
+        	currentPage=1;
+        	  if(curActivity != null && curActivity instanceof TuesdayActivity){  
+                  ((TuesdayActivity)curActivity).loadData(date,type);;  
+              }  
+              break;   
+        case 2:  
+        	currentPage=2;
+      	  if(curActivity != null && curActivity instanceof WedActivity){  
+                ((WedActivity)curActivity).loadData(date,type);;  
+            }  
+            break;   
+        case 3:  
+        	currentPage=3;
+      	  if(curActivity != null && curActivity instanceof ThurActivity){  
+                ((ThurActivity)curActivity).loadData(date,type);;  
+            }  
+            break; 
+        case 4:  
+        	currentPage=4;
+      	  if(curActivity != null && curActivity instanceof FriActivity){  
+                ((FriActivity)curActivity).loadData(date,type);;  
+            }  
+            break;   
+        case 5:  
+        	currentPage=5;
+      	  if(curActivity != null && curActivity instanceof SatActivity){  
+                ((SatActivity)curActivity).loadData(date,type);;  
+            }  
+            break; 
+        case 6:  
+        	currentPage=6;
+      	  if(curActivity != null && curActivity instanceof SunActivity){  
+                ((SunActivity)curActivity).loadData(date,type);;  
+            }  
+            break; 
+     
+        }  
+    }  
 
 }

@@ -2,11 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
         android:id="@+id/act"
-        android:title="活动列表"/>
+        android:title="社团活动列表"/>
     <item
         android:id="@+id/task"
-        android:title="任务列表"/>
+        android:title="课程任务列表"/>
     <item
         android:id="@+id/agenda"
-        android:title="日程列表"/>
+        android:title="个人活动列表"/>
+    <item
+        android:id="@+id/person"
+        android:title="单独活动列表"/>
 </menu>
