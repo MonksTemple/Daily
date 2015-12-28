@@ -18,11 +18,24 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 日程列表界面
+ */
 public class TastListActivity extends Activity {
-
-	private PopupMenu popupMenu;  
-	private Menu menu; 
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
+	private Menu menu;
+	/**列表控件*/
 	ListView list ;
+	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,10 +46,19 @@ public class TastListActivity extends Activity {
 		loadList();
 	}
 
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 	    popupMenu.show();  
 	}  
 	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 	    menu = popupMenu.getMenu();
@@ -44,6 +66,10 @@ public class TastListActivity extends Activity {
 	    setListListener();
 	}
 	
+	/**
+	 * 
+	 * 初始化菜单
+	 */
 	public void initialMenu(){
 		//通过XML导入菜单栏
 	    MenuInflater menuInflater = getMenuInflater();  
@@ -83,6 +109,10 @@ public class TastListActivity extends Activity {
 	    });  
 	}
 	
+	/**
+	 * 
+	 * 加载列表
+	 */
 	public void loadList(){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
@@ -108,6 +138,11 @@ public class TastListActivity extends Activity {
 		list.setAdapter(mSchedule); 
 	}
 	
+	/**
+	 * 
+	 * 返回按钮事件
+	 * @param view
+	 */
 	public void back(View view){	
 		//界面跳转
 		Intent intent = new Intent();
@@ -116,7 +151,10 @@ public class TastListActivity extends Activity {
 		TastListActivity.this.finish();
 	}
 	
-	
+	/**
+	 * 
+	 * 设置监听器
+	 */
 	private void setListListener() {
 		list.setOnItemClickListener(new OnItemClickListener() {
 

@@ -33,24 +33,44 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 活动信息页面
+ */
 public class ActInfoActivity extends Activity {
+	/**活动名称编辑框*/
 	private EditText actName;
+	/**活动简介编辑框*/
 	private EditText actDes;
+	/**活动创始人编辑框*/
 	private EditText actCreator;
+	/**活动开始时间编辑框*/
 	private EditText startTime;
+	/**活动结束时间编辑框*/
 	private EditText endTime;
+	/**活动地点编辑框*/
 	private EditText place;
+	/**活动提醒时间编辑框*/
 	private EditText remindTime;
 
+	/**图片*/
 	private ImageView lines;
+	/**确认按钮*/
 	private Button sure;
-
-	private PopupMenu popupMenu;  
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
 	private Menu menu; 
 	
+	/**活动类*/
 	com.example.model.Activity act;
 	
-	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -63,11 +83,19 @@ public class ActInfoActivity extends Activity {
 		
 	}
 
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 		popupMenu.show();  
 	}  
 
-
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		actName=(EditText) findViewById(R.id.actNameText);
 		actDes=(EditText) findViewById(R.id.actIntroText);
@@ -92,6 +120,10 @@ public class ActInfoActivity extends Activity {
 		sure.setVisibility(4);
 	}
 
+	/**
+	 * 
+	 * 初始化菜单控件
+	 */
 	public void initialMenu(){
 		//通过XML导入菜单栏
 		MenuInflater menuInflater = getMenuInflater();  
@@ -127,7 +159,11 @@ public class ActInfoActivity extends Activity {
 			}  
 		});  
 	}
-
+	
+	/**
+	 * 
+	 * 修改信息
+	 */
 	public void changeInfo(){
 		actName.setEnabled(false);
 		actDes.setEnabled(false);
@@ -139,8 +175,12 @@ public class ActInfoActivity extends Activity {
 		sure.setVisibility(0);
 		lines.setVisibility(4);
 	}
-
-	//返回箭头
+	
+	/**
+	 * 
+	 * 返回事件处理
+	 * @param view
+	 */
 	public void back(View view){
 		Intent intent = new Intent();
 		intent = new Intent(ActInfoActivity.this, ActListActivity.class);
@@ -148,7 +188,11 @@ public class ActInfoActivity extends Activity {
 		ActInfoActivity.this.finish();
 	}
 
-	//确定按钮
+	/**
+	 * 
+	 * 确认按钮事件处理
+	 * @param view
+	 */
 	public void sure(View view){
 		Intent intent = new Intent();
 		intent = new Intent(ActInfoActivity.this, ActListActivity.class);
@@ -156,6 +200,11 @@ public class ActInfoActivity extends Activity {
 		ActInfoActivity.this.finish();
 	}
 
+	/**
+	 * 
+	 * 设置活动信息
+	 * @param activity
+	 */
 	private void setActivity(com.example.model.Activity activity) {
 		// TODO Auto-generated method stub
 		actName.setText(activity.getName());
@@ -171,6 +220,10 @@ public class ActInfoActivity extends Activity {
 		remindTime.setText(DateUtil.getStringFromDate(activity.getRemindTime()));
 	}
 	
+	/**
+	 * 
+	 * 获得活动信息
+	 */
 	public void getAct(){
 		Intent intent= ActInfoActivity.this.getIntent(); 
 		act= (com.example.model.Activity)intent.getSerializableExtra("act");

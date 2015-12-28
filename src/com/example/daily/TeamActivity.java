@@ -16,11 +16,24 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 团队活动页面
+ */
 public class TeamActivity extends Activity {
-
+	/**弹出菜单*/
 	private PopupMenu popupMenu;  
+	/**菜单*/
 	private Menu menu;
-	ListView list;
+	/**列表控件*/
+	private ListView list;
+	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -31,17 +44,30 @@ public class TeamActivity extends Activity {
 		initialMenu();
 		loadList();
 	}
-
+	
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 	    popupMenu.show();  
 	}  
 	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		list = (ListView) findViewById(R.id.teamView); 
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 	    menu = popupMenu.getMenu(); 
 	}
 	
+	/**
+	 * 
+	 * 加载列表
+	 */
 	public void loadList(){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
@@ -71,6 +97,10 @@ public class TeamActivity extends Activity {
 		list.setAdapter(mSchedule); 
 	}
 	
+	/**
+	 * 
+	 * 初始化菜单控件
+	 */
 	public void initialMenu(){
 		 //通过XML导入菜单栏
 	    MenuInflater menuInflater = getMenuInflater();  

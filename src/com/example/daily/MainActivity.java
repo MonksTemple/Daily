@@ -27,21 +27,45 @@ import android.widget.PopupMenu;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.Toast;
+/**
+ * 日程中心界面
+ */
 public class MainActivity extends Activity {
 
+	/**ViewPager控件**/
 	ViewPager pager = null;
+	/**
+	 * 标签
+	 */
 	PagerTabStrip tabStrip = null;
+	/**
+	 * 用来存放子界面的容器
+	 */
 	ArrayList<View> viewContainter = new ArrayList<View>();
+	/**
+	 * 用来存放子界面名字的容器
+	 */
 	ArrayList<String> titleContainer = new ArrayList<String>();
+	
+	/**
+	 * 页面控制器
+	 */
 	private LocalActivityManager mactivityManager = null; 
 
-	//菜单栏
+	/**
+	 * 菜单栏
+	 */
 	private PopupMenu popupMenu;  
 	private Menu menu;
 	Date date;
 	int type=0;
 	int weekDay=0;
 
+	/*
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@SuppressLint("ResourceAsColor")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +81,10 @@ public class MainActivity extends Activity {
 		getDate();
 	}
 
-	//初始化title的值
+	/**
+	 * 
+	 * 初始化title的值
+	 */
 	@SuppressWarnings("deprecation")
 	public void initialTitile(){
 		pager = (ViewPager) this.findViewById(R.id.vPager);
@@ -113,6 +140,9 @@ public class MainActivity extends Activity {
 	}  
 
 
+	/**
+	 * 通过XML导入菜单栏,并设置菜单栏的监听事件
+	 */
 	public void initialMenu(){
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 		menu = popupMenu.getMenu(); 
@@ -165,10 +195,20 @@ public class MainActivity extends Activity {
 	}
 	
 
+	/**
+	 * 
+	 * 点击三道线图片响应事件：弹出菜单栏
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 		popupMenu.show();  
 	} 
 	
+	/**
+	 * 
+	 * 点击返回按钮响应事件：返回日历界面
+	 * @param view
+	 */
 	public void clickBack(View view){	
 		//界面跳转
 		Intent intent = new Intent();
@@ -177,7 +217,10 @@ public class MainActivity extends Activity {
 		MainActivity.this.finish();
 	}
 
-	//设置当前显示的页面
+	/**
+	 * 
+	 * 设置当前显示的页面
+	 */
 	public void getDate(){
 		Intent intent=getIntent();
 		date=(Date) intent.getSerializableExtra("date");
@@ -189,51 +232,96 @@ public class MainActivity extends Activity {
 
 
 
-
+/**
+ * 定义自己的ViewPager适配器
+ */
 class MyViewPagerAdapter extends PagerAdapter{  
 	//viewpager中的组件数量
 	List<View> viewContainter;
 	List<String> titleContainer;
 
+	/**
+	 * 构造函数
+	 *
+	 * @param viewContainter
+	 * @param titleContainer
+	 */
 	public MyViewPagerAdapter(List<View> viewContainter,List<String> titleContainer) {  
 		this.viewContainter = viewContainter;  
 		this.titleContainer=titleContainer;
 	}
 
+	/**
+	 * 
+	 * 得到viewPager的子界面的个数
+	 * @return
+	 */
 	@Override
 	public int getCount() {
 		return viewContainter.size();
 	}
-	//滑动切换的时候销毁当前的组件
+	
+	/**
+	 * 
+	 * 滑动切换的时候销毁当前的组件
+	 * @param container
+	 * @param position
+	 * @param object
+	 */
 	@Override
 	public void destroyItem(ViewGroup container, int position,
 			Object object) {
 		((ViewPager) container).removeView(viewContainter.get(position));
 	}
-	//每次滑动的时候生成的组件
+
+	/**
+	 * 
+	 * 每次滑动的时候生成的组件
+	 * @param container
+	 * @param position
+	 * @return
+	 */
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
 		((ViewPager) container).addView(viewContainter.get(position));
 		return viewContainter.get(position);
 	}
 
+	/**
+	 * 
+	 * @param arg0
+	 * @param arg1
+	 * @return
+	 */
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
 		return arg0 == arg1;
 	}
 
+	/**
+	 * 
+	 * @param object
+	 * @return
+	 */
 	@Override
 	public int getItemPosition(Object object) {
 		return POSITION_NONE;
 	}
 
+	/**
+	 * 得到子界面的标题
+	 * @param position
+	 * @return
+	 */
 	@Override
 	public CharSequence getPageTitle(int position) {
 		return titleContainer.get(position);
 	}
 }
 
-
+/**
+ * 页面状态改变监听事件
+ */
 class MyOnPageChangeListener implements OnPageChangeListener{  
 	private LocalActivityManager mactivityManager = null;
 	ArrayList<String> titleContainer = new ArrayList<String>();
@@ -241,6 +329,15 @@ class MyOnPageChangeListener implements OnPageChangeListener{
 	int type;
 	int currentPage;
 
+	/**
+	 * 构造函数
+	 *
+	 * @param mactivityManager
+	 * @param titleContainer
+	 * @param date
+	 * @param type
+	 * @param currentPage
+	 */
 	public MyOnPageChangeListener(LocalActivityManager mactivityManager, ArrayList<String> titleContainer,Date date,int type,int currentPage){
 		this.mactivityManager=mactivityManager;
 		this.titleContainer=titleContainer;
@@ -249,11 +346,21 @@ class MyOnPageChangeListener implements OnPageChangeListener{
 		this.currentPage=currentPage;
 	}
 
+	/**
+	 * 界面状态改变
+	 * @param arg0
+	 */
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
 		         Log.d("mainactivity", "--------changed:" + arg0);
 	}
 
+	/**
+	 * 界面滑动
+	 * @param arg0
+	 * @param arg1
+	 * @param arg2
+	 */
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
 		         Log.d("mainactivity", "-------scrolled arg0:" + arg0);
@@ -261,6 +368,10 @@ class MyOnPageChangeListener implements OnPageChangeListener{
 		         Log.d("mainactivity", "-------scrolled arg2:" + arg2);
 	}
 
+	/**
+	 * 选择页面
+	 * @param arg0
+	 */
 	@Override
 	public void onPageSelected(int arg0) {
 		         Log.d("mainactivity", "------selected:" + arg0);
@@ -329,6 +440,10 @@ class MyOnPageChangeListener implements OnPageChangeListener{
         }  
     }  
 
+    /**
+     * 获得子界面对应的日期
+     * @param arg0
+     */
     private void getCudate(int arg0){
     	if(currentPage<arg0)
     		date=DateUtil.getForword(date, 1);

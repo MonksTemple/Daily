@@ -3,12 +3,7 @@ package com.example.util;
 import java.util.Calendar;
 
 /**
- * Created by IntelliJ IDEA.
  * 对公历日期的处理类
- * User: zhouxin@easier.cn
- * Date: --
- * Time: 下午4:06
- * To change this template use File | Settings | File Templates.
  */
 public class GregorianUtil {
     private final static String[][] GRE_FESTVIAL = {
@@ -50,14 +45,29 @@ public class GregorianUtil {
             {"艾滋病", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                     "", "", "", "", "", "圣诞", "", "", "", "", "", ""},
     };
+    /**
+     * 月份
+     */
     private int mMonth;
+    /**
+     * 日期
+     */
     private int mDay;
 
+    /**
+     * 通过Calendar日历对象得到月份和日期
+     *
+     * @param calendar
+     */
     public GregorianUtil(Calendar calendar) {
         mMonth = calendar.get(Calendar.MONTH);
         mDay = calendar.get(Calendar.DATE);
     }
 
+    /**
+     * 获得公历日期的信息
+     * @return
+     */
     public String getGremessage() {
         return GRE_FESTVIAL[mMonth][mDay - 1];
     }

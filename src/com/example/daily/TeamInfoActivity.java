@@ -15,19 +15,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+/**
+ * 
+ * 团队信息页面
+ */
 public class TeamInfoActivity extends Activity implements TeamView{
+	/**团队名称编辑框*/
 	EditText teamName;
+	/**团队简介编辑框*/
 	EditText teamDescription;
+	/**确定按钮*/
 	Button sure;
-
+	/**团队名称字符串*/
 	String teamNameText;
+	/**团队简介字符串*/
 	String teamDescriptionText;
-	
+	/**铅笔图片*/
 	ImageView pen;
+	/**当前团队类对象*/
 	Team currentTeam;
-	
+	/**团队管理类对象*/
 	TeamManage teamManage;
-	
+	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -48,6 +57,12 @@ public class TeamInfoActivity extends Activity implements TeamView{
 		}
 	};
 	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +70,11 @@ public class TeamInfoActivity extends Activity implements TeamView{
 		initial();
 		getTeamInfo();
 	}
-
+	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		teamName = (EditText) findViewById(R.id.cname);
 		teamDescription = (EditText) findViewById(R.id.info);
@@ -68,7 +87,12 @@ public class TeamInfoActivity extends Activity implements TeamView{
 		
 		teamManage = new TeamManage(this);
 	}
-
+	
+	/**
+	 * 
+	 * 返回按钮事件处理
+	 * @param view
+	 */
 	public void back(View view){
 //		//界面跳转到创建团队
 //		Intent intent = new Intent();
@@ -77,8 +101,12 @@ public class TeamInfoActivity extends Activity implements TeamView{
 //		TeamInfoActivity.this.finish();
 		finish();
 	}
-
-	//编辑信息
+	
+	/**
+	 * 
+	 * 编辑按钮事件处理
+	 * @param view
+	 */
 	public void edit(View view){
 		sure.setVisibility(0);
 		pen.setVisibility(4);
@@ -86,6 +114,11 @@ public class TeamInfoActivity extends Activity implements TeamView{
 		teamDescription.setEnabled(true);
 	}
 	
+	/**
+	 * 
+	 * 确认按钮事件处理
+	 * @param view
+	 */
 	public void sure(View view){
 		teamNameText = teamName.getText().toString();
 		teamDescriptionText = teamDescription.getText().toString();
@@ -135,7 +168,13 @@ public class TeamInfoActivity extends Activity implements TeamView{
 		currentTeam = (Team)intent.getSerializableExtra("team");
 		setTeamInfo(currentTeam);
 	}
-
+	
+	/*
+	 * 
+	 * 获得团队信息
+	 * @return 
+	 * @see com.example.view.TeamView#getTeam()
+	 */
 	@Override
 	public Team getTeam() {
 		currentTeam.setName(teamNameText);
@@ -143,7 +182,13 @@ public class TeamInfoActivity extends Activity implements TeamView{
 			
 		return currentTeam;
 	}
-
+	
+	/*
+	 * 
+	 * 设置团队信息
+	 * @param team 
+	 * @see com.example.view.TeamView#setTeam(com.example.model.Team)
+	 */
 	@Override
 	public void setTeam(Team team) {
 		teamName.setText(team.getName());

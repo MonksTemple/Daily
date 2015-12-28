@@ -20,26 +20,36 @@ import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
 /**
- * 日期时间选择控件 使用方法： private EditText inputDate;//需要设置的日期时间文本编辑框 private String
+ * 日期时间选择控件 使用方法： 
+ * private EditText inputDate;//需要设置的日期时间文本编辑框 
+ * private String
  * initDateTime="2012年9月3日 14:44",//初始日期时间值 在点击事件中使用：
- * inputDate.setOnClickListener(new OnClickListener() {
- * 
- * @Override public void onClick(View v) { DateTimePickDialogUtil
- *           dateTimePicKDialog=new
- *           DateTimePickDialogUtil(SinvestigateActivity.this,initDateTime);
- *           dateTimePicKDialog.dateTimePicKDialog(inputDate);
- * 
- *           } });
- * 
- * @author
  */
 public class DateTimePickDialogUtil implements OnDateChangedListener,
 		OnTimeChangedListener {
+	/**
+	 * 日期控件
+	 */
 	private DatePicker datePicker;
+	/**
+	 * 时间控件
+	 */
 	private TimePicker timePicker;
+	/**
+	 * 弹出框
+	 */
 	private AlertDialog ad;
+	/**
+	 * 字符串类型日期
+	 */
 	private String dateTime;
+	/**
+	 * 日期初始值字符串
+	 */
 	private String initDateTime;
+	/**
+	 * 界面活动 Android.app.Activity
+	 */
 	private Activity activity;
 
 	/**
@@ -56,6 +66,11 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 
 	}
 
+	/**
+	 * 初始化时间和日期控件
+	 * @param datePicker
+	 * @param timePicker
+	 */
 	public void init(DatePicker datePicker, TimePicker timePicker) {
 		Calendar calendar = Calendar.getInstance();
 		if (!(null == initDateTime || "".equals(initDateTime))) {
@@ -109,10 +124,25 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 		return ad;
 	}
 
+	/*
+	 * 时间改变后时间控件对应的操作
+	 * @param view
+	 * @param hourOfDay
+	 * @param minute 
+	 * @see android.widget.TimePicker.OnTimeChangedListener#onTimeChanged(android.widget.TimePicker, int, int)
+	 */
 	public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
 		onDateChanged(null, 0, 0, 0);
 	}
 
+	/*
+	 * 时间改变后日历控件对应的操作
+	 * @param view
+	 * @param year
+	 * @param monthOfYear
+	 * @param dayOfMonth 
+	 * @see android.widget.DatePicker.OnDateChangedListener#onDateChanged(android.widget.DatePicker, int, int, int)
+	 */
 	public void onDateChanged(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		// 获得日历实例

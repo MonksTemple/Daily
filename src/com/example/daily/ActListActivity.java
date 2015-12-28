@@ -29,15 +29,25 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 活动列表页面
+ */
 public class ActListActivity extends ListActivity implements ActListView {
-	private PopupMenu popupMenu;  
-	private Menu menu; 
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
+	private Menu menu;
+	/**列表控件*/
 	private ListView list;
+	/**活动管理类对象*/
 	private ActManage actManage;
+	/**活动列表*/
 	private List<Activity> myList;
-	
+	/**当前团队*/
 	private Team currentTeam;
 	
+	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -50,7 +60,12 @@ public class ActListActivity extends ListActivity implements ActListView {
 		}
 	};
 
-	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,17 +81,29 @@ public class ActListActivity extends ListActivity implements ActListView {
 		
 	}
 
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 		popupMenu.show();  
 	}  
 
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 		menu = popupMenu.getMenu(); 
 		list = (ListView) findViewById(android.R.id.list); 
 	}
 	
-
+	/**
+	 * 
+	 * 初始化菜单控件
+	 */
 	public void initialMenu(){
 		//通过XML导入菜单栏
 		MenuInflater menuInflater = getMenuInflater();  
@@ -107,7 +134,11 @@ public class ActListActivity extends ListActivity implements ActListView {
 			}  
 		});  
 	}
-
+	
+	/**
+	 * 
+	 * 加载日期
+	 */
 	public void loadData(){
 		new Thread(){
 			public void run(){
@@ -122,7 +153,12 @@ public class ActListActivity extends ListActivity implements ActListView {
 			}
 		}.start();
 	}
-
+	
+	/**
+	 * 
+	 * 加载列表
+	 * @param alist
+	 */
 	public void loadList(List<com.example.model.Activity> alist){	
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
 		for(com.example.model.Activity act:alist){
@@ -150,11 +186,24 @@ public class ActListActivity extends ListActivity implements ActListView {
 		list.setAdapter(mSchedule); 
 	}
 	
+	/**
+	 * 
+	 * 获得团队信息
+	 */
 	public void getTeamInfo(){
 		Intent intent = ActListActivity.this.getIntent(); 
 		currentTeam = (Team)intent.getSerializableExtra("team");
 	}
 	
+	/*
+	 * 
+	 * 设置列表点击事件
+	 * @param l
+	 * @param v
+	 * @param position
+	 * @param id 
+	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
+	 */
 	@Override
     protected void onListItemClick(ListView l, View v, int position, long id){
         // TODO Auto-generated method stub
@@ -165,14 +214,24 @@ public class ActListActivity extends ListActivity implements ActListView {
 		startActivity(intent);
     }
 
-	//返回箭头
+	/**
+	 * 
+	 * 返回按钮事件处理
+	 * @param view
+	 */
 	public void back(View view){
 		Intent intent = new Intent();
 		intent = new Intent(ActListActivity.this, CalendarActivity.class);
 		startActivity(intent);
 		ActListActivity.this.finish();
 	}
-
+	
+	/*
+	 * 
+	 * 设置活动信息
+	 * @param actList 
+	 * @see com.example.view.ActListView#setActList(java.util.List)
+	 */
 	@Override
 	public void setActList(List<com.example.model.Activity> actList) {
 		// TODO Auto-generated method stub

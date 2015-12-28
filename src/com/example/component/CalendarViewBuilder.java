@@ -5,7 +5,9 @@ import android.content.Context;
 import com.example.component.CalendarView.CallBack;
 import com.example.util.CustomDate;
 
-
+/**
+ * 绘制日历
+ */
 public class CalendarViewBuilder {
 		private CalendarView[] calendarViews;
 		/**
@@ -49,6 +51,11 @@ public class CalendarViewBuilder {
 			}
 		}
 		
+		/**
+		 * 
+		 * 调到制定天
+		 * @param date
+		 */
 		public void turnSpecialDays(CustomDate date){
 			if(calendarViews != null)
 				for(int i = 0 ;i < calendarViews.length;i++){

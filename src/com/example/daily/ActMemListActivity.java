@@ -18,9 +18,20 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 活动成员列表页面
+ */
 public class ActMemListActivity extends Activity {
+	/**列表控件*/
+	private ListView list;
 	
-	ListView list;
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,6 +42,10 @@ public class ActMemListActivity extends Activity {
 				loadList();
 	}
 
+	/**
+	 * 
+	 * 加载列表
+	 */
 	private void loadList() {
 		// TODO Auto-generated method stub
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
@@ -52,13 +67,20 @@ public class ActMemListActivity extends Activity {
 		list.setAdapter(mSchedule);
 	}
 
-
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	private void initial() {
 		// TODO Auto-generated method stub
         list = (ListView) findViewById(R.id.actMemListView); 
         setListListener();
 	}
 	
+	/**
+	 * 
+	 * 设置监听器
+	 */
 	private void setListListener() {
 		list.setOnItemClickListener(new OnItemClickListener() {
 

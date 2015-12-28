@@ -21,10 +21,24 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 课程组列表页面
+ */
 public class ClassListActivity extends Activity {
-	private PopupMenu popupMenu;  
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
 	private Menu menu;
+	/**列表控件*/
 	ListView list;
+	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,10 +49,19 @@ public class ClassListActivity extends Activity {
 		loadList();
 	}
 
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 	    popupMenu.show();  
 	}  
 	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		list = (ListView) findViewById(R.id.classListView);
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
@@ -46,6 +69,10 @@ public class ClassListActivity extends Activity {
 	    setListListener();
 	}
 	
+	/**
+	 * 
+	 * 初始化菜单
+	 */
 	public void initialMenu(){
 		//通过XML导入菜单栏
 	    MenuInflater menuInflater = getMenuInflater();  
@@ -71,6 +98,10 @@ public class ClassListActivity extends Activity {
 	    });  
 	}
 	
+	/**
+	 * 
+	 * 加载列表
+	 */
 	public void loadList(){
 
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
@@ -101,7 +132,11 @@ public class ClassListActivity extends Activity {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * 返回事件处理
+	 * @param view
+	 */
 	public void clickBack(View view){	
 		//界面跳转到日历界面
 		Intent intent = new Intent();
@@ -110,6 +145,10 @@ public class ClassListActivity extends Activity {
 		ClassListActivity.this.finish();
 	}
 	
+	/**
+	 * 
+	 * 设置监听器
+	 */
 	private void setListListener() {
 		list.setOnItemClickListener(new OnItemClickListener() {
 

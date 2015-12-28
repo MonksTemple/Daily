@@ -16,25 +16,47 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 任务信息页面
+ */
 public class TaskInfoActivity extends Activity {
+	/**开始时间编辑框*/
 	private EditText startDateTime;
+	/**结束时间编辑框*/
 	private EditText endDateTime;
+	/**提醒时间编辑框*/
 	private EditText remindDateTime;
-	EditText taskName;
-	EditText taskDes;
-	EditText taskHolder;
-	EditText place;
-	Button sure;
+	/**任务名称编辑框*/
+	private EditText taskName;
+	/**任务简介编辑框*/
+	private EditText taskDes;
+	/**任务发起人编辑框*/
+	private EditText taskHolder;
+	/**热舞地点编辑框*/
+	private EditText place;
+	/**确认按钮*/
+	private Button sure;
 	
 	ImageView lines;
-
+	
+	/**开始时间字符串*/
 	private String initStartDateTime = "2015年12月30日 10:44";
-	private String initEndDateTime = "2015年01月30日 11:44"; 
+	/**结束时间字符串*/
+	private String initEndDateTime = "2015年01月30日 11:44";
+	/**提醒时间字符串*/
 	private String initRemindDateTime = "2015年01月30日 11:40"; 
-
-	private PopupMenu popupMenu;  
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
 	private Menu menu; 
 	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,10 +67,19 @@ public class TaskInfoActivity extends Activity {
 		setupTime();
 	}
 
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 	    popupMenu.show();  
 	}  
 	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		taskName = (EditText) findViewById(R.id.tname);
 		taskDes = (EditText) findViewById(R.id.info);
@@ -72,6 +103,10 @@ public class TaskInfoActivity extends Activity {
 	    remindDateTime.setClickable(false);
 	}
 	
+	/**
+	 * 
+	 * 初始化菜单
+	 */
 	public void initialMenu(){
 		 //通过XML导入菜单栏
 	    MenuInflater menuInflater = getMenuInflater();  
@@ -100,7 +135,10 @@ public class TaskInfoActivity extends Activity {
 	    });  
 	}
 	
-	
+	/**
+	 * 
+	 * 修改信息
+	 */
 	void changeInfo(){
 		taskName.setEnabled(true);
 	    taskDes.setEnabled(true);
@@ -113,6 +151,10 @@ public class TaskInfoActivity extends Activity {
 	    lines.setVisibility(8);
 	}
 	
+	/**
+	 * 
+	 * 设置时间
+	 */
 	public void setupTime(){
 		startDateTime.setText(initStartDateTime);
 		endDateTime.setText(initEndDateTime);

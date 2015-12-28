@@ -16,6 +16,9 @@ import com.example.util.CalendarLunarUtil;
 import com.example.util.CustomDate;
 import com.example.util.DateUtil;
 
+/**
+ * 自定义的日历控件
+ */
 public class CalendarView extends View {
 
 	private static final String TAG = "CalendarView";
@@ -42,32 +45,75 @@ public class CalendarView extends View {
 	boolean isTurnSpecialDay;
 	//private CustomDate lastShowDate;
 
+	/**
+	 * 回调函数接口
+	 */
 	public interface CallBack {
 
+		/**
+		 * 
+		 * 回调点击的日期
+		 * @param date
+		 */
 		void clickDate(CustomDate date);//回调点击的日期
 
+		/**
+		 * 
+		 * 回调cell的高度确定slidingDrawer高度
+		 * @param cellSpace
+		 */
 		void onMesureCellHeight(int cellSpace);//回调cell的高度确定slidingDrawer高度
 
+		/**
+		 * 
+		 * 回调滑动viewPager改变的日期
+		 * @param date
+		 */
 		void changeDate(CustomDate date);//回调滑动viewPager改变的日期
 	}
 
+	/**
+	 * 构造函数
+	 *
+	 * @param context
+	 * @param attrs
+	 * @param defStyle
+	 */
 	public CalendarView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 
 	}
 
+	/**
+	 * 构造函数
+	 *
+	 * @param context
+	 * @param attrs
+	 */
 	public CalendarView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 
 	}
 
+	/**
+	 * 构造函数
+	 *
+	 * @param context
+	 */
 	public CalendarView(Context context) {
 		super(context);
 		init(context);
 	}
-
+	
+	/**
+	 * 构造函数
+	 *
+	 * @param context
+	 * @param style
+	 * @param mCallBack
+	 */
 	public CalendarView(Context context, int style, CallBack mCallBack) {
 		super(context);
 		CalendarView.style = style;
@@ -75,6 +121,12 @@ public class CalendarView extends View {
 		init(context);
 	}
 
+	/*
+	 * 
+	 * TODO
+	 * @param canvas 
+	 * @see android.view.View#onDraw(android.graphics.Canvas)
+	 */
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
@@ -84,6 +136,10 @@ public class CalendarView extends View {
 		}
 	}
 
+	/**
+	 * 初始化控件
+	 * @param context
+	 */
 	private void init(Context context) {
 		mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -93,6 +149,10 @@ public class CalendarView extends View {
 		initDate();
 	}
 
+	/**
+	 * 
+	 * 初始化日期
+	 */
 	private void initDate() {
 		if (style == MONTH_STYLE) {
 			mShowDate =new CustomDate();
@@ -100,6 +160,15 @@ public class CalendarView extends View {
 		fillDate();
 	}
 
+	/*
+	 * 
+	 * TODO
+	 * @param w
+	 * @param h
+	 * @param oldw
+	 * @param oldh 
+	 * @see android.view.View#onSizeChanged(int, int, int, int)
+	 */
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
@@ -117,10 +186,14 @@ public class CalendarView extends View {
 	private Cell mClickCell;
 	private float mDownX;
 	private float mDownY;
-/*
- * 
- * 触摸事件为了确定点击的位置日期
- */
+
+	/*
+	 * 触摸事件为了确定点击的位置日期
+	 * TODO
+	 * @param event
+	 * @return 
+	 * @see android.view.View#onTouchEvent(android.view.MotionEvent)
+	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
@@ -141,6 +214,11 @@ public class CalendarView extends View {
 		return true;
 	}
 
+	/**
+	 * 点击某一天
+	 * @param col
+	 * @param row
+	 */
 	private void measureClickCell(int col, int row) {
 		if (col >= TOTAL_COL || row >= TOTAL_ROW)
 			return;
@@ -161,7 +239,10 @@ public class CalendarView extends View {
 		}
 	}
 
-	// 组
+	/**
+	 * 组
+	 * 
+	 */
 	class Row {
 		public int j;
 
@@ -180,7 +261,10 @@ public class CalendarView extends View {
 		}
 	}
 
-	// 单元格
+	/**
+	 * 单元格
+	 * 
+	 */
 	class Cell {
 		public CustomDate date;
 		public State state;
@@ -196,7 +280,11 @@ public class CalendarView extends View {
 		}
 
 
-		// 绘制一个单元格 如果颜色需要自定义可以修改
+		/**
+		 * 
+		 * 绘制一个单元格 如果颜色需要自定义可以修改
+		 * @param canvas
+		 */ 
 		public void drawSelf(Canvas canvas) {
 			switch (state) {
 			case CURRENT_MONTH_DAY:
@@ -242,7 +330,6 @@ public class CalendarView extends View {
 	}
 /**
  * 
- * @author huang
  * cell的state
  *当前月日期，过去的月的日期，下个月的日期，今天，点击的日期
  *
@@ -352,16 +439,28 @@ public class CalendarView extends View {
 		}
 	}
 
+	/**
+	 * 更新
+	 */
 	public void update() {
 		fillDate();
 		invalidate();
 	}
 	
+	/**
+	 * 回到今天
+	 * 
+	 */
 	public void backToday(){
 		initDate();
 		invalidate();
 	}
 	//切换style
+	/**
+	 * 
+	 * 切换style
+	 * @param style
+	 */
 	public void switchStyle(int style) {
 		CalendarView.style = style;
 		if (style == MONTH_STYLE) {
@@ -369,6 +468,10 @@ public class CalendarView extends View {
 		}
 	}
 //向右滑动
+	/**
+	 * 
+	 *向右滑动
+	 */
 	public void rightSilde() {
 		if (style == MONTH_STYLE) {
 			
@@ -385,7 +488,10 @@ public class CalendarView extends View {
 		update();
 	//	isTurnSpecialDay=false;
 	}
-//向左滑动
+	/**
+	 * 
+	 * 向左滑动
+	 */
 	public void leftSilde() {
 		
 		if (style == MONTH_STYLE) {
@@ -403,6 +509,11 @@ public class CalendarView extends View {
 //		isTurnSpecialDay=false;
 	}
 	
+	/**
+	 * 
+	 * 调到制定天
+	 * @param date
+	 */
 	public void turnToSpeDay(CustomDate date){
 		mShowDate.year=date.year;
 		mShowDate.month=date.month;
