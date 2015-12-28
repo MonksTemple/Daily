@@ -20,22 +20,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 
+ * 修改用户信息界面
+ */
 public class ChangeUserInfoActivity extends Activity implements UserView{
+	/**电话编辑框*/
 	private EditText telText;
+	/**密码编辑框*/
 	private EditText pwdText;
+	/**密码编辑框*/
 	private EditText ipwdText;
+	/**学号编辑框*/
 	private TextView snoText;
+	/**姓名编辑框*/
 	private TextView userNameText;
 	
+	/**电话字符串*/
 	private String strTel;
+	/**密码字符串*/
 	private String strPwd;
+	/**密码字符串*/
 	private String strPwd2;
+	/**电话字符串*/
 	private User  tempUser;
-	
+	/**信息存储类对象*/
 	private SharedPreferences sp;
-	
+	/**用户管理类对象*/
 	private UserManage userManage;
-	
+	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -61,8 +74,15 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 			}
 		}
 	};
+	
 
 	@Override
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_user_info);
@@ -85,7 +105,11 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 		userManage = new UserManage(this);
 	}
 
-	//返回箭头
+	/**
+	 * 
+	 * 返回按钮事件处理
+	 * @param view
+	 */
 	public void back(View view){
 		Intent intent = new Intent();
 		intent = new Intent(ChangeUserInfoActivity.this, UserInfoActivity.class);
@@ -93,6 +117,11 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 		ChangeUserInfoActivity.this.finish();
 	}
 	
+	/**
+	 * 
+	 * 确认按钮事件处理
+	 * @param view
+	 */
 	public void sure(View view){
 		strTel = telText.getText().toString();
 		strPwd = pwdText.getText().toString();
@@ -128,6 +157,12 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 		}.start();	
 	}
 	
+	/*
+	 * 
+	 * 获得用户信息
+	 * @return 
+	 * @see com.example.view.UserView#getUser()
+	 */
 	@Override
 	public User getUser() {
 		SharedPreferences sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
@@ -139,6 +174,12 @@ public class ChangeUserInfoActivity extends Activity implements UserView{
 		return returnUser;
 	}
 
+	/*
+	 * 
+	 * 设置用户信息
+	 * @param user 
+	 * @see com.example.view.UserView#setUser(com.example.model.User)
+	 */
 	@Override
 	public void setUser(User user) {
 		// TODO Auto-generated method stub

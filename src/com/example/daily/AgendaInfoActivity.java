@@ -17,23 +17,45 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 日程信息页面
+ */
 public class AgendaInfoActivity extends Activity {
+	/**日程开始时间编辑框*/
 	private EditText startDateTime;
+	/**日程结束时间编辑框*/
 	private EditText endDateTime;
+	/**日程提醒时间编辑框*/
 	private EditText remindDateTime;
+	/**日程名称编辑框*/
 	private EditText aName;
+	/**日程信息编辑框*/
 	private EditText aInfo;
+	/**日程地点编辑框*/
 	private EditText place;
+	/**确认按钮*/
 	Button sure;
 
+	/**日程开始时间字符串*/
 	private String initStartDateTime = "2015年12月30日 10:44"; // ��ʼ����ʼʱ��
+	/**日程结束时间字符串*/
 	private String initEndDateTime = "2015年01月30日 11:44"; // ��ʼ������ʱ��
+	/**日程地点字符串*/
 	private String initRemindDateTime = "2015年01月30日 11:40"; // ��ʼ������ʱ��
-
-	private PopupMenu popupMenu;  
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
 	private Menu menu; 
+	/**活动类对象*/
 	com.example.model.Activity act;
-
+	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,11 +68,20 @@ public class AgendaInfoActivity extends Activity {
 		setUpTime();
 		getAct();
 	}
-
+	
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 		popupMenu.show();  
 	}  
-
+	
+	/**
+	 * 
+	 * 处理控件
+	 */
 	public void initial(){
 		//创建时间选择器
 		startDateTime = (EditText) findViewById(R.id.startime);
@@ -71,6 +102,10 @@ public class AgendaInfoActivity extends Activity {
 		sure.setVisibility(4);
 	}
 
+	/**
+	 * 
+	 * 初始化菜单
+	 */
 	public void initialMenu(){
 		//通过XML导入菜单栏
 		MenuInflater menuInflater = getMenuInflater();  
@@ -97,6 +132,10 @@ public class AgendaInfoActivity extends Activity {
 		});  
 	}
 	
+	/**
+	 * 
+	 * 编辑按钮事件处理
+	 */
 	public void edit(){
 		startDateTime.setClickable(true);
 		endDateTime.setClickable(true);
@@ -107,6 +146,10 @@ public class AgendaInfoActivity extends Activity {
 		sure.setVisibility(0);
 	}
 
+	/**
+	 * 
+	 * 设置时间
+	 */
 	public void setUpTime(){
 		startDateTime.setText(initStartDateTime);
 		endDateTime.setText(initEndDateTime);
@@ -140,6 +183,11 @@ public class AgendaInfoActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * 
+	 * 确认按钮事件处理
+	 * @param view
+	 */
 	public void sure(View view){
 		Intent intent = new Intent();
 		intent = new Intent(AgendaInfoActivity.this, AgendaListActivity.class);
@@ -147,6 +195,11 @@ public class AgendaInfoActivity extends Activity {
 		AgendaInfoActivity.this.finish();
 	}
 	
+	/**
+	 * 
+	 * 返回按钮事件处理
+	 * @param view
+	 */
 	public void back(View view){
 		Intent intent = new Intent();
 		intent = new Intent(AgendaInfoActivity.this, AgendaListActivity.class);
@@ -154,12 +207,21 @@ public class AgendaInfoActivity extends Activity {
 		AgendaInfoActivity.this.finish();
 	}
 	
+	/**
+	 * 
+	 * 获得活动信息
+	 */
 	public void getAct(){
 		Intent intent= AgendaInfoActivity.this.getIntent(); 
 		act= (com.example.model.Activity)intent.getSerializableExtra("agenda");
 		setActivity(act);
 	}
 	
+	/**
+	 * 
+	 * 设置活动信息
+	 * @param activity
+	 */
 	private void setActivity(com.example.model.Activity activity) {
 		// TODO Auto-generated method stub
 		aName.setText(activity.getName());

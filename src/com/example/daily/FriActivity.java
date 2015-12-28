@@ -29,6 +29,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 
+/**
+ * 
+ * 星期五页面
+ */
 public class FriActivity extends Activity implements ActListView {
 	private Drawable  redCircle;
 	private Drawable  blueCircle;

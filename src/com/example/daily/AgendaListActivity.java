@@ -28,13 +28,22 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 日程列表页面
+ */
 public class AgendaListActivity extends Activity implements ActListView {
-	private PopupMenu popupMenu;  
-	private Menu menu; 
-	ListView list;
-	ActManage actManage;
-	List<com.example.model.Activity> myList;
-	
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
+	private Menu menu;
+	/**列表控件*/
+	private ListView list;
+	/**活动管理类*/
+	private ActManage actManage;
+	/**活动列表*/
+	private List<com.example.model.Activity> myList;
+	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -46,7 +55,13 @@ public class AgendaListActivity extends Activity implements ActListView {
 			loadList(myList);
 		}
 	};
-
+	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,10 +73,19 @@ public class AgendaListActivity extends Activity implements ActListView {
 		loadData();
 	}
 
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 	    popupMenu.show();  
 	}  
 	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		list = (ListView) findViewById(R.id.classListView);
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
@@ -69,6 +93,10 @@ public class AgendaListActivity extends Activity implements ActListView {
 	    setListListener();
 	}
 	
+	/**
+	 * 
+	 * 初始化菜单
+	 */
 	public void initialMenu(){
 		 //通过XML导入菜单栏
 	    MenuInflater menuInflater = getMenuInflater();  
@@ -96,6 +124,11 @@ public class AgendaListActivity extends Activity implements ActListView {
 	    });  
 	}
 	
+	/**
+	 * 
+	 * 加载列表
+	 * @param myList
+	 */
 	public void loadList(List<com.example.model.Activity> myList){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
@@ -120,52 +153,66 @@ public class AgendaListActivity extends Activity implements ActListView {
 	}
 	
 	//返回箭头
-		public void back(View view){
-			Intent intent = new Intent();
-			intent = new Intent(AgendaListActivity.this, CalendarActivity.class);
-			startActivity(intent);
-			AgendaListActivity.this.finish();
-		}
+	public void back(View view){
+		Intent intent = new Intent();
+		intent = new Intent(AgendaListActivity.this, CalendarActivity.class);
+		startActivity(intent);
+		AgendaListActivity.this.finish();
+	}
+	
+	/**
+	 * 
+	 * 设置监听器
+	 */
+	private void setListListener() {
+		list.setOnItemClickListener(new OnItemClickListener() {
 
-		private void setListListener() {
-			list.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO 自动生成的方法存根
+				Intent intent =new Intent();
+				intent.setClass(AgendaListActivity.this, AgendaInfoActivity.class);
+				intent.putExtra("index", id);
+				System.out.println(id);
+				startActivity(intent);
+			}
 
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					// TODO 自动生成的方法存根
-					Intent intent =new Intent();
-					intent.setClass(AgendaListActivity.this, AgendaInfoActivity.class);
-					intent.putExtra("index", id);
-					System.out.println(id);
-					startActivity(intent);
-				}
+		});
+	}
 
-			});
-		}
-
-		@Override
-		public void setActList(List<com.example.model.Activity> actList) {
-			// TODO Auto-generated method stub
-			
-		}
+	/*
+	 * 
+	 * 设置活动信息
+	 * @param actList 
+	 * @see com.example.view.ActListView#setActList(java.util.List)
+	 */
+	@Override
+	public void setActList(List<com.example.model.Activity> actList) {
+		// TODO Auto-generated method stub
 		
-		public void loadData(){
-			new Thread(){
-				public void run(){
-					Message msg = new Message();
-					Bundle bundle = new Bundle();
-					ArrayList list=new ArrayList();
-					SharedPreferences sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
-					String user = sp.getString("user", "");
-					User users = JSON.parseObject(user,User.class);
-					int uid=users.getUserId();
-					List<com.example.model.Activity> myList=actManage.showAgendByUserId(uid,0);
-					list.add(myList);
-					bundle.putParcelableArrayList("myList", list);
-					msg.setData(bundle);
-					handler.sendMessage(msg);
-				}
-			}.start();
-		}
+	}
+	
+	/**
+	 * 
+	 * 加载数据
+	 */
+	public void loadData(){
+		new Thread(){
+			public void run(){
+				Message msg = new Message();
+				Bundle bundle = new Bundle();
+				ArrayList list=new ArrayList();
+				SharedPreferences sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
+				String user = sp.getString("user", "");
+				User users = JSON.parseObject(user,User.class);
+				int uid=users.getUserId();
+				List<com.example.model.Activity> myList=actManage.showAgendByUserId(uid,0);
+				list.add(myList);
+				bundle.putParcelableArrayList("myList", list);
+				msg.setData(bundle);
+				handler.sendMessage(msg);
+			}
+		}.start();
+	}
 }

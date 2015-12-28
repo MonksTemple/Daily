@@ -34,25 +34,47 @@ import com.example.component.CustomViewPagerAdapter;
 import com.example.util.CalendarLunarUtil;
 import com.example.util.CustomDate;
 
+/**
+ * 
+ * 日历界面
+ */
 @SuppressWarnings("deprecation")
 public class CalendarActivity extends Activity implements CallBack{
+	/**图片*/
 	private ViewPager viewPager;
+	/**日历*/
 	private CalendarView[] views;
+	/**年份编辑框*/
 	private TextView showYearView;
+	/**月份编辑框*/
 	private TextView showMonthView;
+	/**周编辑框*/
 	private TextView showWeekView;
+	/**日历*/
 	private CalendarViewBuilder builder = new CalendarViewBuilder();
+	/**图片*/
 	private View mContentPager;
+	/**用户日期*/
 	private CustomDate mClickDate;
+	/**用户日期*/
 	private CustomDate lastDate;
-	//菜单栏
-	private PopupMenu popupMenu;  
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
 	private Menu menu;
+	/**Typeface*/
 	private Typeface typeface;
+	
 	Date dates=new Date();
 	
 	Calendar cal=Calendar.getInstance();
 
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,7 +88,10 @@ public class CalendarActivity extends Activity implements CallBack{
 	}
 	
 	
-	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	private void findViewbyId() {
 		viewPager = (ViewPager) this.findViewById(R.id.viewpager);
 		showMonthView = (TextView)this.findViewById(R.id.show_month_view);
@@ -81,6 +106,10 @@ public class CalendarActivity extends Activity implements CallBack{
 		setViewPager();
 	}
 
+	/**
+	 * 设置typeface
+	 * TODO
+	 */
 	private void setTypeface(){
 		typeface=Typeface.createFromAsset(this.getAssets(), "fonts/hwht.ttf");
 		showMonthView.setTypeface(typeface);
@@ -88,7 +117,10 @@ public class CalendarActivity extends Activity implements CallBack{
 		showWeekView.setTypeface(typeface);
 	}
 	
-
+	/**
+	 * 
+	 * 设置图片
+	 */
 	private void setViewPager() {
 		CustomViewPagerAdapter<CalendarView> viewPagerAdapter = new CustomViewPagerAdapter<CalendarView>(views);
 		viewPager.setAdapter(viewPagerAdapter);
@@ -96,26 +128,48 @@ public class CalendarActivity extends Activity implements CallBack{
 		viewPager.setOnPageChangeListener(new CalendarViewPagerLisenter(viewPagerAdapter));
 	}
 
+	/*
+	 * 
+	 * 结束页面 
+	 * @see android.app.Activity#onDestroy()
+	 */
+	@Override  
+	protected void onDestroy() {  
+	    super.onDestroy();  
+	}  
 
- @Override  
- protected void onDestroy() {  
-     super.onDestroy();  
- }  
 
-
-	
+	/**
+	 * 
+	 * 显示日期
+	 * @param year
+	 * @param month
+	 * @param week
+	 * @param lunar
+	 */
  
- public void setShowDateViewText(int year ,int month,String week,String lunar){
-	 showYearView.setText(year+"年");
-	 showMonthView.setText(month+"月");
-	 showWeekView.setText(week);
- }
+	 public void setShowDateViewText(int year ,int month,String week,String lunar){
+		 showYearView.setText(year+"年");
+		 showMonthView.setText(month+"月");
+		 showWeekView.setText(week);
+	 }
 
-
+	 /*
+	  * 
+	  * 测量行高
+	  * @param cellSpace 
+	  * @see com.example.component.CalendarView.CallBack#onMesureCellHeight(int)
+	  */
 	@Override
 	public void onMesureCellHeight(int cellSpace) {
 	}
 
+	/*
+	 * 
+	 * 点击日期事件
+	 * @param date 
+	 * @see com.example.component.CalendarView.CallBack#clickDate(com.example.util.CustomDate)
+	 */
 	@Override
 	public void clickDate(CustomDate date) {
 		mClickDate = date;
@@ -124,7 +178,12 @@ public class CalendarActivity extends Activity implements CallBack{
 		changeDate(date);
 	}
 
-	//事件响应
+	/*
+	 * 
+	 * 事件处理
+	 * @param date 
+	 * @see com.example.component.CalendarView.CallBack#changeDate(com.example.util.CustomDate)
+	 */
 	@Override
 	public void changeDate(CustomDate date) {
 		//得到农历
@@ -138,14 +197,23 @@ public class CalendarActivity extends Activity implements CallBack{
  
 	
 	DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-
-		@Override
-		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
-			// TODO Auto-generated method stub
-			CustomDate date=new CustomDate(year,monthOfYear+1,dayOfMonth);
-			builder.turnSpecialDays(date);
-		}
+	
+	/*
+	 * 
+	 * 设置日期
+	 * @param view
+	 * @param year
+	 * @param monthOfYear
+	 * @param dayOfMonth 
+	 * @see android.app.DatePickerDialog.OnDateSetListener#onDateSet(android.widget.DatePicker, int, int, int)
+	 */
+	@Override
+	public void onDateSet(DatePicker view, int year, int monthOfYear,
+			int dayOfMonth) {
+		// TODO Auto-generated method stub
+		CustomDate date=new CustomDate(year,monthOfYear+1,dayOfMonth);
+		builder.turnSpecialDays(date);
+	}
 	};
 
 	protected Dialog onCreateDialog(int id) {
@@ -159,7 +227,14 @@ public class CalendarActivity extends Activity implements CallBack{
 		return null;
 	}
 
+	
 	class changeDateListener implements OnClickListener{
+		/*
+		 * 
+		 * 点击事件处理
+		 * @param v 
+		 * @see android.view.View.OnClickListener#onClick(android.view.View)
+		 */
 		@Override
 		public void onClick(View v) {
 			// TODO 自动生成的方法存根
@@ -168,6 +243,10 @@ public class CalendarActivity extends Activity implements CallBack{
 
 	}
 	
+	/**
+	 * 
+	 * 初始化菜单
+	 */
 	public void initialMenu(){
 		popupMenu = new PopupMenu(this, findViewById(R.id.lines));  
 		menu = popupMenu.getMenu(); 
@@ -224,10 +303,20 @@ public class CalendarActivity extends Activity implements CallBack{
 		});  
 	}
 
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 		popupMenu.show();  
 	}
 	
+	/**
+	 * 
+	 * 确认事件处理
+	 * @param view
+	 */
 	public void clickSure(View view){
 		int week = cal.get(Calendar.DAY_OF_WEEK) - 1;
 		
@@ -240,9 +329,3 @@ public class CalendarActivity extends Activity implements CallBack{
 	}
 
 }  
-
-
-
-	
-
-

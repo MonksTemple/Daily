@@ -14,16 +14,32 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+/**
+ * 
+ * 课程组信息页面
+ */
 public class ClassInfoActivity extends Activity {
-	EditText className;
-	EditText createPerson;
-	EditText description;
-	Button sure;
-	ImageView lines;
-
-	private PopupMenu popupMenu;  
+	/**课程组名称编辑框*/
+	private EditText className;
+	/**创建人编辑框*/
+	private EditText createPerson;
+	/**课程组简介编辑框*/
+	private EditText description;
+	/**确认按钮*/
+	private Button sure;
+	/**图片*/
+	private ImageView lines;
+	/**弹出菜单*/
+	private PopupMenu popupMenu;
+	/**菜单*/
 	private Menu menu; 
 
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,10 +50,19 @@ public class ClassInfoActivity extends Activity {
 
 	}
 
+	/**
+	 * 
+	 * 弹出菜单
+	 * @param v
+	 */
 	public void popupmenu(View v) {  
 		popupMenu.show();  
 	}  
 
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		className=(EditText) findViewById(R.id.cname);
 		createPerson=(EditText) findViewById(R.id.createname);
@@ -52,6 +77,10 @@ public class ClassInfoActivity extends Activity {
 		menu = popupMenu.getMenu(); 
 	}
 
+	/**
+	 * 
+	 * 初始化菜单
+	 */
 	public void initialMenu(){
 		//通过XML导入菜单栏
 		MenuInflater menuInflater = getMenuInflater();  
@@ -83,6 +112,11 @@ public class ClassInfoActivity extends Activity {
 		});  
 	}
 
+	/**
+	 * 
+	 * 返回事件处理
+	 * @param view
+	 */
 	public void clickBack(View view){	
 		//界面跳转
 		Intent intent = new Intent();
@@ -91,7 +125,11 @@ public class ClassInfoActivity extends Activity {
 		ClassInfoActivity.this.finish();
 	}
 
-	//点击提交信息按钮
+	/**
+	 * 
+	 * 确认事件处理
+	 * @param view
+	 */
 	public void clickButton(View view){
 		//界面跳转
 		Intent intent = new Intent();

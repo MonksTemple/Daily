@@ -20,14 +20,22 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * 
+ * 创建团队事件处理
+ */
 public class TeamCreateActivity extends Activity implements TeamView{
+	/**团队名称编辑框*/
 	private EditText teamName;
+	/**团队简介编辑框*/
 	private EditText teamInfo;
+	/**团队名称字符串*/
 	private String teamNameText;
+	/**团队简介字符串*/
 	private String teamInfoText;
-	
+	/**团队管理类对象*/
 	private TeamManage teamManage;
-	
+	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -47,6 +55,12 @@ public class TeamCreateActivity extends Activity implements TeamView{
 		}
 	};
 	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,7 +73,11 @@ public class TeamCreateActivity extends Activity implements TeamView{
 		teamManage = new TeamManage(this);
 	}
 	
-	//提交按钮
+	/**
+	 * 
+	 * 确认按钮事件处理
+	 * @param view
+	 */
 	public void sure(View view){
 		//获取信息
 		teamNameText = teamName.getText().toString();
@@ -92,7 +110,11 @@ public class TeamCreateActivity extends Activity implements TeamView{
 		}	
 	}
 	
-	//返回箭头
+	/**
+	 * 
+	 * 返回按钮事件处理
+	 * @param view
+	 */
 	public void back(View view){
 		Intent intent = new Intent();
 		intent = new Intent(TeamCreateActivity.this, TeamListActivity.class);
@@ -100,7 +122,12 @@ public class TeamCreateActivity extends Activity implements TeamView{
 		TeamCreateActivity.this.finish();
 	}
 	
-	
+	/*
+	 * 
+	 * 获得团队信息
+	 * @return 
+	 * @see com.example.view.TeamView#getTeam()
+	 */
 	@Override
 	public Team getTeam() {
 		Team team = new Team();
@@ -115,7 +142,13 @@ public class TeamCreateActivity extends Activity implements TeamView{
 		
 		return team;
 	}
-
+	
+	/*
+	 * 
+	 * 设置团队信息
+	 * @param team 
+	 * @see com.example.view.TeamView#setTeam(com.example.model.Team)
+	 */
 	@Override
 	public void setTeam(Team team) {
 		// TODO Auto-generated method stub

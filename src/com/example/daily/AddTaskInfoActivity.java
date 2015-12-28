@@ -7,8 +7,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+/**
+ * 
+ * 添加任务信息页面
+ */
 public class AddTaskInfoActivity extends Activity {
-
+	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -16,7 +26,11 @@ public class AddTaskInfoActivity extends Activity {
 	}
 	
 	
-	//点击确认按钮
+	/**
+	 * 
+	 * 确认按钮事件处理
+	 * @param view
+	 */
 	void sure(View view){
 		Intent intent1 = new Intent();
 		intent1 = new Intent(AddTaskInfoActivity.this, TastListActivity.class);
@@ -24,7 +38,10 @@ public class AddTaskInfoActivity extends Activity {
 		AddTaskInfoActivity.this.finish();
 	}
 	
-	//点击返回箭头
+	/**
+	 * 
+	 * 返回按钮事件处理
+	 */
 	void back(){
 		Intent intent1 = new Intent();
 		intent1 = new Intent(AddTaskInfoActivity.this, TastListActivity.class);

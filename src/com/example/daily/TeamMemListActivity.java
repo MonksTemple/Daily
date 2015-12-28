@@ -9,8 +9,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+/**
+ * 
+ * 团队成员列表页面
+ */
 public class TeamMemListActivity extends Activity {
-	ListView list;
+	/**列表控件*/
+	private ListView list;
+	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -20,10 +32,18 @@ public class TeamMemListActivity extends Activity {
 		loadList();
 	}
 	
+	/**
+	 * 
+	 * 初始化界面控件
+	 */
 	public void initial(){
 		list= (ListView) findViewById(R.id.teamMemListView); ;
 	}
 	
+	/**
+	 * 
+	 * 加载列表
+	 */
 	public void loadList(){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
@@ -43,5 +63,4 @@ public class TeamMemListActivity extends Activity {
 		 
 		list.setAdapter(mSchedule); 
 	}
-
 }

@@ -31,17 +31,20 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 
 /**
  * 
- * TODO
+ * 团队列表界面
  */
 public class TeamListActivity extends Activity implements TeamListView{
-
+	/**弹出菜单*/
 	private PopupMenu popupMenu;  
+	/**菜单*/
 	private Menu menu;
+	/**列表控件*/
 	private ListView list ;
+	/**存储团队信息的列表*/
 	private List<Team> teamList ;
-	
+	/**团队管理类对象*/
 	private TeamManage teamManage;
-	
+	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -60,7 +63,7 @@ public class TeamListActivity extends Activity implements TeamListView{
 	
 	/*
 	 * 
-	 * TODO
+	 * 界面生成函数
 	 * @param savedInstanceState 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -77,7 +80,7 @@ public class TeamListActivity extends Activity implements TeamListView{
 	}
 	/**
 	 * 
-	 * TODO
+	 * 弹出菜单事件处理
 	 * @param v
 	 */
 	public void popupmenu(View v) {  

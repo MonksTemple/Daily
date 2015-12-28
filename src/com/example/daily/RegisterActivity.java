@@ -15,15 +15,24 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * 
+ * 注册界面
+ */
 public class RegisterActivity extends Activity implements UserView{
+	/**id编辑框*/
 	private EditText idText;
+	/**姓名编辑框*/
 	private EditText nameText;
+	/**密码编辑框*/
 	private EditText pwdText;
+	/**确认密码编辑框*/
 	private EditText pwd2Text;
+	/**电话编辑框*/
 	private EditText phoneText;
-	
+	/**用户管理类对象*/
 	private UserManage userManage;
-	
+	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -42,7 +51,13 @@ public class RegisterActivity extends Activity implements UserView{
 			}
 		}
 	};
-
+	
+	/*
+	 * 
+	 * 界面生成函数
+	 * @param savedInstanceState 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,6 +72,11 @@ public class RegisterActivity extends Activity implements UserView{
 		userManage = new UserManage(this);
 	}
 	
+	/**
+	 * 
+	 * 注册按钮事件处理
+	 * @param view
+	 */
 	public void register(View view){
 		if(idText.getText().toString() == null || idText.getText().toString().length() <= 0 
 			|| pwdText.getText().toString() == null || pwdText.getText().toString().length() <= 0 
@@ -91,6 +111,11 @@ public class RegisterActivity extends Activity implements UserView{
 		}
 	}
 	
+	/**
+	 * 
+	 * 跳转事件处理
+	 * @param view
+	 */
 	public void back(View view){
 		//注册界面跳转
 		Intent intent = new Intent();
@@ -99,6 +124,12 @@ public class RegisterActivity extends Activity implements UserView{
 		this.finish();
 	}
 
+	/*
+	 * 
+	 * 获得用户信息
+	 * @return 
+	 * @see com.example.view.UserView#getUser()
+	 */
 	@Override
 	public User getUser() {
 		User user = new User();
@@ -108,7 +139,13 @@ public class RegisterActivity extends Activity implements UserView{
 		user.setPhoneno(phoneText.getText().toString());
 		return user;
 	}
-
+	
+	/*
+	 * 
+	 * 设置用户信息
+	 * @param user 
+	 * @see com.example.view.UserView#setUser(com.example.model.User)
+	 */
 	@Override
 	public void setUser(User user) {
 		
