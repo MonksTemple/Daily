@@ -80,6 +80,20 @@ public class ActListActivity extends ListActivity implements ActListView {
 		loadData();
 		
 	}
+	
+	
+	/*
+	 * 重新调用该界面
+	 * @see android.app.Activity#onResume()
+	 */
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		loadData();
+		super.onResume();
+	}
+
+
 
 	/**
 	 * 

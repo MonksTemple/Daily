@@ -1,11 +1,15 @@
 package com.example.daily;
 
+import com.example.presenter.ActManage;
 import com.example.util.DateTimePickDialogUtil;
 import com.example.util.DateUtil;
+import com.example.view.ActView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +25,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
  * 
  * 日程信息页面
  */
-public class AgendaInfoActivity extends Activity {
+public class AgendaInfoActivity extends Activity implements ActView{
 	/**日程开始时间编辑框*/
 	private EditText startDateTime;
 	/**日程结束时间编辑框*/
@@ -50,6 +54,30 @@ public class AgendaInfoActivity extends Activity {
 	/**活动类对象*/
 	com.example.model.Activity act;
 	
+	/**活动管理类对象*/
+	private ActManage actManage;
+	
+	/**处理类对象*/
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			Bundle bundle  = msg.getData();
+			String resp=bundle.getString("resp");
+			if(resp.equals("true")){
+				Toast.makeText(AgendaInfoActivity.this, "修改成功",  
+						Toast.LENGTH_SHORT).show(); 
+				finish();
+			}else{
+				Toast.makeText(AgendaInfoActivity.this, "修改失败",  
+						Toast.LENGTH_SHORT).show();  
+			}
+		}
+	};
+
+	
+	
 	/*
 	 * 
 	 * 界面生成函数
@@ -66,6 +94,7 @@ public class AgendaInfoActivity extends Activity {
 		initialMenu();
 		//设置时间选择控件
 		setUpTime();
+		actManage=new ActManage(this);
 		getAct();
 	}
 	
@@ -189,10 +218,16 @@ public class AgendaInfoActivity extends Activity {
 	 * @param view
 	 */
 	public void sure(View view){
-		Intent intent = new Intent();
-		intent = new Intent(AgendaInfoActivity.this, AgendaListActivity.class);
-		startActivity(intent);
-		AgendaInfoActivity.this.finish();
+		new Thread(){
+			public void run(){
+				Message msg = new Message();
+				Bundle bundle = new Bundle();
+				String resp=actManage.modifyActivity(getActivity());
+				bundle.putString("resp", resp);
+				msg.setData(bundle);
+				handler.sendMessage(msg);
+			}
+		}.start();
 	}
 	
 	/**
@@ -214,7 +249,7 @@ public class AgendaInfoActivity extends Activity {
 	public void getAct(){
 		Intent intent= AgendaInfoActivity.this.getIntent(); 
 		act= (com.example.model.Activity)intent.getSerializableExtra("agenda");
-		setActivity(act);
+		setActivitys(act);
 	}
 	
 	/**
@@ -222,7 +257,7 @@ public class AgendaInfoActivity extends Activity {
 	 * 设置活动信息
 	 * @param activity
 	 */
-	private void setActivity(com.example.model.Activity activity) {
+	private void setActivitys(com.example.model.Activity activity) {
 		// TODO Auto-generated method stub
 		aName.setText(activity.getName());
 		aInfo.setText(activity.getDescription());
@@ -230,5 +265,23 @@ public class AgendaInfoActivity extends Activity {
 		startDateTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));
 		endDateTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));
 		remindDateTime.setText(DateUtil.getStringFromDate(activity.getRemindTime()));
+	}
+
+	@Override
+	public com.example.model.Activity getActivity() {
+		// TODO Auto-generated method stub
+		act.setName(aName.getText().toString());
+		act.setDescription(aInfo.getText().toString());
+		act.setPlace(place.getText().toString());
+		act.setEndTime(DateUtil.getDateFromString(endDateTime.getText().toString()));
+		act.setStartTime(DateUtil.getDateFromString(startDateTime.getText().toString()));
+		act.setRemindTime(DateUtil.getDateFromString(remindDateTime.getText().toString()));
+		return act;
+	}
+
+	@Override
+	public void setActivity(com.example.model.Activity activity) {
+		// TODO Auto-generated method stub
+		
 	}
 }

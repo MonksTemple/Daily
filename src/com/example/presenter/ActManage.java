@@ -63,8 +63,12 @@ public class ActManage {
 	 * 
 	 * 修改活动
 	 */
-	public void modifyActivity(){
-
+	public String modifyActivity(Activity act){
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "22");
+		map.put("activity", JSON.toJSONString(act));
+		String resp = ConnectUtil.getResponse(map);
+		return resp;
 	}
 
 	/**
