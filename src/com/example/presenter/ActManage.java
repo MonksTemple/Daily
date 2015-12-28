@@ -23,34 +23,65 @@ import com.example.util.DateUtil;
 import com.example.view.ActListView;
 import com.example.view.ActView;
 
+/**
+ * 
+ * 活动操作类
+ */
 public class ActManage {
+	/**活动视图接口*/
 	private ActView actView;
+	/**活动列表视图接口*/
 	private ActListView actListView;
 
+	/**
+	 * 
+	 * 构造函数
+	 * @param actView
+	 */
 	public ActManage(ActView actView){
 		this.actView=actView;
 	}
 
+	/**
+	 * 
+	 *构造函数
+	 * @param actListView
+	 */
 	public ActManage(ActListView actListView){
 		this.actListView=actListView;
 	}
 
 	/**
-	 * 活动type：2
+	 * 
+	 * 添加活动
 	 */
 	public void addActivity(){
 
 	}
 
+	/**
+	 * 
+	 * 修改活动
+	 */
 	public void modifyActivity(){
 
 	}
 
+	/**
+	 * 
+	 * 删除团队--根据指定的id
+	 * @param aId
+	 */
 	public void deleteActivity(int aId){
 
 	}
 
 
+	/**
+	 * 
+	 * 得到所有的团队的活动
+	 * @return 团队活动列表
+	 */
 	public Set<Activity> showActivitiesByTeamId() {
 		Set<Activity> activitys = null;
 
@@ -59,7 +90,7 @@ public class ActManage {
 	}
 
 	/**
-	 * @function 根据当前用户的id号得到需要的日程类型列表
+	 * 根据当前用户的id号得到需要的日程类型列表
 	 * @param uid
 	 * @param type 需要获得的事件类型  Type为0的时候得到所有的列表，Type为1的时候为团队活动，type为2的时候为任务，type3 是个人活动，type4是单独的活动	
 	 * @return 日程列表
@@ -78,9 +109,9 @@ public class ActManage {
 	
 
 	/**
-	 * @function 获得 需要类型的活动列表
+	 * 获得 需要类型的活动列表
 	 * @param type 需要获得的事件类型  Type为0的时候得到所有的列表，Type为1的时候为团队活动，type为2的时候为任务，type3 是个人活动，type4是单独的活动	
-	 * @return List<Activity>
+	 * @return 活动列表
 	 */
 	public List<Activity> showIsolateActivities(int type) {
 		List<Activity> activitys = new ArrayList();
@@ -102,7 +133,7 @@ public class ActManage {
 	
 
 	/**
-	 * 
+	 * 从Json中解析出Activity类
 	 * @param resp 传输过来的Json文件字符串
 	 * @param myType activity的类型 活动类型,Type为0的时候得到所有的列表，Type为1的时候为团队活动，type为2的时候为任务，type3 是个人活动，type4是单独的活动	
 	 * @return 对应类型的activity对象列表

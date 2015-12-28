@@ -14,9 +14,20 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+/**
+ * 
+ * 连接服务器辅助类
+ */
 public class ConnectUtil {
-	private static String URL = "http://192.168.23.1:8080/Tell/TellServlet";
+	/**服务器的地址*/
+	private static String URL = "http://192.168.191.1:8080/Tell/TellServlet";
 	
+	/**
+	 * 
+	 * 连接服务器并发送请求
+	 * @param map
+	 * @return 返回的请求数据
+	 */
 	public static String getResponse(Map<String, String> map){
 		HttpClient client = new DefaultHttpClient();
 		List<NameValuePair> list = new ArrayList<NameValuePair>();

@@ -23,23 +23,39 @@ import com.example.util.DateUtil;
 import com.example.view.TeamListView;
 import com.example.view.TeamView;
 
-
+/**
+ * 
+ * 团队处理类
+ */
 public class TeamManage {
-	
+	/**团队视图接口*/
 	private TeamView teamView;
+	/**团队列表视图接口*/
 	private TeamListView teamListView;
 	
+	/**
+	 * 
+	 * 构造函数
+	 * @param teamView
+	 */
 	public TeamManage(TeamView teamView){
 		this.teamView = teamView;
 	}
 	
+	/**
+	 * 
+	 * 构造函数
+	 * @param teamListView
+	 */
 	public TeamManage(TeamListView teamListView){
 		this.teamListView = teamListView;
 	}
 	
-	//团队类型——1
-	
-	//11
+	/**
+	 * 
+	 * 创建团队
+	 * @return true--创建成功，false--创建失败
+	 */
 	public Boolean createTeam(){
 		Team team = teamView.getTeam();
 		String teamString = JSON.toJSONString(team);
@@ -53,12 +69,22 @@ public class TeamManage {
 		return true;
 	}
 	
-	//12
+	/**
+	 * 
+	 * 添加团队成员--根据指定的团队id和用户id
+	 * @param tId
+	 * @param userId
+	 * @return true--添加成功，false--添加失败
+	 */
 	public Boolean addMember(int tId,int userId){
 		return null;
 	}
 	
-	//13
+	/**
+	 * 
+	 * 修改团队信息
+	 * @return true--修改成功，false--修改失败
+	 */
 	public Boolean modifyInfo(){
 		Team team = teamView.getTeam();
 		String teamString = JSON.toJSONString(team);
@@ -72,13 +98,22 @@ public class TeamManage {
 		return true;
 	}
 	
-	//14
+	/**
+	 * 
+	 * 删除团队--根据指定的id
+	 * @param tId
+	 * @return true--删除成功，false--删除失败
+	 */
 	public Boolean deleteTeam(int tId){
 		
 		return null;
 	}
 	
-	//15——查看团队列表
+	/**
+	 * 
+	 * 查看团队列表
+	 * @return 团队列表
+	 */
 	public List<Team> ShowTeamList(){ 
 		List<Team> teams = new ArrayList<Team>();
 		Map<String,String> map = new HashMap<String,String>();
@@ -113,13 +148,24 @@ public class TeamManage {
 		return teams;
 	}
 	
-	//16
+	/**
+	 * 
+	 * 删除团队成员---根据指定的团队id和用户id
+	 * @param tId
+	 * @param userId
+	 * @return true--删除成功，false--删除失败
+	 */
 	public Boolean deleteMember(int tId,int userId){
 		
 		return null;
 	}
 	
-	//17
+	/**
+	 * 
+	 * 显示团队成员列表--根据指定的团队id
+	 * @param tId
+	 * @return 团队成员列表
+	 */
 	public Set<User> showMemberList(int tId){
 		
 		return null;
