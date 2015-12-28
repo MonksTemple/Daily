@@ -27,14 +27,29 @@ import com.example.model.User;
 import com.example.util.ConnectUtil;
 import com.example.view.UserView;
 
+/**
+ * 
+ * 用户类处理
+ */
 public class UserManage {
 	
+	/**用户视图接口*/
 	private UserView userView;
 	
+	/**
+	 * 
+	 * 构造函数
+	 * @param tempUserView
+	 */
 	public UserManage(UserView tempUserView){
 		userView = tempUserView;
 	}
 	
+	/**
+	 * 
+	 * 注册
+	 * @return  true--登陆成功，false--登陆失败
+	 */
 	public boolean register() {
 		User user = userView.getUser();
 		String userString = JSON.toJSONString(user);
@@ -48,6 +63,11 @@ public class UserManage {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * 注册
+	 * @return 用户后的信息
+	 */
 	public String login(){
 		User user = userView.getUser();
 		String userString = JSON.toJSONString(user);
@@ -58,11 +78,22 @@ public class UserManage {
 		return resp;
 	}
 	
+	/**
+	 * 
+	 * 用户注销
+	 * @param userId
+	 * @return true--注销成功，false--注销失败
+	 */
 	public boolean logout(int userId){
 		
 		return true;
 	}
 	
+	/**
+	 * 
+	 * 修改用户信息
+	 * @return true--修改成功，false--修改失败
+	 */
 	public boolean modify(){
 		User user = userView.getUser();
 		String userString = JSON.toJSONString(user);
