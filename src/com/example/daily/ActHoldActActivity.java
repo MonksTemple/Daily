@@ -22,10 +22,7 @@ public class ActHoldActActivity extends Activity  {
 	}
 	
 	public void back(View view){
-		Intent intent = new Intent();
-		intent = new Intent(ActHoldActActivity.this, ActListActivity.class);
-		startActivity(intent);
-		ActHoldActActivity.this.finish();
+		finish();
 	}
 	
 }

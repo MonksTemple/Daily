@@ -98,7 +98,6 @@ public class MainActivity extends Activity {
 
 		
 		pager.setAdapter(new MyViewPagerAdapter(viewContainter,titleContainer));
-		pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
 	}
 
 
@@ -132,7 +131,7 @@ public class MainActivity extends Activity {
 				case R.id.act:  
 					type=1;
 					pager.getAdapter().notifyDataSetChanged();
-					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
+					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type,pager.getCurrentItem()));
 					pager.getAdapter().notifyDataSetChanged();
 					pager.childDrawableStateChanged(viewContainter.get(0));
 					pager.getAdapter().notifyDataSetChanged();
@@ -141,19 +140,19 @@ public class MainActivity extends Activity {
 					break;  
 				case R.id.task:  
 					type=2;
-					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
+					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type,pager.getCurrentItem()));
 					Toast.makeText(MainActivity.this, "任务列表",  
 							Toast.LENGTH_SHORT).show(); 
 					break;   
 				case R.id.agenda:  
 					type=3;
-					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
+					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type,pager.getCurrentItem()));
 					Toast.makeText(MainActivity.this, "日程列表",  
 							Toast.LENGTH_SHORT).show();  
 					break;  
 				case R.id.person:  
 					type=4;
-					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type));
+					pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type,pager.getCurrentItem()));
 					Toast.makeText(MainActivity.this, "单独列表",  
 							Toast.LENGTH_SHORT).show();  
 					break; 
@@ -184,6 +183,7 @@ public class MainActivity extends Activity {
 		date=(Date) intent.getSerializableExtra("date");
 		weekDay=DateUtil.getWeekDayFromDate(date);
 		pager.setCurrentItem(weekDay);
+		pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer,date,type,pager.getCurrentItem()));
 	}
 }
 
@@ -241,11 +241,12 @@ class MyOnPageChangeListener implements OnPageChangeListener{
 	int type;
 	int currentPage;
 
-	public MyOnPageChangeListener(LocalActivityManager mactivityManager, ArrayList<String> titleContainer,Date date,int type){
+	public MyOnPageChangeListener(LocalActivityManager mactivityManager, ArrayList<String> titleContainer,Date date,int type,int currentPage){
 		this.mactivityManager=mactivityManager;
 		this.titleContainer=titleContainer;
 		this.date=date;
 		this.type=type;
+		this.currentPage=currentPage;
 	}
 
 	@Override
@@ -275,43 +276,50 @@ class MyOnPageChangeListener implements OnPageChangeListener{
     private void loadCurActivity(int arg0){  
         Activity curActivity = mactivityManager.getActivity(titleContainer.get(arg0));  
         switch(arg0){  
-        case 0:  
+        case 0: 
+        	getCudate(arg0);
         	currentPage=0;
             if(curActivity != null && curActivity instanceof MondayActivity){  
                 ((MondayActivity)curActivity).loadData(date,type);;  
             }  
             break;  
         case 1:  
+        	getCudate(arg0);
         	currentPage=1;
         	  if(curActivity != null && curActivity instanceof TuesdayActivity){  
                   ((TuesdayActivity)curActivity).loadData(date,type);;  
               }  
               break;   
         case 2:  
+        	getCudate(arg0);
         	currentPage=2;
       	  if(curActivity != null && curActivity instanceof WedActivity){  
                 ((WedActivity)curActivity).loadData(date,type);;  
             }  
             break;   
         case 3:  
+        	getCudate(arg0);
         	currentPage=3;
       	  if(curActivity != null && curActivity instanceof ThurActivity){  
                 ((ThurActivity)curActivity).loadData(date,type);;  
             }  
             break; 
-        case 4:  
+        case 4: 
+        	getCudate(arg0);
         	currentPage=4;
       	  if(curActivity != null && curActivity instanceof FriActivity){  
                 ((FriActivity)curActivity).loadData(date,type);;  
             }  
             break;   
         case 5:  
+        	getCudate(arg0);
         	currentPage=5;
       	  if(curActivity != null && curActivity instanceof SatActivity){  
                 ((SatActivity)curActivity).loadData(date,type);;  
             }  
             break; 
         case 6:  
+        	getCudate(arg0);
         	currentPage=6;
       	  if(curActivity != null && curActivity instanceof SunActivity){  
                 ((SunActivity)curActivity).loadData(date,type);;  
@@ -321,4 +329,10 @@ class MyOnPageChangeListener implements OnPageChangeListener{
         }  
     }  
 
+    private void getCudate(int arg0){
+    	if(currentPage<arg0)
+    		date=DateUtil.getForword(date, 1);
+    	else
+    		date=DateUtil.getBackday(date, 1);
+    }
 }
