@@ -37,7 +37,7 @@ public class DateUtil {
 
 		return days;
 	}
-	
+
 	public static int getYear() {
 		return Calendar.getInstance().get(Calendar.YEAR);
 	}
@@ -61,7 +61,7 @@ public class DateUtil {
 		return Calendar.getInstance().get(Calendar.MINUTE);
 	}
 	public static CustomDate getNextSunday() {
-		
+
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, 7 - getWeekDay()+1);
 		CustomDate date = new CustomDate(c.get(Calendar.YEAR),
@@ -92,7 +92,7 @@ public class DateUtil {
 		}
 		return week_index;
 	}
-	
+
 	public static int getWeekDayFromDate(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -116,19 +116,19 @@ public class DateUtil {
 		}
 		return date;
 	}
-	
+
 	public static boolean isToday(CustomDate date){
 		return(date.year == DateUtil.getYear() &&
 				date.month == DateUtil.getMonth() 
 				&& date.day == DateUtil.getCurrentMonthDay());
 	}
-	
+
 	public static boolean isCurrentMonth(CustomDate date){
 		return(date.year == DateUtil.getYear() &&
 				date.month == DateUtil.getMonth());
 	}
-	
-	
+
+
 	@SuppressLint("SimpleDateFormat") 
 	public static String getStringFromDate(Date date){
 		String dateString="";
@@ -136,17 +136,17 @@ public class DateUtil {
 		dateString=sdf.format(date);
 		return dateString;
 	}
-	
+
 	public static Date getDateFromString(String dateString){
 		//System.out.println(dateString);
 		String datestring=StringUtil.getString(dateString);
 		if(datestring.equals(""))
 			return new Date();
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
 		Date date = new Date();
 		try {
-		//	System.out.println(dateString);
+			//	System.out.println(dateString);
 			date = sdf.parse(dateString.toString().trim());
 		} catch (ParseException e) {
 			// TODO 自动生成的 catch 块
@@ -154,8 +154,8 @@ public class DateUtil {
 		}
 		return date;
 	}
-	
-	
+
+
 	public static String changeDateFromString(String dateString){
 		String datestring=StringUtil.getString(dateString);
 		if(datestring.equals(""))
@@ -171,31 +171,33 @@ public class DateUtil {
 		}
 		return sdf1.format(date);
 	}
-	
+
 	public static boolean compareDates(Date date1,Date date2){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String d1=sdf.format(date1);
 		String d2=sdf.format(date2);
 		return d1.equals(d2);
 	}
-	
+
 	/**
 	 * 得到前一天
 	 * @param date 传入的日期
 	 * @return
 	 */
-	public static Date getYesterday(Date date){
-		date.setDate(date.getDate()-1);
+	public static Date getBackday(Date date,int n){
+		for(int i=0;i<n;i++)
+			date.setDate(date.getDate()-1);
 		return date;
 	}
-	
+
 	/**
 	 * 得到明天的日期
 	 * @param date
 	 * @return
 	 */
-	public static Date getTomm(Date date){
-		date.setDate(date.getDate()+1);
+	public static Date getForword(Date date,int n){
+		for(int i=0;i<n;i++)
+			date.setDate(date.getDate()+1);
 		return date;
 	}
 

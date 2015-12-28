@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.component.ActLvAdapter;
 import com.example.model.Activity;
+import com.example.model.Team;
 import com.example.presenter.ActManage;
 import com.example.util.DataUtil;
 import com.example.view.ActListView;
@@ -31,9 +32,11 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 public class ActListActivity extends ListActivity implements ActListView {
 	private PopupMenu popupMenu;  
 	private Menu menu; 
-	ListView list;
-	ActManage actManage;
-	List<Activity> myList;
+	private ListView list;
+	private ActManage actManage;
+	private List<Activity> myList;
+	
+	private Team currentTeam;
 	
 	private Handler handler = new Handler(){
 		@Override
@@ -56,7 +59,8 @@ public class ActListActivity extends ListActivity implements ActListView {
 		initial();
 		//初始化菜单栏
 		initialMenu();
-		actManage=new ActManage(this);
+		actManage = new ActManage(this);
+		//getTeamInfo();
 		//加载列表
 		loadData();
 		
@@ -122,17 +126,19 @@ public class ActListActivity extends ListActivity implements ActListView {
 	public void loadList(List<com.example.model.Activity> alist){	
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
 		for(com.example.model.Activity act:alist){
-			String text=act.getDescription();
-			//限制text的长度
-			if(text.length()>DataUtil.TEXTLENTH){
-				text=text.substring(0,DataUtil.TEXTLENTH);
-				text+="...";
-			}
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("ItemTitle", act.getName());  
-			map.put("ItemText", text); 
-			map.put("pic", R.drawable.add);
-			mylist.add(map);
+			//if(act.getTeam().gettId() == currentTeam.gettId()){
+				String text=act.getDescription();
+				//限制text的长度
+				if(text.length()>DataUtil.TEXTLENTH){
+					text=text.substring(0,DataUtil.TEXTLENTH);
+					text+="...";
+				}
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("ItemTitle", act.getName());  
+				map.put("ItemText", text); 
+				map.put("pic", R.drawable.add);
+				mylist.add(map);
+			//}
 		};
 		
 		ActLvAdapter  mSchedule = new ActLvAdapter(this,  
@@ -142,6 +148,11 @@ public class ActListActivity extends ListActivity implements ActListView {
 				new int[] {R.id.ItemTitle,R.id.ItemText,R.id.addC},ActListActivity.this);  
 
 		list.setAdapter(mSchedule); 
+	}
+	
+	public void getTeamInfo(){
+		Intent intent = ActListActivity.this.getIntent(); 
+		currentTeam = (Team)intent.getSerializableExtra("team");
 	}
 	
 	@Override

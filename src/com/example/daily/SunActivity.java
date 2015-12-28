@@ -8,6 +8,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSON;
 import com.example.model.User;
 import com.example.presenter.ActManage;
+import com.example.util.DateUtil;
 import com.example.view.ActListView;
 
 import android.app.Activity;
@@ -35,6 +36,7 @@ public class SunActivity extends Activity implements ActListView {
 	private Drawable  orangeCircle;
 
 	ListView list;
+	Date curDate;
 	
 	ActManage actManage;
 	List<com.example.model.Activity> myList;
@@ -47,6 +49,7 @@ public class SunActivity extends Activity implements ActListView {
 			Bundle bundle  = msg.getData();
 			ArrayList list = bundle.getParcelableArrayList("myList");
 			myList=(List<com.example.model.Activity>) list.get(0);
+			curDate=(Date) list.get(1);
 			loadList(myList);
 		}
 	};
@@ -64,6 +67,9 @@ public class SunActivity extends Activity implements ActListView {
 		setOnListListener();
 	}
 
+	/**
+	 * 
+	 */
 	public void initial(){
 		redCircle= this.getResources().getDrawable(R.drawable.redc);
 		blueCircle= this.getResources().getDrawable(R.drawable.bluec);
@@ -76,6 +82,7 @@ public class SunActivity extends Activity implements ActListView {
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
 		
 		for(com.example.model.Activity act:alist){
+			if(DateUtil.compareDates(act.getEndTime(), curDate)){
 			HashMap<String, Object> map1 = new HashMap<String, Object>(); 
 			map1.put("ItemTitle", act.getName());
 			map1.put("ItemText", act.getDescription());
@@ -95,6 +102,7 @@ public class SunActivity extends Activity implements ActListView {
 			}
 			
 			mylist.add(map1);
+			}
 		}
 		
 		SimpleAdapter mSchedule = new SimpleAdapter(this,  
@@ -135,7 +143,7 @@ public class SunActivity extends Activity implements ActListView {
 
 				Intent intent =new Intent();
 				intent.setClass(SunActivity.this, AgendaInfoActivity.class);
-				intent.putExtra("index", id);
+				intent.putExtra("agenda", myList.get((int) id));
 				System.out.println(id);
 				startActivity(intent);
 			}
@@ -165,8 +173,9 @@ public class SunActivity extends Activity implements ActListView {
 				String user = sp.getString("user", "");
 				User users = JSON.parseObject(user,User.class);
 				int uid=users.getUserId();
-				myList=actManage.showAgendByUserId(uid,type);						
+				myList=actManage.showAgendByUserId(uid,type);	
 				list.add(myList);
+				list.add(date);
 				bundle.putParcelableArrayList("myList", list);
 				msg.setData(bundle);
 				handler.sendMessage(msg);
