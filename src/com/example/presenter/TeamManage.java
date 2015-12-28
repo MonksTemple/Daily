@@ -98,6 +98,7 @@ public class TeamManage {
 					//type为1的时候为团队
 					if(type == 1){
 						Team tempTeam = new Team();
+						tempTeam.setCreator(JSON.parseObject(oj.getString("creator"), User.class));
 						tempTeam.settId(oj.getInt("tId"));
 						tempTeam.setName(oj.getString("name"));
 						tempTeam.settype(1);
