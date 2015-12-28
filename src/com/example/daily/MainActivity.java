@@ -1,7 +1,10 @@
 package com.example.daily;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import com.example.util.DateUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -35,6 +38,7 @@ public class MainActivity extends Activity {
 	//菜单栏
 	private PopupMenu popupMenu;  
 	private Menu menu;
+	Date date;
 
 	@SuppressLint("ResourceAsColor")
 	@Override
@@ -47,6 +51,8 @@ public class MainActivity extends Activity {
 		//初始化title的值
 		initialTitile();
 		initialMenu();
+		//设置当前显示的页面
+		getDate();
 	}
 
 	//初始化title的值
@@ -88,7 +94,7 @@ public class MainActivity extends Activity {
 		viewContainter.add(view6);
 		viewContainter.add(view7);
 
-		pager.setCurrentItem(3);
+		
 		pager.setAdapter(new MyViewPagerAdapter(viewContainter,titleContainer));
 		pager.setOnPageChangeListener(new MyOnPageChangeListener(mactivityManager,titleContainer));
 	}
@@ -154,6 +160,13 @@ public class MainActivity extends Activity {
 		MainActivity.this.finish();
 	}
 
+	//设置当前显示的页面
+	public void getDate(){
+		Intent intent=getIntent();
+		date=(Date) intent.getSerializableExtra("date");
+		int weekDay=DateUtil.getWeekDayFromDate(date);
+		pager.setCurrentItem(weekDay);
+	}
 }
 
 
@@ -214,21 +227,20 @@ class MyOnPageChangeListener implements OnPageChangeListener{
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		//         Log.d(TAG, "--------changed:" + arg0);
+		         Log.d("mainactivity", "--------changed:" + arg0);
 
 	}
 
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		//         Log.d(TAG, "-------scrolled arg0:" + arg0);
-		//         Log.d(TAG, "-------scrolled arg1:" + arg1);
-		//         Log.d(TAG, "-------scrolled arg2:" + arg2);
+		         Log.d("mainactivity", "-------scrolled arg0:" + arg0);
+		         Log.d("mainactivity", "-------scrolled arg1:" + arg1);
+		         Log.d("mainactivity", "-------scrolled arg2:" + arg2);
 	}
 
 	@Override
 	public void onPageSelected(int arg0) {
-		//         Log.d(TAG, "------selected:" + arg0);
-		//    	 loadCurActivity(arg0); 
+		         Log.d("mainactivity", "------selected:" + arg0);
 	}
 
 

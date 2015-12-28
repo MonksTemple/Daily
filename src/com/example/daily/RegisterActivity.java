@@ -91,8 +91,12 @@ public class RegisterActivity extends Activity implements UserView{
 		}
 	}
 	
-	void back(View view){
-		
+	public void back(View view){
+		//注册界面跳转
+		Intent intent = new Intent();
+		intent = new Intent(RegisterActivity.this, LoginActivity.class);
+		startActivity(intent);
+		this.finish();
 	}
 
 	@Override

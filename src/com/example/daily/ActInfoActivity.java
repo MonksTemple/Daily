@@ -1,10 +1,14 @@
 package com.example.daily;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.example.model.Team;
 import com.example.presenter.ActManage;
+import com.example.presenter.TeamManage;
 import com.example.util.DateUtil;
 import com.example.view.ActView;
+import com.example.view.TeamView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -28,7 +33,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
-public class ActInfoActivity extends Activity implements ActView{
+public class ActInfoActivity extends Activity {
 	private EditText actName;
 	private EditText actDes;
 	private EditText actCreator;
@@ -43,17 +48,19 @@ public class ActInfoActivity extends Activity implements ActView{
 	private PopupMenu popupMenu;  
 	private Menu menu; 
 	
-	private ActManage actManage;
 	com.example.model.Activity act;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_act_info);
 		initial();
+		getAct();
 		//初始化菜单栏
 		initialMenu();
-		actManage=new ActManage(this);
+		
 	}
 
 	public void popupmenu(View v) {  
@@ -149,18 +156,15 @@ public class ActInfoActivity extends Activity implements ActView{
 		ActInfoActivity.this.finish();
 	}
 
-	@Override
-	public com.example.model.Activity getActivity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void setActivity(com.example.model.Activity activity) {
 		// TODO Auto-generated method stub
 		actName.setText(activity.getName());
 		actDes.setText(activity.getDescription());
-		actCreator.setText(activity.getTeam().getCreator().getUserName());
+		if(activity.getTeam()==null){
+			actCreator.setText("");
+		}else{
+			actCreator.setText(activity.getTeam().getCreator().getUserName());
+		}
 		place.setText(activity.getPlace());
 		startTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));
 		endTime.setText(DateUtil.getStringFromDate(activity.getStartTime()));
@@ -168,10 +172,11 @@ public class ActInfoActivity extends Activity implements ActView{
 	}
 	
 	public void getAct(){
-		Intent intent=this.getIntent();
-		Bundle a=intent.getBundleExtra("act");
-		
+		Intent intent= ActInfoActivity.this.getIntent(); 
+		act= (com.example.model.Activity)intent.getSerializableExtra("act");
+		setActivity(act);
 	}
+	
 }
 
 

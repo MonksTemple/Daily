@@ -2,10 +2,20 @@ package com.example.daily;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import com.alibaba.fastjson.JSON;
+import com.example.model.User;
+import com.example.presenter.ActManage;
+import com.example.view.ActListView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,10 +28,24 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
-public class AgendaListActivity extends Activity {
+public class AgendaListActivity extends Activity implements ActListView {
 	private PopupMenu popupMenu;  
 	private Menu menu; 
 	ListView list;
+	ActManage actManage;
+	List<com.example.model.Activity> myList;
+	
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			Bundle bundle  = msg.getData();
+			ArrayList list = bundle.getParcelableArrayList("myList");
+			myList=(List<com.example.model.Activity>) list.get(0);
+			loadList(myList);
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +53,9 @@ public class AgendaListActivity extends Activity {
 		setContentView(R.layout.activity_agenda_list);
 		initial();
 		initialMenu();
-		//加载日程列表
-		loadList();
+		actManage=new ActManage(this);
+		//加载列表
+		loadData();
 	}
 
 	public void popupmenu(View v) {  
@@ -71,17 +96,15 @@ public class AgendaListActivity extends Activity {
 	    });  
 	}
 	
-	public void loadList(){
+	public void loadList(List<com.example.model.Activity> myList){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
 
-		HashMap<String, String> map1 = new HashMap<String, String>(); 
-		HashMap<String, String> map2 = new HashMap<String, String>();  
-		map1.put("ItemTitle", "AAAAA");  
-		map1.put("ItemText", "bbbbbb");  
-		map2.put("ItemTitle", "CCCCC");  
-		map2.put("ItemText", "ddddd");  
-		mylist.add(map1);  
-		mylist.add(map2);
+		for(com.example.model.Activity act:myList){
+			HashMap<String, String> map1 = new HashMap<String, String>(); 
+			map1.put("ItemTitle", act.getName());
+			map1.put("ItemText", act.getDescription());
+			mylist.add(map1);  
+		}
 		
 		SimpleAdapter mSchedule = new SimpleAdapter(this,  
 				mylist,
@@ -119,5 +142,30 @@ public class AgendaListActivity extends Activity {
 				}
 
 			});
+		}
+
+		@Override
+		public void setActList(List<com.example.model.Activity> actList) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		public void loadData(){
+			new Thread(){
+				public void run(){
+					Message msg = new Message();
+					Bundle bundle = new Bundle();
+					ArrayList list=new ArrayList();
+					SharedPreferences sp = getApplication().getSharedPreferences("userInfo", Context.MODE_APPEND);
+					String user = sp.getString("user", "");
+					User users = JSON.parseObject(user,User.class);
+					int uid=users.getUserId();
+					List<com.example.model.Activity> myList=actManage.showActivitiesByUserId(uid);
+					list.add(myList);
+					bundle.putParcelableArrayList("myList", list);
+					msg.setData(bundle);
+					handler.sendMessage(msg);
+				}
+			}.start();
 		}
 }

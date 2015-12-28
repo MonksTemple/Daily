@@ -92,6 +92,16 @@ public class DateUtil {
 		}
 		return week_index;
 	}
+	
+	public static int getWeekDayFromDate(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int week_index = cal.get(Calendar.DAY_OF_WEEK) - 2;
+		if (week_index < 0) {
+			week_index = 0;
+		}
+		return week_index;
+	}
 
 	@SuppressLint("SimpleDateFormat")
 	public static Date getDateFromString(int year, int month) {

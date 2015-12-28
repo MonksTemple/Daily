@@ -63,8 +63,6 @@ public class CalendarActivity extends Activity implements CallBack{
 		setContentView(R.layout.activity_calendar);
 		findViewbyId();
 		initialMenu();
-		
-
 	}
 	
 	
@@ -217,7 +215,6 @@ public class CalendarActivity extends Activity implements CallBack{
 					Intent intent5 = new Intent();
 					intent5 = new Intent(CalendarActivity.this, UserInfoActivity.class);
 					startActivity(intent5);
-//					CalendarActivity.this.finish();
 					break; 
 				default:  
 					break;  
@@ -237,6 +234,7 @@ public class CalendarActivity extends Activity implements CallBack{
 		//界面跳转
 		Intent intent = new Intent();
 		intent = new Intent(CalendarActivity.this, MainActivity.class);
+		intent.putExtra("date", dates);
 		startActivity(intent);
 		CalendarActivity.this.finish();
 	}

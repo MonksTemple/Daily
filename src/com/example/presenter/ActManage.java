@@ -12,6 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.SharedPreferences;
+
 import com.alibaba.fastjson.JSON;
 import com.example.model.Activity;
 import com.example.model.User;
@@ -33,16 +35,16 @@ public class ActManage {
 	}
 
 	/**
-	 * 活动type：3
+	 * 活动type：2
 	 */
 	public void addActivity(){
 
 	}
 
 	public void modifyActivity(){
-		
+
 	}
-	
+
 	public void deleteActivity(int aId){
 
 	}
@@ -54,13 +56,49 @@ public class ActManage {
 		return activitys;
 	}
 
-	public Set<Activity> showActivitiesByUserId() {
-		Set<Activity> activitys = null;
-
-
+	/**
+	 * 根据当前用户的id号得到他的事件列表
+	 * @param uid
+	 * @return
+	 */
+	public List<Activity> showActivitiesByUserId(int uid) {
+		List<Activity> activitys = new ArrayList();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "25");
+		map.put("userId", uid+"");
+		String resp = ConnectUtil.getResponse(map);
+		if(!resp.equals("false")){		
+			try {
+				JSONArray actList = new JSONArray(resp);
+				int size=actList.length();
+				for(int i=0;i<size;i++){
+					JSONObject oj = actList.getJSONObject(i);
+					int type=oj.getInt("type");
+					//type为3 的时候为个人活动
+					if(type==3){
+						Activity a=new Activity();
+						a.setaId(oj.getInt("aId"));
+						a.setName(oj.getString("name"));
+						a.setDescription(oj.getString("description"));
+						a.setEndTime(DateUtil.getDateFromString(oj.getString("endTime")));
+						a.setStartTime(DateUtil.getDateFromString(oj.getString("startTime")));
+						a.setRemindTime(DateUtil.getDateFromString(oj.getString("remindTime")));
+						a.setPlace(oj.getString("place"));
+						activitys.add(a);
+					}
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return activitys;
 	}
 
+	/**
+	 * 获得个人发布的活动列表
+	 * @return List<Activity>
+	 */
 	public List<Activity> showIsolateActivities() {
 		List<Activity> activitys = new ArrayList();
 		Map<String,String> map = new HashMap<String,String>();
@@ -72,15 +110,19 @@ public class ActManage {
 				int size=actList.length();
 				for(int i=0;i<size;i++){
 					JSONObject oj = actList.getJSONObject(i);
-					Activity a=new Activity();
-					a.setaId(oj.getInt("aId"));
-					a.setName(oj.getString("name"));
-					a.setDescription(oj.getString("description"));
-					a.setEndTime(DateUtil.getDateFromString(oj.getString("endTime")));
-					a.setStartTime(DateUtil.getDateFromString(oj.getString("startTime")));
-					a.setRemindTime(DateUtil.getDateFromString(oj.getString("remindTime")));
-					a.setPlace(oj.getString("place"));
-					activitys.add(a);
+					int type=oj.getInt("type");
+					//type为4的时候为单独活动
+					if(type==4){
+						Activity a=new Activity();
+						a.setaId(oj.getInt("aId"));
+						a.setName(oj.getString("name"));
+						a.setDescription(oj.getString("description"));
+						a.setEndTime(DateUtil.getDateFromString(oj.getString("endTime")));
+						a.setStartTime(DateUtil.getDateFromString(oj.getString("startTime")));
+						a.setRemindTime(DateUtil.getDateFromString(oj.getString("remindTime")));
+						a.setPlace(oj.getString("place"));
+						activitys.add(a);
+					}
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

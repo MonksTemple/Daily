@@ -89,7 +89,6 @@ public class ActListActivity extends ListActivity implements ActListView {
 					Intent intent = new Intent();
 					intent = new Intent(ActListActivity.this, ActHoldActActivity.class);
 					startActivity(intent);
-//					ActListActivity.this.finish();
 					Toast.makeText(ActListActivity.this, "发布活动",  
 							Toast.LENGTH_LONG).show();  
 					break;   
@@ -108,7 +107,6 @@ public class ActListActivity extends ListActivity implements ActListView {
 	public void loadData(){
 		new Thread(){
 			public void run(){
-				
 				Message msg = new Message();
 				Bundle bundle = new Bundle();
 				ArrayList list=new ArrayList();
@@ -151,9 +149,7 @@ public class ActListActivity extends ListActivity implements ActListView {
         // TODO Auto-generated method stub
 		Intent intent =new Intent();
 		intent.setClass(ActListActivity.this, ActInfoActivity.class);
-		Bundle bundle=new Bundle();
-		bundle.putSerializable("act", new ArrayList().add(myList.get((int) id)));
-		intent.putExtras(bundle);
+		intent.putExtra("act",myList.get((int) id));
 		System.out.println(id);
 		startActivity(intent);
     }

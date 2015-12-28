@@ -1,9 +1,10 @@
 ﻿package com.example.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-public class Activity {
+public class Activity  implements Serializable{
 
 	private int aId;               //活动id
 	private Team team;             //团队，如果是个人活动就为空
