@@ -73,9 +73,10 @@ public class TuesdayActivity extends Activity implements ActListView {
 			loadList(myList);
 		}
 	};
-	/**
+	/*
 	 * 界面显示
 	 * @param savedInstanceState
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +174,7 @@ public class TuesdayActivity extends Activity implements ActListView {
 				// TODO 自动生成的方法存根
 
 				Intent intent =new Intent();
-				intent.setClass(MondayActivity.this, AgendaInfoActivity.class);
+				intent.setClass(TuesdayActivity.this, AgendaInfoActivity.class);
 				intent.putExtra("agenda", myList.get((int) id));
 				System.out.println(id);
 				startActivity(intent);

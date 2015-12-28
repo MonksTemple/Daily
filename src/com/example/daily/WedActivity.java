@@ -30,7 +30,7 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 
 /**
- * 周五日程列表子界面
+ * 周三日程列表子界面
  */
 public class WedActivity extends Activity implements ActListView {
 	/**
@@ -73,14 +73,15 @@ public class WedActivity extends Activity implements ActListView {
 			loadList(myList);
 		}
 	};
-	/**
+	/*
 	 * 界面显示
 	 * @param savedInstanceState
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.wed);
+		setContentView(R.layout.activity_wed);
 
 		//初始化控件
 		initial();
@@ -173,7 +174,7 @@ public class WedActivity extends Activity implements ActListView {
 				// TODO 自动生成的方法存根
 
 				Intent intent =new Intent();
-				intent.setClass(MondayActivity.this, AgendaInfoActivity.class);
+				intent.setClass(WedActivity.this, AgendaInfoActivity.class);
 				intent.putExtra("agenda", myList.get((int) id));
 				System.out.println(id);
 				startActivity(intent);

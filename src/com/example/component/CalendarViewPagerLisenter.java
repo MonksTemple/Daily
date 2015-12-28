@@ -22,7 +22,7 @@ public class CalendarViewPagerLisenter implements OnPageChangeListener {
 	}
 	
 	/*
-	 * 
+	 * 页面选中事件 
 	 * @param arg0 
 	 * @see android.support.v4.view.ViewPager.OnPageChangeListener#onPageSelected(int)
 	 */
@@ -48,7 +48,7 @@ public class CalendarViewPagerLisenter implements OnPageChangeListener {
 
 	
 	/**
-	 * 
+	 * 判断手势滑动方向
 	 * @param arg0
 	 */
 	private void measureDirection(int arg0) {
@@ -62,16 +62,31 @@ public class CalendarViewPagerLisenter implements OnPageChangeListener {
 		mCurrIndex = arg0;
 	}
 
+	/*
+	 * 页面滚动事件
+	 * @param arg0
+	 * @param arg1
+	 * @param arg2 
+	 * @see android.support.v4.view.ViewPager.OnPageChangeListener#onPageScrolled(int, float, int)
+	 */
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
 	}
 
+	/*
+	 * 
+	 * 页面状态改变事件
+	 * @param arg0 
+	 * @see android.support.v4.view.ViewPager.OnPageChangeListener#onPageScrollStateChanged(int)
+	 */
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
 	}
 
 
-
+	/**
+	 * 页面滑动方向
+	 */
 	enum SildeDirection {
 		RIGHT, LEFT, NO_SILDE;
 	}

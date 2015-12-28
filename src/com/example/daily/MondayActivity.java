@@ -73,9 +73,11 @@ public class MondayActivity extends Activity implements ActListView {
 			loadList(myList);
 		}
 	};
-	/**
+	
+	/*
 	 * 界面显示
 	 * @param savedInstanceState
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
