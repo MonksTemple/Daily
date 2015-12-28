@@ -14,6 +14,24 @@ public class Team {
 	private Set members;         //该团队所有的成员
 	
 	
+	public Team(){
+		this.tId = 0;
+		this.name = "";
+		this.description = "";
+		this.type = 0;
+		this.cno = 0;
+		this.creator = null;
+	}
+	
+	public Team(Team team){
+		this.tId = team.gettId();
+		this.name = team.getName();
+		this.description = team.getDescription();
+		this.type = team.getType();
+		this.cno = team.getCno();
+		this.creator = new User(team.getCreator());
+	}
+	
 	public int gettId() {
 		return tId;
 	}
