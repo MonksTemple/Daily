@@ -20,7 +20,7 @@ import org.apache.http.util.EntityUtils;
  */
 public class ConnectUtil {
 	/**服务器的地址*/
-	private static String URL = "http://192.168.191.1:8080/Tell/TellServlet";
+	private static String URL = "http://192.168.23.1:8080/Tell/TellServlet";
 	
 	/**
 	 * 
