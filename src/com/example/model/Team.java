@@ -1,8 +1,9 @@
 package com.example.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Team {
+public class Team implements Serializable{
 
 	private int tId;             //团队编号
 	private String name;         //团队名称

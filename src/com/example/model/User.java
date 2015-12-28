@@ -1,9 +1,10 @@
 package com.example.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User {
+public class User implements Serializable{
 	private int userId;        //学生编号，或者教师编号
 	private String userName;   //用户名
 	private String password;   //密码
