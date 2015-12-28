@@ -6,7 +6,12 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="libs/fastjson-1.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="libs/fastjson-1.2.2.jar" sourcepath="libs/fastjson-1.2.2-sources.jar"/>
+=======
 	<classpathentry kind="lib" path="libs/commons-logging-1.0.4.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+>>>>>>> 274e0fad1b81f9bc73c79567430f2d278f15debf
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -2,12 +2,20 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 import com.example.component.ActLvAdapter;
+import com.example.model.Team;
+import com.example.presenter.TeamManage;
+import com.example.view.TeamListView;
+import com.example.view.TeamView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,15 +28,40 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
-public class TeamListActivity extends Activity {
+public class TeamListActivity extends Activity implements TeamListView{
 
 	private PopupMenu popupMenu;  
 	private Menu menu;
-	ListView list ;
+	private ListView list ;
+	
+	private TeamManage teamManage;
+	
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			Bundle bundle  = msg.getData();
+			String login = bundle.getString("createTeam");
+			if (login.equals("true")) {//为true说明创建成功
+				Intent intent = new Intent();
+				intent = new Intent(TeamListActivity.this, TeamListActivity.class);
+				startActivity(intent);
+				TeamListActivity.this.finish();
+			}else {
+				Toast.makeText(TeamListActivity.this, "创建失败", Toast.LENGTH_SHORT)
+				.show();
+			}
+		}
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_team_list);
+		
+		teamManage = new TeamManage(this);
+		
 		initial();
 		initialMenu();
 		loadList();
@@ -45,6 +78,7 @@ public class TeamListActivity extends Activity {
 	    setListListener();
 	}
 	
+	//初始化菜单
 	public void initialMenu(){
 		//通过XML导入菜单栏
 	    MenuInflater menuInflater = getMenuInflater();  
@@ -74,8 +108,34 @@ public class TeamListActivity extends Activity {
 	    });  
 	}
 	
-
+	//加载团队列表
 	public void loadList(){
+		
+		new Thread (){
+			public void run() {
+				
+				Message msg = new Message();
+				Bundle bundle = new Bundle();
+				Set<Team> teamList = teamManage.ShowTeamList();
+				
+				if(teamManage.createTeam()){
+					bundle.putString("createTeam", "true");
+					msg.setData(bundle);
+					
+					handler.sendMessage(msg);
+				}
+				else{
+					bundle.putString("createTeam", "false");
+					msg.setData(bundle);
+					handler.sendMessage(msg);
+				}
+				
+			}
+		}.start();
+		
+		
+		
+		
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
 
 		HashMap<String, Object> map1 = new HashMap<String, Object>(); 
@@ -126,4 +186,11 @@ public class TeamListActivity extends Activity {
 
 		});
 	}
+
+	@Override
+	public void setTeamList(List<Team> teamList) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
