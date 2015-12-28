@@ -90,7 +90,7 @@ public class CustomViewPagerAdapter<V extends View> extends PagerAdapter {
 	}
 
 	/*
-	 * 
+	 * 销毁界面
 	 * @param arg0
 	 * @param arg1
 	 * @param arg2 
@@ -103,7 +103,7 @@ public class CustomViewPagerAdapter<V extends View> extends PagerAdapter {
 	}
 
 	/*
-	 * 
+	 * 开始更新
 	 * @param arg0 
 	 * @see android.support.v4.view.PagerAdapter#startUpdate(android.view.View)
 	 */

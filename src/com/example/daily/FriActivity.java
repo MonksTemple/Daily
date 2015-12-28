@@ -30,21 +30,37 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 
 /**
- * 
- * 星期五页面
+ * 周五日程列表子界面
  */
 public class FriActivity extends Activity implements ActListView {
+	/**
+	 * 红色小圆圈，代表任务
+	 */
 	private Drawable  redCircle;
+	/**
+	 * 绿色小圆圈，代表个人活动
+	 */
 	private Drawable  blueCircle;
+	/**
+	 * 黄色小圆圈，代表社团活动
+	 */
 	private Drawable  yellowCircle;
+	/**
+	 * 橙色小圆圈，代表单独活动
+	 */
 	private Drawable  orangeCircle;
 
+	/**事件列表**/
 	ListView list;
+	/**当前界面对应的日期**/
 	Date curDate;
 	
+	/**活动管理类对象*/
 	ActManage actManage;
+	/**活动列表*/
 	List<com.example.model.Activity> myList;
 	
+	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -57,10 +73,14 @@ public class FriActivity extends Activity implements ActListView {
 			loadList(myList);
 		}
 	};
+	/**
+	 * 界面显示
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fri);
+		setContentView(R.layout.activity_friday);
 
 		//初始化控件
 		initial();
@@ -72,7 +92,7 @@ public class FriActivity extends Activity implements ActListView {
 	}
 
 	/**
-	 * 
+	 * 初始化界面
 	 */
 	public void initial(){
 		redCircle= this.getResources().getDrawable(R.drawable.redc);
@@ -82,6 +102,10 @@ public class FriActivity extends Activity implements ActListView {
 		list= (ListView) findViewById(R.id.classListView); 
 	}
 
+	/**
+	 * 加载并显示事件列表
+	 * @param alist
+	 */
 	public void loadList(List<com.example.model.Activity> alist){
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();  
 		
@@ -137,6 +161,9 @@ public class FriActivity extends Activity implements ActListView {
 	}
 
 
+	/**
+	 * 列表子项点击事件响应
+	 */
 	private void setOnListListener() {
 		list.setOnItemClickListener(new OnItemClickListener() {
 
@@ -146,7 +173,7 @@ public class FriActivity extends Activity implements ActListView {
 				// TODO 自动生成的方法存根
 
 				Intent intent =new Intent();
-				intent.setClass(FriActivity.this, AgendaInfoActivity.class);
+				intent.setClass(MondayActivity.this, AgendaInfoActivity.class);
 				intent.putExtra("agenda", myList.get((int) id));
 				System.out.println(id);
 				startActivity(intent);
@@ -155,6 +182,10 @@ public class FriActivity extends Activity implements ActListView {
 		});
 	}
 
+	/**
+	 * 设置事件列表的值
+	 * @param actList
+	 */
 	@Override
 	public void setActList(List<com.example.model.Activity> actList) {
 		// TODO Auto-generated method stub
@@ -162,7 +193,7 @@ public class FriActivity extends Activity implements ActListView {
 	}
 	
 	/**
-	 * 
+	 * 加载事件列表数据
 	 * @param date  当前页面的日期
 	 * @param Type  要查询的类型，Type为0的时候得到所有的列表，Type为1的时候为团队活动，type为2的时候为任务，type3 是个人活动，type4是单独的活动	
 	 */
