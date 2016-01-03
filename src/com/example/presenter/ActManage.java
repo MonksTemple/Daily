@@ -170,7 +170,7 @@ public class ActManage {
 					Team team=new Team();
 					User user=new User();
 					JSONObject toj = oj.getJSONObject("team");
-					team.settId(oj.getInt("tId"));
+					team.settId(toj.getInt("tId"));
 					JSONObject uoj=toj.getJSONObject("creator");
 					user.setUserId(uoj.getInt("userId"));
 					user.setUserName(uoj.getString("userName"));
