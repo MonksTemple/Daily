@@ -45,7 +45,7 @@ public class LoginActivity extends Activity implements UserView{
 			String login = bundle.getString("login");
 			if (login.equals("true")) {//为true说明登陆成功
 				Intent intent = new Intent();
-				intent = new Intent(LoginActivity.this, TeamListActivity.class);
+				intent = new Intent(LoginActivity.this, CalendarActivity.class);
 				startActivity(intent);
 				//LoginActivity.this.finish();
 				//Toast.makeText(get, "登陆成功",Toast.LENGTH_LONG).show();

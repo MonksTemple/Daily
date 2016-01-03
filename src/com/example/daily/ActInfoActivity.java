@@ -257,10 +257,7 @@ public class ActInfoActivity extends Activity implements ActView{
 	 * @param view
 	 */
 	public void back(View view){
-		Intent intent = new Intent();
-		intent = new Intent(ActInfoActivity.this, ActListActivity.class);
-		startActivity(intent);
-		ActInfoActivity.this.finish();
+		finish();
 	}
 
 	/**

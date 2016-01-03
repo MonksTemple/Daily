@@ -236,10 +236,7 @@ public class AgendaInfoActivity extends Activity implements ActView{
 	 * @param view
 	 */
 	public void back(View view){
-		Intent intent = new Intent();
-		intent = new Intent(AgendaInfoActivity.this, AgendaListActivity.class);
-		startActivity(intent);
-		AgendaInfoActivity.this.finish();
+		finish();
 	}
 	
 	/**

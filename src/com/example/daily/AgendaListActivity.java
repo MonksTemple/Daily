@@ -165,10 +165,7 @@ public class AgendaListActivity extends Activity implements ActListView {
 	
 	//返回箭头
 	public void back(View view){
-		Intent intent = new Intent();
-		intent = new Intent(AgendaListActivity.this, CalendarActivity.class);
-		startActivity(intent);
-		AgendaListActivity.this.finish();
+		finish();
 	}
 	
 	/**
@@ -183,8 +180,19 @@ public class AgendaListActivity extends Activity implements ActListView {
 					int position, long id) {
 				// TODO 自动生成的方法存根
 				Intent intent =new Intent();
+				if(myList.get((int) id).getType()==3){
 				intent.setClass(AgendaListActivity.this, AgendaInfoActivity.class);
 				intent.putExtra("agenda", myList.get((int) id));
+				}else{
+				if(myList.get((int)id).getType()==2){
+					intent.setClass(AgendaListActivity.this, TaskInfoActivity.class);
+					intent.putExtra("task", myList.get((int) id));
+				}else{
+					intent.setClass(AgendaListActivity.this, ActInfoActivity.class);
+					intent.putExtra("act", myList.get((int) id));
+				}
+				}
+				
 				System.out.println(id);
 				startActivity(intent);
 			}
