@@ -67,6 +67,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 						showList.add(tempList.get(i));
 					}
 				}
+				 
 				loadList(showList);
 			}
 			else if(hasActivity.equals("false")){
