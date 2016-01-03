@@ -168,6 +168,10 @@ public class AgendaListActivity extends Activity implements ActListView {
 		finish();
 	}
 	
+	public void fresh(View view){
+		loadData();
+	}
+	
 	/**
 	 * 
 	 * 设置监听器

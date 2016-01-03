@@ -150,6 +150,53 @@ public class TeamManage {
 	
 	/**
 	 * 
+	 * 查看团队列表
+	 * @return 团队列表
+	 */
+	public Team addPersonTeam(){ 
+		Team team=teamView.getTeam();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "15");
+		String resp = ConnectUtil.getResponse(map);
+		Team tempTeam = new Team();
+		
+		if(!resp.equals("false")){		
+			try {
+				//将json转换为对象数组
+				JSONArray teamList = new JSONArray(resp);
+				
+				for(int i = 0; i < teamList.length(); i++){
+					JSONObject oj = teamList.getJSONObject(i);
+					
+					int type = oj.getInt("type");
+					
+					//type为0的时候为个人
+					if(type == 0){
+						tempTeam.setCreator(JSON.parseObject(oj.getString("creator"), User.class));
+						if(tempTeam.getCreator().getUserName().equals(team.getCreator().getUserName())){
+							tempTeam.setCno(0);
+							tempTeam.settId(oj.getInt("tId"));
+							return tempTeam;
+						}
+					}
+				}
+				
+				String teamString = JSON.toJSONString(team);
+				Map<String,String> map1 = new HashMap<String,String>();
+				map1.put("type", "11");
+				map1.put("team", teamString);
+				String resp1 = ConnectUtil.getResponse(map);
+				if(!resp.equals("false"))
+					return addPersonTeam();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}	
+		return null;
+	}
+	
+	/**
+	 * 
 	 * 删除团队成员---根据指定的团队id和用户id
 	 * @param tId
 	 * @param userId
