@@ -132,6 +132,24 @@ public class ActManage {
 		}
 		return activitys;
 	}
+	
+	/**
+	 * 
+	 * 显示所有活动
+	 * @param type
+	 * @return
+	 */
+	public List<Activity> showActivities(int type) {
+		List<Activity> activitys = new ArrayList();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "28");
+		String resp = ConnectUtil.getResponse(map);
+		
+		if(!resp.equals("false")){		
+			activitys=getActivityFromJson(resp,type);
+		}
+		return activitys;
+	}
 
 	public List<User> showMembers() {
 		List<User> users = new ArrayList<User>();

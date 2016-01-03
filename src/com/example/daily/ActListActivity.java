@@ -183,7 +183,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 					bundle.putString("hasActivity", "true");
 				}
 				else{
-					tempList = actManage.showIsolateActivities(0);
+					tempList = actManage.showActivities(0);
 					bundle.putString("hasActivity", "false");
 				}
 				
