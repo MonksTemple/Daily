@@ -86,10 +86,15 @@ public class ActManage {
 	 * 得到所有的团队的活动
 	 * @return 团队活动列表
 	 */
-	public Set<Activity> showActivitiesByTeamId() {
-		Set<Activity> activitys = null;
-
-
+	public List<Activity> showActivitiesByTeamId(int tId) {
+		List<Activity> activitys = new ArrayList();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "24");
+		map.put("tId", tId+"");
+		String resp = ConnectUtil.getResponse(map);
+		if(!resp.equals("false")){		
+			activitys = getActivityFromJson(resp,1);
+		}
 		return activitys;
 	}
 

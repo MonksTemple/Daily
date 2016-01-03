@@ -46,6 +46,8 @@ public class ActListActivity extends ListActivity implements ActListView {
 	private List<Activity> myList;
 	/**当前团队*/
 	private Team currentTeam;
+	/**临时活动表*/
+	private List<Activity> tempList;
 	
 	/**处理类对象*/
 	private Handler handler = new Handler(){
@@ -54,9 +56,17 @@ public class ActListActivity extends ListActivity implements ActListView {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			Bundle bundle  = msg.getData();
-			ArrayList list = bundle.getParcelableArrayList("myList");
-			myList=(List<com.example.model.Activity>) list.get(0);
-			loadList(myList);
+			
+			//ArrayList list = bundle.getParcelableArrayList("myList");
+			//myList=(List<com.example.model.Activity>) list.get(0);
+			List<Activity> showList = new ArrayList<Activity>();
+			for(int i = 0; i < tempList.size(); i++){
+				if(tempList.get(i).getTeam().gettId() == currentTeam.gettId()){
+					showList.add(tempList.get(i));
+				}
+			}
+			
+			loadList(showList);
 		}
 	};
 
@@ -75,7 +85,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 		//初始化菜单栏
 		initialMenu();
 		actManage = new ActManage(this);
-		//getTeamInfo();
+		getTeamInfo();
 		//加载列表
 		loadData();
 		
@@ -92,8 +102,6 @@ public class ActListActivity extends ListActivity implements ActListView {
 		loadData();
 		super.onResume();
 	}
-
-
 
 	/**
 	 * 
@@ -158,10 +166,12 @@ public class ActListActivity extends ListActivity implements ActListView {
 			public void run(){
 				Message msg = new Message();
 				Bundle bundle = new Bundle();
-				ArrayList list=new ArrayList();
-				List<com.example.model.Activity> myList=actManage.showIsolateActivities(4);
-				list.add(myList);
-				bundle.putParcelableArrayList("myList", list);
+				ArrayList list = new ArrayList();
+				//tempList = actManage.showIsolateActivities(1);
+				tempList = actManage.showActivitiesByTeamId(3);
+				
+				//list.add(myList);
+				//bundle.putParcelableArrayList("myList", list);
 				msg.setData(bundle);
 				handler.sendMessage(msg);
 			}

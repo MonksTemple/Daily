@@ -116,8 +116,7 @@ public class TeamListActivity extends Activity implements TeamListView{
 		    			Intent intent = new Intent();
 		    			intent = new Intent(TeamListActivity.this, TeamInfoActivity.class);
 		    			startActivity(intent);
-		    			Toast.makeText(TeamListActivity.this, "创建团队",  
-		    					Toast.LENGTH_LONG).show();  
+		    			Toast.makeText(TeamListActivity.this, "创建团队", Toast.LENGTH_LONG).show();  
 		    			break; 
 		    		default:  
 		    			break;  
@@ -159,10 +158,6 @@ public class TeamListActivity extends Activity implements TeamListView{
 	 * @param view
 	 */
 	public void back(View view){
-//		Intent intent1 = new Intent();
-//		intent1 = new Intent(TeamListActivity.this, CalendarActivity.class);
-//		startActivity(intent1);
-//		TeamListActivity.this.finish();
 		finish();
 	}
 	
@@ -177,7 +172,7 @@ public class TeamListActivity extends Activity implements TeamListView{
 				Intent intent = new Intent();
 				intent.setClass(TeamListActivity.this, ActListActivity.class);
 				intent.putExtra("team",teamList.get((int) id));
-				System.out.println(id);
+				//System.out.println(id);
 				startActivity(intent);
 			}
 
