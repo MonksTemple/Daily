@@ -48,6 +48,8 @@ public class ActListActivity extends ListActivity implements ActListView {
 	private Team currentTeam;
 	/**临时活动表*/
 	private List<Activity> tempList;
+	/***/
+	private boolean status;
 	
 	/**处理类对象*/
 	private Handler handler = new Handler(){
@@ -56,17 +58,24 @@ public class ActListActivity extends ListActivity implements ActListView {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			Bundle bundle  = msg.getData();
+			String hasActivity = bundle.getString("hasActivity");
+			//如果从团队列表进入活动列表
+			if(hasActivity.equals("true")){
+				List<Activity> showList = new ArrayList<Activity>();
+				for(int i = 0; i < tempList.size(); i++){
+					if(tempList.get(i).getTeam().gettId() == currentTeam.gettId()){
+						showList.add(tempList.get(i));
+					}
+				}
+				loadList(showList);
+			}
+			else if(hasActivity.equals("false")){
+				loadList(tempList);
+			}
 			
 			//ArrayList list = bundle.getParcelableArrayList("myList");
 			//myList=(List<com.example.model.Activity>) list.get(0);
-			List<Activity> showList = new ArrayList<Activity>();
-			for(int i = 0; i < tempList.size(); i++){
-				if(tempList.get(i).getTeam().gettId() == currentTeam.gettId()){
-					showList.add(tempList.get(i));
-				}
-			}
 			
-			loadList(showList);
 		}
 	};
 
@@ -80,6 +89,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_act_list);
+		status = false;
 		//初始化控件
 		initial();
 		//初始化菜单栏
@@ -90,7 +100,6 @@ public class ActListActivity extends ListActivity implements ActListView {
 		loadData();
 		
 	}
-	
 	
 	/*
 	 * 重新调用该界面
@@ -168,7 +177,16 @@ public class ActListActivity extends ListActivity implements ActListView {
 				Bundle bundle = new Bundle();
 				ArrayList list = new ArrayList();
 				//tempList = actManage.showIsolateActivities(1);
-				tempList = actManage.showActivitiesByTeamId(3);
+				//如果从团队列表进入活动列表
+				if(status){
+					tempList = actManage.showActivitiesByTeamId(currentTeam.gettId());
+					bundle.putString("hasActivity", "true");
+				}
+				else{
+					tempList = actManage.showIsolateActivities(0);
+					bundle.putString("hasActivity", "false");
+				}
+				
 				
 				//list.add(myList);
 				//bundle.putParcelableArrayList("myList", list);
@@ -217,6 +235,12 @@ public class ActListActivity extends ListActivity implements ActListView {
 	public void getTeamInfo(){
 		Intent intent = ActListActivity.this.getIntent(); 
 		currentTeam = (Team)intent.getSerializableExtra("team");
+		if(currentTeam == null){
+			status = false;
+		}
+		else{
+			status = true;
+		}
 	}
 	
 	/*
@@ -244,10 +268,11 @@ public class ActListActivity extends ListActivity implements ActListView {
 	 * @param view
 	 */
 	public void back(View view){
-		Intent intent = new Intent();
-		intent = new Intent(ActListActivity.this, CalendarActivity.class);
-		startActivity(intent);
-		ActListActivity.this.finish();
+//		Intent intent = new Intent();
+//		intent = new Intent(ActListActivity.this, CalendarActivity.class);
+//		startActivity(intent);
+//		ActListActivity.this.finish();
+		finish();
 	}
 	
 	/*
