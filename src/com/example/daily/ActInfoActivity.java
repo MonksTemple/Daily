@@ -3,9 +3,12 @@ package com.example.daily;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.example.model.Team;
+import com.example.model.User;
 import com.example.presenter.ActManage;
 import com.example.presenter.TeamManage;
+import com.example.util.DateTimePickDialogUtil;
 import com.example.util.DateUtil;
 import com.example.view.ActView;
 import com.example.view.TeamView;
@@ -13,6 +16,7 @@ import com.example.view.TeamView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +25,7 @@ import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.LayoutInflater.Factory;
+import android.view.View.OnClickListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,7 +42,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
  * 
  * 活动信息页面
  */
-public class ActInfoActivity extends Activity {
+public class ActInfoActivity extends Activity implements ActView{
 	/**活动名称编辑框*/
 	private EditText actName;
 	/**活动简介编辑框*/
@@ -52,6 +57,12 @@ public class ActInfoActivity extends Activity {
 	private EditText place;
 	/**活动提醒时间编辑框*/
 	private EditText remindTime;
+	/**日程开始时间字符串*/
+	private String initStartDateTime = "2015年12月30日 10:44"; // ��ʼ����ʼʱ��
+	/**日程结束时间字符串*/
+	private String initEndDateTime = "2015年01月30日 11:44"; // ��ʼ������ʱ��
+	/**日程地点字符串*/
+	private String initRemindDateTime = "2015年01月30日 11:40"; // ��ʼ������ʱ��
 
 	/**图片*/
 	private ImageView lines;
@@ -62,8 +73,31 @@ public class ActInfoActivity extends Activity {
 	/**菜单*/
 	private Menu menu; 
 	
+	/**活动管理类对象*/
+	private ActManage actManage;
 	/**活动类*/
 	com.example.model.Activity act;
+	
+	/**处理类对象*/
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			Bundle bundle  = msg.getData();
+			String resp=bundle.getString("resp");
+			if(resp.equals("true")){
+				Toast.makeText(ActInfoActivity.this, "修改成功",  
+						Toast.LENGTH_SHORT).show(); 
+				finish();
+			}else{
+				Toast.makeText(ActInfoActivity.this, "修改失败",  
+						Toast.LENGTH_SHORT).show();  
+			}
+		}
+	};
+
+	
 	
 	/*
 	 * 
@@ -77,6 +111,7 @@ public class ActInfoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_act_info);
 		initial();
+		actManage = new ActManage(this);
 		getAct();
 		//初始化菜单栏
 		initialMenu();
@@ -118,8 +153,46 @@ public class ActInfoActivity extends Activity {
 		endTime.setClickable(false);
 		remindTime.setClickable(false);
 		sure.setVisibility(4);
+		setUpTime();
 	}
 
+	/**
+	 * 
+	 * 设置时间
+	 */
+	public void setUpTime(){
+		startTime.setText(initStartDateTime);
+		endTime.setText(initEndDateTime);
+		remindTime.setText(initRemindDateTime);
+		startTime.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						ActInfoActivity.this, initEndDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(startTime);
+
+			}
+		});
+
+		endTime.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						ActInfoActivity.this, initEndDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(endTime);
+			}
+		});
+
+		remindTime.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						ActInfoActivity.this, initRemindDateTime);
+				dateTimePicKDialog.dateTimePicKDialog(remindTime);
+			}
+		});
+	}
+	
 	/**
 	 * 
 	 * 初始化菜单控件
@@ -137,8 +210,6 @@ public class ActInfoActivity extends Activity {
 				switch (item.getItemId()) {  
 				case R.id.change: 
 					changeInfo();
-					Toast.makeText(ActInfoActivity.this, "修改活动信息",  
-							Toast.LENGTH_LONG).show();  
 					break;  
 				case R.id.check:  
 					Intent intent = new Intent();
@@ -165,15 +236,19 @@ public class ActInfoActivity extends Activity {
 	 * 修改信息
 	 */
 	public void changeInfo(){
-		actName.setEnabled(false);
-		actDes.setEnabled(false);
-		actCreator.setEnabled(false);
-		place.setEnabled(false);
-		startTime.setClickable(false);
-		endTime.setClickable(false);
-		remindTime.setClickable(false);
+		actName.setEnabled(true);
+		actDes.setEnabled(true);
+		actCreator.setBackgroundColor(Color.GRAY);
+		place.setEnabled(true);
+		startTime.setClickable(true);
+		startTime.setEnabled(true);
+		endTime.setClickable(true);
+		endTime.setEnabled(true);
+		remindTime.setClickable(true);
+		remindTime.setEnabled(true);
 		sure.setVisibility(0);
 		lines.setVisibility(4);
+		
 	}
 	
 	/**
@@ -194,10 +269,16 @@ public class ActInfoActivity extends Activity {
 	 * @param view
 	 */
 	public void sure(View view){
-		Intent intent = new Intent();
-		intent = new Intent(ActInfoActivity.this, ActListActivity.class);
-		startActivity(intent);
-		ActInfoActivity.this.finish();
+		new Thread(){
+			public void run(){
+				Message msg = new Message();
+				Bundle bundle = new Bundle();
+				String resp=actManage.modifyActivity(getActivity());
+				bundle.putString("resp", resp);
+				msg.setData(bundle);
+				handler.sendMessage(msg);
+			}
+		}.start();
 	}
 
 	/**
@@ -205,7 +286,7 @@ public class ActInfoActivity extends Activity {
 	 * 设置活动信息
 	 * @param activity
 	 */
-	private void setActivity(com.example.model.Activity activity) {
+	private void setActivitys(com.example.model.Activity activity) {
 		// TODO Auto-generated method stub
 		actName.setText(activity.getName());
 		actDes.setText(activity.getDescription());
@@ -227,7 +308,35 @@ public class ActInfoActivity extends Activity {
 	public void getAct(){
 		Intent intent= ActInfoActivity.this.getIntent(); 
 		act= (com.example.model.Activity)intent.getSerializableExtra("act");
-		setActivity(act);
+		setActivitys(act);
+	}
+
+	/*
+	 * 得到活动
+	 * @return 
+	 * @see com.example.view.ActView#getActivity()
+	 */
+	@Override
+	public com.example.model.Activity getActivity() {
+		// TODO Auto-generated method stub
+		act.setName(actName.getText().toString());
+		act.setDescription(actDes.getText().toString());
+		act.setPlace(place.getText().toString());
+		act.setEndTime(DateUtil.getDateFromString(endTime.getText().toString()));
+		act.setStartTime(DateUtil.getDateFromString(startTime.getText().toString()));
+		act.setRemindTime(DateUtil.getDateFromString(remindTime.getText().toString()));
+		return act;
+	}
+
+	/*
+	 * 设置活动
+	 * @param activity 
+	 * @see com.example.view.ActView#setActivity(com.example.model.Activity)
+	 */
+	@Override
+	public void setActivity(com.example.model.Activity activity) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

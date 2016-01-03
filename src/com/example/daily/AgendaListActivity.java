@@ -72,6 +72,17 @@ public class AgendaListActivity extends Activity implements ActListView {
 		//加载列表
 		loadData();
 	}
+	
+	/*
+	 * 重新调用该界面
+	 * @see android.app.Activity#onResume()
+	 */
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		loadData();
+		super.onResume();
+	}
 
 	/**
 	 * 
@@ -173,7 +184,7 @@ public class AgendaListActivity extends Activity implements ActListView {
 				// TODO 自动生成的方法存根
 				Intent intent =new Intent();
 				intent.setClass(AgendaListActivity.this, AgendaInfoActivity.class);
-				intent.putExtra("index", id);
+				intent.putExtra("agenda", myList.get((int) id));
 				System.out.println(id);
 				startActivity(intent);
 			}

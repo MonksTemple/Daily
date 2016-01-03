@@ -63,8 +63,12 @@ public class ActManage {
 	 * 
 	 * 修改活动
 	 */
-	public void modifyActivity(){
-
+	public String modifyActivity(Activity act){
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "22");
+		map.put("activity", JSON.toJSONString(act));
+		String resp = ConnectUtil.getResponse(map);
+		return resp;
 	}
 
 	/**
@@ -161,7 +165,9 @@ public class ActManage {
 					Team team=new Team();
 					User user=new User();
 					JSONObject toj = oj.getJSONObject("team");
+					team.settId(oj.getInt("tId"));
 					JSONObject uoj=toj.getJSONObject("creator");
+					user.setUserId(uoj.getInt("userId"));
 					user.setUserName(uoj.getString("userName"));
 					team.setCreator(user);
 					a.setTeam(team);
