@@ -153,8 +153,6 @@ public class ActManage {
 
 	public List<User> showMembers() {
 		List<User> users = new ArrayList<User>();
-
-
 		return users;
 	}
 	

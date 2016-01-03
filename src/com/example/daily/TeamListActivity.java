@@ -172,7 +172,6 @@ public class TeamListActivity extends Activity implements TeamListView{
 				Intent intent = new Intent();
 				intent.setClass(TeamListActivity.this, ActListActivity.class);
 				intent.putExtra("team",teamList.get((int) id));
-				//System.out.println(id);
 				startActivity(intent);
 			}
 

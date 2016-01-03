@@ -67,7 +67,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 						showList.add(tempList.get(i));
 					}
 				}
-				 
+				
 				loadList(showList);
 			}
 			else if(hasActivity.equals("false")){
@@ -183,14 +183,11 @@ public class ActListActivity extends ListActivity implements ActListView {
 					tempList = actManage.showActivitiesByTeamId(currentTeam.gettId());
 					bundle.putString("hasActivity", "true");
 				}
+				//如果从日历进入活动列表
 				else{
 					tempList = actManage.showActivities(0);
 					bundle.putString("hasActivity", "false");
 				}
-				
-				
-				//list.add(myList);
-				//bundle.putParcelableArrayList("myList", list);
 				msg.setData(bundle);
 				handler.sendMessage(msg);
 			}
@@ -269,10 +266,6 @@ public class ActListActivity extends ListActivity implements ActListView {
 	 * @param view
 	 */
 	public void back(View view){
-//		Intent intent = new Intent();
-//		intent = new Intent(ActListActivity.this, CalendarActivity.class);
-//		startActivity(intent);
-//		ActListActivity.this.finish();
 		finish();
 	}
 	
