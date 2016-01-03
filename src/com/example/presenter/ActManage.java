@@ -55,8 +55,20 @@ public class ActManage {
 	 * 
 	 * 添加活动
 	 */
-	public void addActivity(){
-
+	public boolean addActivity(Team team){
+		if(team==null)
+			return false;
+		Activity act=actView.getActivity();
+		act.setTeam(team);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("type", "21");
+		map.put("activity", JSON.toJSONString(act));
+		String resp = ConnectUtil.getResponse(map);
+		if(resp.equals("false")){
+			return false;
+		}
+		else
+			return true;
 	}
 
 	/**

@@ -34,6 +34,7 @@
             android:layout_height="10pt"
             android:layout_centerVertical="true"
             android:layout_marginRight="5pt"
+            android:onClick="fresh"
             android:layout_toLeftOf="@+id/lines"
             android:src="@drawable/flesh" />
 
