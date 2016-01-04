@@ -51,6 +51,8 @@ public class ActListActivity extends ListActivity implements ActListView {
 	/***/
 	private boolean status;
 	
+	private List<Activity> showList;
+	
 	/**处理类对象*/
 	private Handler handler = new Handler(){
 		@Override
@@ -61,7 +63,7 @@ public class ActListActivity extends ListActivity implements ActListView {
 			String hasActivity = bundle.getString("hasActivity");
 			//如果从团队列表进入活动列表
 			if(hasActivity.equals("true")){
-				List<Activity> showList = new ArrayList<Activity>();
+				showList = new ArrayList<Activity>();
 				for(int i = 0; i < tempList.size(); i++){
 					if(tempList.get(i).getTeam().gettId() == currentTeam.gettId()){
 						showList.add(tempList.get(i));
@@ -255,7 +257,11 @@ public class ActListActivity extends ListActivity implements ActListView {
         // TODO Auto-generated method stub
 		Intent intent =new Intent();
 		intent.setClass(ActListActivity.this, ActInfoActivity.class);
-		intent.putExtra("act",myList.get((int) id));
+		if(status){
+			intent.putExtra("act",showList.get((int) id));
+		}else{
+			intent.putExtra("act",tempList.get((int) id));
+		}
 		System.out.println(id);
 		startActivity(intent);
     }

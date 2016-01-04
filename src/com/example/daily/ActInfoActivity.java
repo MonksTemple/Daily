@@ -1,5 +1,6 @@
 package com.example.daily;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -304,7 +305,7 @@ public class ActInfoActivity extends Activity implements ActView{
 	 */
 	public void getAct(){
 		Intent intent= ActInfoActivity.this.getIntent(); 
-		act= (com.example.model.Activity)intent.getSerializableExtra("act");
+		act = (com.example.model.Activity)intent.getSerializableExtra("act");
 		setActivitys(act);
 	}
 
@@ -315,7 +316,6 @@ public class ActInfoActivity extends Activity implements ActView{
 	 */
 	@Override
 	public com.example.model.Activity getActivity() {
-		// TODO Auto-generated method stub
 		act.setName(actName.getText().toString());
 		act.setDescription(actDes.getText().toString());
 		act.setPlace(place.getText().toString());
@@ -331,9 +331,14 @@ public class ActInfoActivity extends Activity implements ActView{
 	 * @see com.example.view.ActView#setActivity(com.example.model.Activity)
 	 */
 	@Override
-	public void setActivity(com.example.model.Activity activity) {
-		// TODO Auto-generated method stub
-		
+	public void setActivity(com.example.model.Activity act) {		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		actName.setText(act.getName());
+		actDes.setText(act.getDescription());	
+		startTime.setText(sdf.format(act.getStartTime()));
+		endTime.setText(sdf.format(act.getEndTime()));
+		place.setText(act.getPlace());
+		remindTime.setText(sdf.format(act.getRemindTime()));
 	}
 	
 }
