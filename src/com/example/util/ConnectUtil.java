@@ -16,7 +16,7 @@ import org.apache.http.util.EntityUtils;
 
 /**
  * 
- * 连接服务器辅助类
+ * 连接服务器辅助类c
  */
 public class ConnectUtil {
 	/**服务器的地址*/
